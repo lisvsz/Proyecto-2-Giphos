@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://kit.fontawesome.com/622b7b372b.js" crossorigin="anonymous"></script>
+    <title>GIFOS</title>
+</head>
+<body>
+    <header>
+        <nav id="navbar-header">
+            <div id="container-logo">
+                <img src="assets/logo-mobile.svg" id="logomobile" alt="logomobile">
+                <img src="assets/logo-desktop.svg" id="logodesktop" alt="logomobile">
+                <span id="gifos">GIFOS</span>
+            </div>
+            <a href="#navbar-header" class="navbar-menu-mobile open">
+                <img id="burger" src="assets/burger.svg" alt="menuhamburguesa">
+                <img id="burgerdark" src="assets/burger-darkmode.svg" alt="menuhamburguesadark">
+            </a>
+            <a href="#" class="navbar-menu-mobile close">
+                <img id="closeicon" src="assets/close.svg" alt="menuhamburguesa">
+                <img id="closedark" src ="assets/button-closedarkmode.svg" alt="menuhamburguesadark">
+            </a>
+            <ul class="navbar-container">
+                <li><a href="#" class="navbar-link" id="switch">Modo Nocturno<br><br><hr></a></li>
+                <li><a href="#fav" class="navbar-link" id="favorites">Favoritos<br><br><hr></a></li>
+                <li><a href="#mine" class="navbar-link" id="mygifos">Mis GIFOS<br><br><hr></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="search">
+            <h1>Inspírate, busca, guarda, y crea <br> los mejores <span>GIFOS</span></h1>
+            <img id="guys" src="assets/ilustra_header.svg" alt="higuys">
+            <div class="boxsearch">
+                <input type="text" name="search" placeholder="Busca GIFOS y más" class="src">
+                <button type="submit" id="btnsearch"><img id="iconsearch1" src="assets/icon-search.svg" data-src="assets/icon-search.svg" alt="iconsearch1"></button>
+            </div>
+            <h3>Trending:</h3>
+            <p id="sections1"> Reactions, Entertainment, Sports, Stickers, Artists</p>
+            <div id="container-search"></div>
+        </section>
+        
+        <section id="search-active" style="display: none">
+            <div class="boxsearch">
+                <input type="text" name="search" placeholder="Busca GIFOS y más" class="src" id="searching">
+                <button type="submit" id="btnsearch2"><img id="iconsearch2" src="assets/icon-search.svg" alt="iconsearch2"><img id="iconsearch2dark" src="assets/icon-search-mod-noc.svg" alt="iconsearch2dark">
+                </button>
+            </div>
+            <h3>Trending:</h3>
+                <p id="sections2"> Reactions, Entertainment, Sports, Stickers, Artists</p>
+            <hr>
+            <h4 id="result">Mascotas</h4>
+            <div class="container-search-active">
+                <img src="assets/icon-favoritos.svg" class="gif" alt="icon">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+            </div>
+            <a href="#" class="btn-ver">VER MÁS</a>
+        </section>
+
+        <section id="fav" style="display:none">
+            <img src="assets/icon-favoritos.svg" id="icon-favoritos" alt="fav-icon">
+            <h2>Favoritos</h2>
+                <div class="container-fav">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                </div>
+                <a href="#" class="btn-ver">VER MÁS</a>
+        </section>
+
+        <section id="mine" style="display:none">
+            <img src="assets/icon-mis-gifos.svg" id="icon-mis-gifos" alt="mygifos-icon">
+            <h2>Mis GIFOS</h2>
+                <div class="container-mine">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                </div>
+                <a href="#" class="btn-ver">VER MÁS</a>
+        </section>
+
+        <section id="gallery">
+            <h2>Trending GIFOS</h2>
+            <P>Mira los últimos<br>GIFOS de nuestra comunidad.</P>
+        </section>
+    </main>
+    <footer>
+        <p class="r15px">Compartir en:</p>
+        <div id="socialmedia">
+            <a href="http://www.facebook.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+            <a href="http://www.twitter.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+            <a href="http://www.instagram.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p class="r14px">© GIFOS 2020 All Rights Reserved.</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
+
