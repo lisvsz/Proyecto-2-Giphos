@@ -74,31 +74,76 @@ navmine.addEventListener('click', function(){
 //Llamar API
 
 let apiKey = 'PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT';
-
 let searchInput = document.getElementById('search');
-let btnSearch = document.getElementById('btnsearch');
-let results = document.getElementsByClassName('container-search');
+let btnSearch = document.getElementById('btnsearch')
 
-async function search(){
-    //console.log(':D');
-    async function newSearch(thing){
-        let url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${encodeURI(thing)}&limit=12&offset=0&rating=g&lang=en`;
-        const resp = await fetch(url);
-        const info = resp.json;
-        return info;
-    }
-    let info = newSearch(searchInput.data);
-    info.then(response => {
-        console.log(response.data);
-}) .catch(error => {
-    console.log(error);
-});
-}
+
+// Botones búsqueda
+
 btnSearch.addEventListener('click', () => {
-    search();
+    searchByApiKey();
 });
 searchInput.addEventListener('keyup', () => {
     if (event.which === 13 || event.keyCode == 13){
-        search();
+        searchByApiKey();
     }
 })
+/**
+ * Funcion que nos sirve para hacer el llamado a la API KEY
+ * @param {*} thing este parámetro es proporcionado por el usuario
+ */
+async function searchByApiKey(searchInput){
+    let url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${encodeURI(searchInput)}&limit=12&offset=0&rating=g&lang=es`;
+    let resp = await fetch(url);
+    let info = await resp.json();
+    console.log(info);
+    //return info;
+
+
+// Tercer intento obtener imagenes
+
+    // For para obtener imagenes
+    for(let i=0; i<12; i++){   
+    //Obtener imagenes
+    let image = info.data[i].images.original.url;
+    let searchGif = document.createElement('img');
+        searchGif.src = image;
+    let searchResults = document.getElementById('container-search');
+        searchResults.appendChild(searchGif);
+        searchGif.style.height = "200px";
+        searchGif.style.width = "250px";
+    }
+}
+
+/* segundo intento let gifResult = searchByApiKey();
+
+gifResult.then(info => {
+    let gifImg = document.createElement('img');
+    gifImg.setAttribute('src', info.data[1].images);
+    gifImg.style.width= '156px';
+    gifImg.style.height = '120px';
+    results.appendChild(gifImg);
+    console.log(info);
+}).catch(err =>{
+    console.error('Error', err);
+}) */
+
+
+
+/*function showResultApi(){
+    //console.log(':D');
+    let information = searchByApiKey(searchInput.value);
+    information.then(response => {
+        console.log(response.data);
+        //imprimir en pantalla
+        let fig = document.createElement('figure');
+        let gifsearch = document.createElement('img');
+        gifsearch.src = response.data[0].images.downsized.url;
+        results.appendChild(img);
+        let results = document.getElementsById('container-search');
+        results.inserAdjacentElement('afterbegin', fig);
+    }) .catch(error => {
+    console.log(error);
+        alert('No se encontraron resultados');
+    });
+}*/
