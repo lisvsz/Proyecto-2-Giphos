@@ -124,6 +124,8 @@ header .navbar-container {
   transition: height 0.4s ease;
   width: 100%;
   z-index: 2;
+  -webkit-transition: 0.7s ease all;
+  transition: 0.7s ease all;
 }
 
 header #burgerdark {
@@ -264,38 +266,44 @@ body.dark {
 main {
   min-height: 900px;
   text-align: center;
+  -webkit-transition: 0.7s ease all;
+  transition: 0.7s ease all;
 }
 
-body.dark main #search h1 {
+body.dark main #container-search h1 {
   color: white;
 }
 
-body.dark main #search .src {
+body.dark main #container-search .src {
   background-color: #37383C;
   border: 1px solid white;
 }
 
-body.dark main #search .src::-webkit-input-placeholder {
+body.dark main #container-search .src::-webkit-input-placeholder {
   color: #9CAFC3;
 }
 
-body.dark main #search .src:-ms-input-placeholder {
+body.dark main #container-search .src:-ms-input-placeholder {
   color: #9CAFC3;
 }
 
-body.dark main #search .src::-ms-input-placeholder {
+body.dark main #container-search .src::-ms-input-placeholder {
   color: #9CAFC3;
 }
 
-body.dark main #search .src::placeholder {
+body.dark main #container-search .src::placeholder {
   color: #9CAFC3;
 }
 
-body.dark main #search h3 {
+body.dark main #container-search h3 {
   color: white;
 }
 
-body.dark main #search #sections {
+body.dark main #container-search #trendingSection {
+  color: white;
+}
+
+body.dark main #container-search #sections {
   color: white;
 }
 
@@ -326,11 +334,11 @@ body.dark main #gallery p {
   color: white;
 }
 
-main #search {
+main #container-search {
   height: 470px;
 }
 
-main #search h1 {
+main #container-search h1 {
   color: #572EE5;
   font-family: "Montserrat", sans-serif;
   font-size: 25px;
@@ -338,28 +346,28 @@ main #search h1 {
   margin: 7px 44px 31px 45px;
 }
 
-main #search h1 br {
+main #container-search h1 br {
   display: none;
 }
 
-main #search span {
+main #container-search span {
   color: #50E3C2;
 }
 
-main #search #guys {
+main #container-search #guys {
   position: relative;
   top: 4px;
   height: 130px;
   width: 273px;
 }
 
-main #search .boxsearch {
+main #container-search .boxsearch {
   margin: 0 auto;
   height: 50px;
   width: 334px;
 }
 
-main #search .src {
+main #container-search .src {
   border: 1px solid #572EE5;
   border-radius: 40px;
   color: #000000;
@@ -369,31 +377,31 @@ main #search .src {
   width: 334px;
 }
 
-main #search .src::-webkit-input-placeholder {
+main #container-search .src::-webkit-input-placeholder {
   color: #6B7989;
   font-size: 16px;
   text-align: center;
 }
 
-main #search .src:-ms-input-placeholder {
+main #container-search .src:-ms-input-placeholder {
   color: #6B7989;
   font-size: 16px;
   text-align: center;
 }
 
-main #search .src::-ms-input-placeholder {
+main #container-search .src::-ms-input-placeholder {
   color: #6B7989;
   font-size: 16px;
   text-align: center;
 }
 
-main #search .src::placeholder {
+main #container-search .src::placeholder {
   color: #6B7989;
   font-size: 16px;
   text-align: center;
 }
 
-main #search button {
+main #container-search button {
   background: none;
   border: none;
   cursor: pointer;
@@ -403,14 +411,26 @@ main #search button {
   z-index: 1;
 }
 
-main #search h3 {
+main #container-search h3 {
   color: #572EE5;
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
   margin-top: 36px;
+  height: 25px;
 }
 
-main #search #sections {
+main #container-search #trendingSection {
+  color: #572EE5;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  height: 50px;
+  line-height: 24px;
+  margin: 0 auto;
+  text-transform: capitalize;
+  width: 225px;
+}
+
+main #container-search #sections {
   color: #572EE5;
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
@@ -639,7 +659,7 @@ main #mine .btn-ver:hover {
 }
 
 main #gallery {
-  background-color: #F3F5F8;
+  background-color: #2d69c4;
   height: 430px;
 }
 
@@ -656,6 +676,31 @@ main #gallery p {
   font-size: 16px;
   line-height: 20px;
   padding: 7px 21px 32px 21px;
+}
+
+main #gallery .trending-slider {
+  background-color: aliceblue;
+  overflow-x: auto;
+}
+
+main #gallery .trending-slider::-webkit-scrollbar {
+  width: 0;
+}
+
+main #gallery .trending-slider ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+main #gallery .trending-slider ul li {
+  list-style: none;
+  margin-left: 22px;
+}
+
+main #gallery .trending-slider ul li img {
+  height: 187px;
+  width: 243px;
 }
 
 /* Desktop 1440px*/
@@ -715,7 +760,7 @@ footer {
   background-color: white;
   border-bottom: 5px solid #572EE5;
   font-family: "Roboto", sans-serif;
-  height: 204px;
+  min-height: 204px;
 }
 
 body.dark footer {

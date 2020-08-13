@@ -12,9 +12,10 @@ body{
 main{
     min-height: 900px;
     text-align: center;
+    transition: 0.7s ease all;
     //dark version
     body.dark & {
-        #search{
+        #container-search{
             h1{
                 color: $color-primary;
             }
@@ -26,6 +27,9 @@ main{
                 }
             }
             h3{
+                color: $color-primary;
+            }
+            #trendingSection{
                 color: $color-primary;
             }
             #sections{
@@ -59,7 +63,7 @@ main{
         }
     }
 
-    #search{
+    #container-search{
         height: 470px;
         h1{
             color: $color-secondary;
@@ -113,6 +117,17 @@ main{
             font-family: $font-primary;
             font-size: 16px;
             margin-top: 36px;
+            height: 25px;
+        }
+        #trendingSection{
+            color: $color-secondary;
+            font-family: $font-primary;
+            font-size: 14px;
+            height: 50px;
+            line-height: 24px;
+            margin: 0 auto;
+            text-transform: capitalize;
+            width: 225px;
         }
         #sections{
             color: $color-secondary;
@@ -289,7 +304,7 @@ main{
 
 
     #gallery{
-        background-color: #F3F5F8;
+        background-color: #2d69c4;
         height: 430px;
         h2{
             color: $color-secondary;
@@ -303,6 +318,24 @@ main{
             font-size: 16px;
             line-height: 20px;
             padding: 7px 21px 32px 21px;
+        }
+        .trending-slider{
+            background-color: aliceblue;
+            overflow-x: auto;
+            &::-webkit-scrollbar{
+                width: 0;
+            }
+            ul{
+                display: flex;
+                li{
+                    list-style: none;
+                    margin-left: 22px;
+                    img{
+                        height: 187px;
+                        width: 243px;
+                    }
+                }
+            }
         }
     }
 }

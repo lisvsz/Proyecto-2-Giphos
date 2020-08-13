@@ -3,7 +3,7 @@ footer{
     background-color: $color-primary;
     border-bottom: 5px solid $color-secondary;
     font-family: $font-secondary;
-    height: 204px;
+    min-height: 204px;
     body.dark &{
         background-color: $color-grey;
         border-bottom: 5px solid $color-tertiary;
