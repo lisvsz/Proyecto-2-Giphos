@@ -81,13 +81,17 @@ let btnSearch = document.getElementById('btnsearch')
 // Botones búsqueda
 
 btnSearch.addEventListener('click', () => {
-    searchByApiKey();
+    searchByApiKey(searchInput.value).then((arrayGifs) =>
+        showGifs(arrayGifs)
+    );
 });
 searchInput.addEventListener('keyup', () => {
     if (event.which === 13 || event.keyCode == 13){
-        searchByApiKey();
+        searchByApiKey(searchInput.value).then((arrayGifs)=>
+        showGifs(arrayGifs)
+        );
     }
-})
+}) 
 
 /**
  * Funcion que nos sirve para hacer el llamado a la API KEY
@@ -100,8 +104,26 @@ async function searchByApiKey(searchInput){
     console.log(info);
     return info;
 }
-let info = searchByApiKey(searchInput.value);
+
+//Cuarto intento
+
+function showGifs(gifsArray){ 
+    for (let i=0; i < gifsArray.length; i++ ) {
+        console.log('Element');
+        let imgGif = gifsArray[i].images.downsized.url;
+        let searchGif = document.createElement('img');    
+        searchGif.src = imgGif;
+        let searchResults = document.getElementById('container-search');
+        searchResults.appendChild(searchGif);
+        searchGif.style.height = "120px";
+        searchGif.style.width = "156px";
+    };
+}
+
+
+/*
 // Tercer intento obtener imagenes
+let info = searchByApiKey(searchInput.value);
     // For para obtener imagenes
     searchByApiKey(searchInput).then(info =>{
         for(let i=0; i<12; i++){   
@@ -115,7 +137,7 @@ let info = searchByApiKey(searchInput.value);
         searchGif.style.width = "156px";
     }
 });
-searchByApiKey(searchInput);
+searchByApiKey(searchInput); */
 
 /* segundo intento let gifResult = searchByApiKey();
 
