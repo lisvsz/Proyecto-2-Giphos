@@ -28,6 +28,10 @@
                 <li><a href="#fav" class="navbar-link" id="favorites">Favoritos<br><br><hr></a></li>
                 <li><a href="#mine" class="navbar-link" id="mygifos">Mis GIFOS<br><br><hr></a></li>
             </ul>
+            <a href="#create" id="createGif" class="btn-mygifos">
+                <img id="plus" src="assets/button-crear-gifo.svg" alt="button">
+                <img id="pluswhite"src="assets/button-crear-gifo-darkmode.svg" alt="button">
+            </a>
         </nav>
     </header>
     <main>
@@ -35,12 +39,38 @@
             <h1>Inspírate, busca, guarda, y crea <br> los mejores <span>GIFOS</span></h1>
             <img id="guys" src="assets/ilustra_header.svg" alt="higuys">
             <div class="boxsearch">
-                <input type="text" id="search" name="search" placeholder="Busca GIFOS y más" class="src">
-                <button type="submit" id="btnsearch"><img id="iconsearch1" src="assets/icon-search.svg" data-src="assets/icon-search.svg" alt="iconsearch1"></button>
+                <input type="text" id="search" name="search" placeholder="Busca GIFOS y más" class="src" list="huge_list">
+                <datalist id="huge_list"></datalist>
+                <button type="submit" id="btnsearch">
+                    <img id="iconsearch1" src="assets/icon-search.svg" data-src="assets/icon-search.svg" alt="iconsearch1">
+                    <img id="iconsearch2dark" src="assets/icon-search-mod-noc.svg" alt="iconsearch2dark">
+                </button>
+
             </div>
+            <div class="boxresults">
+                <a href="#" class="searchresult">
+                    <div class="searchtitle"> Mascotas 1 </div>
+                </a>
+            
+                <a href="#" class="searchresult">
+                    <div class="searchtitle"> Mascotas 2 </div>
+                </a>
+           
+                <a href="#" class="searchresult">
+                    <div class="searchtitle"> Mascotas 3 </div>
+                </a>
+
+                <a href="#" class="searchresult">
+                    <div class="searchtitle"> Mascotas 4 </div>
+                </a>
+            </div>
+
             <h3>Trending:</h3>
             <p id="trendingSection"></p>
-            <div id="container-search"></div>
+            <hr>
+            <h2 id="searchTitle">Mascotas</h2>
+            <div id="grid-search"></div>
+            <button class="btn-ver">VER MÁS<button>
         </section>
         
         <!--<section id="search-active" style="display: none">
@@ -106,21 +136,42 @@
                 <a href="#" class="btn-ver">VER MÁS</a>
         </section>
 
+        <section id="create" style="display:none">
+            <img id="cameraimg" src="assets/camara.svg" alt="camara">
+            <div id="screen-container">
+                <h2>Aquí podrás <br>crear tus propios<span> GIFOS</span></h2>
+                    <p>¡Crea tu GIFO en sólo 3 pasos!<br> (sólo necesitas una cámara para grabar un video)</p>
+            </div>
+            <div id="number-counting">
+                <button class="btn-counting" id="btn1">1</button>
+                <button class="btn-counting" id="btn2">2</button>
+                <button class="btn-counting" id="btn3">3</button>
+            </div>
+            <hr>
+            <img id="tapeimg" src="assets/element_cinta2.svg" alt="camara">
+        </section>
+
         <section id="gallery">
             <h2>Trending GIFOS</h2>
             <p>Mira los últimos<br>GIFOS de nuestra comunidad.</p>
+            <button class="btn-slider-left"><img src= "assets/button-left.svg" alt="button-left"></button>
             <div class="trending-slider">
                 <ul>
-                    <li><img id="trendingGif" src="assets/ebi fry.png" alt="trending-gif"></li>
-                    <li><img id="trendingGif" src="assets/ebi fry.png" alt="trending-gif"></li>
-                    <li><img id="trendingGif" src="assets/ebi fry.png" alt="trending-gif"></li>
-                    <li><img id="trendingGif" src="assets/ebi fry.png" alt="trending-gif"></li>
-                    <li><img id="trendingGif" src="assets/ebi fry.png" alt="trending-gif"></li>
-                    <li><img id="trendingGif" src="assets/ebi fry.png" alt="trending-gif"></li>
-                    <li><img id="trendingGif" src="assets/ebi fry.png" alt="trending-gif"></li>
-                    <li><img id="trendingGif" src="assets/ebi fry.png" alt="trending-gif"></li>
+                    <li id="liGif"></li>
+                    <li id="liGif"></li>
+                    <li id="liGif"></li>
+                    <li id="liGif"></li>
+                    <li id="liGif"></li>
+                    <li id="liGif"></li>
+                    <li id="liGif"></li>
+                    <li id="liGif"></li>
+                    <li id="liGif"></li>
+                    <li id="liGif"></li>
+                    <li id="liGif"></li>
+                    <li id="liGif"></li>
                 </ul>
             </div>
+            <button class="btn-slider-right"><img src= "assets/button-right.svg" alt="button-right"></button>
         </section>
     </main>
     <footer>

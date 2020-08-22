@@ -20,7 +20,10 @@ header{
             background-color: $color-grey;
         }
         hr{
-            color: $color-grey;
+            border: 1px solid $color-quaternary;
+            margin: 0 auto;
+            opacity: 0.5;
+            width: 41px;
         }
         #container-logo{
             #gifos{
@@ -39,11 +42,21 @@ header{
         #closeicon{
             display: none;
         }
-        hr{
-            color: #808080;
-        }
         .navbar-link{
             color: $color-primary;
+            &:active{
+                background-color: $color-quaternary;
+            }
+        }
+        .btn-mygifos{
+            background-color: $color-grey;
+            border: 1px solid $color-primary;
+            &:hover{
+                background-color: $color-primary;
+            }
+            &:active{
+                background-color: $color-quaternary;
+            }
         }
     }
 
@@ -115,7 +128,7 @@ header{
         color: $color-primary;
         padding-top: 20px;
         &:hover{
-            text-decoration: underline 2px $color-details;
+            text-decoration: underline $color-details;
         }
         &:active{
             color: $color-quaternary;
@@ -133,9 +146,12 @@ header{
     .close{
     display: none;
     }
+    .btn-mygifos{
+        display: none;
+    }
 }
 /* Desktop 1440px*/
-@media (min-width: 1440px){ 
+@media (min-width: 1366px){ 
     header{
     background-color: $color-primary;
     height: 90px;
@@ -158,10 +174,11 @@ header{
         display: none;
         }
         .navbar-container{
+        align-items: flex-end;
         background-color: $color-primary;
         display: flex;
         flex-direction: row;
-        height: 90px;
+        height: 50px;
         justify-content: flex-end;
         position: static;
         width: 100%;
@@ -175,8 +192,32 @@ header{
         .navbar-link{
         color: $color-secondary;
         font-size: 13px;
-        padding-right: 42px;
+        padding-left: 45px;
         text-transform: uppercase;
+        }
+        .btn-mygifos{
+            border: 1px solid $color-secondary;
+            border-radius: 100%;
+            display: block;
+            height: 54px;
+            margin: 23px 156px 18px 53px;
+            padding: 19px;
+            width: 54px;
+            #pluswhite{
+                display:none;
+            }
+            &:hover{
+                background-color: $color-secondary;
+                #pluswhite{
+                    display: block;
+                }
+                #plus{
+                    display: none;
+                }
+            }
+            &:active{
+                background-color: $color-quaternary;
+            }
         }
     }
 }
