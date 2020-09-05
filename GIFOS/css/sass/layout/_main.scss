@@ -85,6 +85,49 @@ main{
                 }
             }
         }
+        #create{
+            #cameraimg{
+                display:none;
+            }
+            #cameraimgdark{
+                display: inline;
+                left: -452px;
+                position: relative;
+                top: 140px;
+            }
+            #tapeimg{
+                display: none;
+            }
+            #tapeimgdark{
+                bottom: 255px;
+                display: inline;
+                left: 480px;
+                position: relative;
+            }
+            #screen-container{
+                border: 1px solid $color-primary;
+                h2{
+                    color: $color-primary;
+                }
+                p{
+                color: $color-primary;
+                }
+            }
+            #number-counting{
+                .btn-counting{
+                    background-color: $color-grey;
+                    border: 1px solid $color-primary;
+                    color: $color-primary;
+                    &:hover{
+                        background-color: $color-primary;
+                        color: $color-tertiary;
+                    }
+                }
+            }
+            hr{
+                border: 4px solid $color-primary;
+            }
+        }
         #gallery{
             background-color: #222326;
             h2{
@@ -124,18 +167,49 @@ main{
             margin: 0 auto;
             height: 50px;
             width: 334px;
-            &:focus-within{
-                box-shadow: 0 0 3px rgba ( 0, 0, 0, 0.3);
-            }
             input{
                 padding-left: 10px;
             }
+            //Estilo lista desplegable de resultados
+            .inputOpen{
+                align-items: flex-start;
+                background-color: $color-primary;
+                border: 1px solid $color-secondary;
+                border-radius: 0px 0px 27px 27px;
+                border-collapse: collapse;
+                border-top: hidden;
+                color: $color-quaternary;
+                display: flex;
+                flex-direction: column;
+                font-family: $font-secondary;
+                font-size: 16px;
+                height: 200px;
+                justify-content: space-evenly;
+                padding-left: 23.5px;
+                position: relative;
+                text-decoration: none;
+                z-index: 2;
+                li{
+                    list-style: none;
+                }
+            }
+
+            input::-webkit-calendar-picker-indicator {
+                display: none;
+            }
+            
             #iconsearch2dark{
                 display: none;
             }
+            /*#huge_list{
+                background-color: $color-primary;
+                li{
+                    color: $color-quaternary;
+                }
+            }*/
             .src{
                 border: 1px solid $color-secondary;
-                border-radius: 40px;
+                border-radius: 27px;
                 color: $color-tertiary;
                 font-family: $font-secondary;
                 height: 50px;
@@ -147,8 +221,14 @@ main{
                     text-align: center;
                 }
             }
+            
+            //Estilo de barra de búsqueda al desplegar resultados NO APLICADO AÚN
+            .srcOpen{
+                border-radius: 27px 27px 0px 0px;
+                border-bottom: 1px solid $color-quaternary;
+            }
+
             button{
-                background: none;
                 border: none;
                 cursor: pointer;
                 position: relative;
@@ -156,15 +236,6 @@ main{
                 top: -35px;
                 z-index: 1;
             }
-        }
-        .boxresults{
-            max-height: 200px;
-            overflow-y: auto;
-            transition: visibility 0.1 s, opacity 0.1s;
-        }
-        .boxresults--visible{
-            visibility: visible;
-            opacity: 1;
         }
         h3{
             color: $color-secondary;
@@ -177,12 +248,13 @@ main{
             color: $color-secondary;
             font-family: $font-primary;
             font-size: 14px;
-            min-height: 50px;
             line-height: 24px;
-            margin: 0 auto;
+            margin: auto;
+            min-height: 50px;
             padding-bottom: 35px;
             text-transform: capitalize;
             width: 225px;
+            word-wrap: break-word;
         }
         hr{
             border: 1px solid $color-quaternary;
@@ -195,6 +267,9 @@ main{
             font-family: $font-primary;
             font-size: 25px; 
             padding-top: 43px;
+        }
+        #activeSearch{
+            display: none;
         }
         #grid-search{
             column-gap: 21px;
@@ -303,24 +378,74 @@ main{
     }
 
     #create{
-        height: 572px;
+        max-block-size: 572px;
         #cameraimg{
-            position: absolute;
-            left: 140px;
-            top: 213px;
+            left: -452px;
+            position: relative;
+            top: 140px;
+        }
+        #cameraimgdark{
+            display: none;
+        }
+        #luzimg{
+            left: -455px;
+            position: relative;
+            top: 137px;
+            height: 151px;
+            width: 91px;
         }
         #screen-container{
             border: 1px solid $color-secondary;
             height: 390px;
             margin: 4px auto 29px auto;
+            position: relative;
+            top: -140px;
             width: 688px;
+            #frame1{
+                border-left: 1px solid $color-details;
+                border-top: 1px solid $color-details;
+                height: 25px;
+                margin: 20px;
+                width: 27px;
+            }
+            #frame2{
+                border-right: 1px solid $color-details;
+                border-top: 1px solid $color-details;
+                height: 27px;
+                left: 620px;
+                margin: 20px;
+                position: relative;
+                top: -45px;
+                width: 25px;
+            }
+            #frame3{
+                border-bottom: 1px solid $color-details;
+                border-left: 1px solid $color-details;
+                height: 27px;
+                margin: 20px;
+                position: relative;
+                top: -35px;
+                width: 25px;
+            }
+            #frame4{
+                border-bottom: 1px solid $color-details;
+                border-right: 1px solid $color-details;
+                height: 25px;
+                margin: 20px;
+                margin-left: 641px;
+                position: relative;
+                top: -80px;
+                width: 27px;
+            }
             h2{
                 color: $color-secondary;
                 font-family: $font-primary;
                 font-size: 25px;
                 line-height: 35px;
                 margin: 134px 68px 3px 70px;
+                position: relative;
                 text-align: center;
+                top: -90px;
                 span{
                     color: $color-details;
                 }
@@ -330,6 +455,8 @@ main{
                 font-family: $font-secondary;
                 font-size: 16px;
                 line-height: 30px;
+                position: relative;
+                top: -85px;
             }
         }
         #number-counting{
@@ -342,6 +469,8 @@ main{
                 font-size: 18px;
                 height: 32px;
                 margin-right: 25px;
+                position: relative;
+                top: -140px;
                 width: 32px;
                 &:hover{
                     background-color: $color-secondary;
@@ -352,16 +481,22 @@ main{
         hr{
             border: 4px solid $color-secondary;
             margin: 19px auto 20px auto;
+            position: relative;
+            top: -140px;
             width: 790px;
         }
         #tapeimg{
-            position: absolute;
-            right: 160px;
-            top: 475px;
+            position: relative;
+            left: 480px;
+            bottom: 255px;
+        }
+        #tapeimgdark{
+            display: none;
         }
     }
 
     #gallery{
+        border: 2px solid crimson;
         background-color: #F3F5F8;
         height: 430px;
         h2{
@@ -377,15 +512,15 @@ main{
             line-height: 20px;
             padding: 7px 21px 32px 21px;
         }
+        .btn-slider{
+            display: none;
+        }
         .trending-slider{
             background-color: aliceblue;
             overflow-x: auto;
             &::-webkit-scrollbar{
                 width: 0;
                 }
-            .btn-slider{
-                display: none;
-            }
             ul{
                 li{
                     display: flex;
@@ -431,7 +566,6 @@ main{
 /* Desktop 1440px*/
 @media (min-width: 1366px){ 
     main{
-        min-height: 1395px;
         #container-search{
             min-height: 665px;
             h1{
@@ -466,6 +600,18 @@ main{
                 font-size: 16px;
                 width: 402px;
             }
+            #grid-search{
+                column-gap: 29px;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+                margin: 46px 21px 78px 21px;
+                row-gap: 28px;
+                .img{
+                    height: 200px;
+                    width: 260px;
+                }
+            }
         }
         #gallery{
             height: 640px;
@@ -478,29 +624,29 @@ main{
                     display: none;
                 }
             }
-            .btn-slider-left{
+            #btn-slider-left{
                 background-color: $color-primary;
                 border: 1px solid $color-secondary;
                 display: block;
                 height: 40px;
-                left: 94px;
+                position: relative;
+                right: -3%;
+                top: 35%;
                 width: 40px;
-                position: absolute;
-                top: 1480px;
                 z-index: 2;
                 &:hover{
                     background-color: $color-secondary;
                     }
             }
-            .btn-slider-right{
+            #btn-slider-right{
                 background-color: $color-primary;
                 border: 1px solid $color-secondary;
-                top: 1480px;
                 display: block;
                 height: 40px;
+                left: 92%;
+                position: relative;
+                top: -26%;
                 width: 40px;
-                position: absolute;
-                right: 92px;
                 z-index: 3;
                 &:hover{
                     background-color: $color-secondary;
@@ -508,8 +654,8 @@ main{
             }
             .trending-slider{
                 width: 1150px;
+                padding: 53px 100px 0 100px;
                 ul{
-                    padding: 53px 157px 182px 156px;
                     li{
                         img{
                             height: 275px;

@@ -53,23 +53,30 @@ footer{
 /* Desktop 1440px*/
 @media (min-width: 1366px){ 
     footer{
+        border: 2px solid cyan;
         height: 116px;
         display: flex;
         flex-direction: row;
+        align-items: center;
         .r15px{
             font-size: 13px;
-            margin: 49.5px 0 48.4px 156px;
-            width: 79px;
+            margin: 49.5px 17px 48.3px 150px;
+            padding: 0;
         }
         #socialmedia{
             display: flex;
             flex-direction: row;
-            //margin: 47.4px 734px 48.4px 17px;
-            width: 106px;
+            margin: 0;
+            width: 96px;
+            a{
+                height: 20px;
+                width: 20px;
+            }
         }
         .r14px{
             font-size: 13px;
-            margin: 49.5px 158px 51.5px 0;
+            margin: 49.5px 158px 51.5px 630px;
+            width: 200px;
         }
     
     }

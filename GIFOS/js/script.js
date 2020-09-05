@@ -1,10 +1,13 @@
 // Dark mode :)
 
+function darkMode() {
 const btnSwitch = document.getElementById("switch");
-
 btnSwitch.addEventListener("click", function dark() {
     document.body.classList.toggle("dark");
 });
+}
+
+darkMode();
 
 //Cambiar icono búsqueda a dark
     /*let iconsearch = document.getElementById("iconsearch");
@@ -94,17 +97,20 @@ navmine.addEventListener('click', function(){
 
 //LLAMAR API
 
-let apiKey = 'PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT';
 let searchInput = document.getElementById('search');
-let btnSearch = document.getElementById('btnsearch')
+let btnSearch = document.getElementById('btnsearch');
+let searchTitle = document.getElementById('searchTitle');
+let huge_list = document.getElementById('huge_list');
+
+//Variables API
+let apiKey = 'PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT';
+let offset = 0;
 
 // Botones búsqueda
 
 btnSearch.addEventListener('click', () => {
     searchByApiKey(searchInput.value).then((arrayGifs) =>
         showGifs(arrayGifs)
-        //let searchTitle = document.getElementById('searchTitle');
-        //searchTitle.innerHTML = searchInput.value;
     );
 });
 searchInput.addEventListener('keyup', () => {
@@ -113,16 +119,18 @@ searchInput.addEventListener('keyup', () => {
         showGifs(arrayGifs)
         );
     } else{
-
-    }
-}) 
+        autocompleteByApiKey(searchInput.value).then((arraySugestions)=>{
+            console.log('AUTOCOMPLETE');
+            processingResults(arraySugestions);
+    })}
+})
 
 // Barra de búsqueda - Autocompletar
     //`https://api.giphy.com/v1/trending/searches?api_key=${apiKey}`;
     //https://api.giphy.com/v1/gifs/search/tags?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&q=korea :)
     //api.giphy.com/v1/gifs/search/tags
     async function autocompleteByApiKey(searchInput){
-        let url = `https://api.giphy.com/v1/gifs/search/tags?api_key=${apiKey}&q=${searchInput}&limit=4&offset=0&rating=g&lang=es`;
+        let url = `https://api.giphy.com/v1/gifs/search/tags?api_key=${apiKey}&q=${searchInput}&limit=4&rating=g&lang=es`;
         let respA = await fetch(url);
         let infoA = await respA.json();
         console.log(infoA);
@@ -130,13 +138,18 @@ searchInput.addEventListener('keyup', () => {
     }    
     //llamar al input debe ser el parámetro
     function processingResults(suggestionArray) {
-        let huge_list = document.getElementById('huge_list');
         huge_list.innerHTML = "";
+        huge_list.classList.add('inputOpen');
+        //Modificar estilo barra de búsqueda
+        let search = document.getElementById('search');
+        search.classList.add('srcOpen');
+        console.log('hola');
         suggestionArray.forEach((item) => {
             console.log('Element: ', item.name);
-            // Crear nueva opción
+            // Crear e imprimir en pantalla nueva opción
             let option = document.createElement('li');
             option.value = item.name;
+            option.innerHTML = "<img src='assets/icon-search-mod-grey.svg'> " + item.name;
             // Agregar nueva opción
             huge_list.appendChild(option);
         });
@@ -147,14 +160,14 @@ searchInput.addEventListener('keyup', () => {
  * @param {*} searchInput este parámetro es proporcionado por el usuario
  */
 async function searchByApiKey(searchInput){
-    let url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchInput}&limit=12&offset=0&rating=g&lang=es`;
+    let url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchInput}&limit=12&offset=${offset}&rating=g&lang=es`;
     let resp = await fetch(url);
     let info = await resp.json();
     console.log(info.data);
     return info.data;
 }
 
-//Cuarto intento
+//Cuarto intento para mostrar resultados de la búsqueda
 
 function showGifs(gifsArray){ 
     for (let i=0; i < gifsArray.length; i++ ) {
@@ -166,9 +179,23 @@ function showGifs(gifsArray){
         searchResults.appendChild(searchGif);
         searchGif.style.height = "120px";
         searchGif.style.width = "156px";
+        //Visualizar categoría de búsqueda
+        searchTitle.innerHTML = searchInput.value;
+        //Visualizar área de resultados
+        let activeSearch = document.getElementById('activeSearch');
+        activeSearch.style.display = "block";
     };
-}
+};
 
+//Botón 'Ver más'
+
+/*function moreBtn(){
+    let btnVer = document.getElementsByClassName('btn-ver');
+    btnVer.addEventListener('click', () => {
+       
+    );
+    })
+};*/
 
 /*
 // Tercer intento obtener imagenes
@@ -200,8 +227,6 @@ gifResult.then(info => {
 }).catch(err =>{
     console.error('Error', err);
 }) */
-
-
 
 /*function showResultApi(){
     //console.log(':D');
@@ -243,6 +268,8 @@ async function trendingByApiKey(){
     });
 
     //Reflejar 'trending gifs' en HTML
+    
+    let liGif = document.getElementById('liGif');
 
     async function trendingGifByApiKey(){
         let url = `https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=12&rating=g`;
@@ -253,11 +280,10 @@ async function trendingByApiKey(){
     }
     trendingGifByApiKey().then(infoTGif =>{
         for(let i= 0; i<12; i++){ 
-            let trendingGif = infoTGif.data[i].images.downsized.url;
+            var trendingGif = infoTGif.data[i].images.downsized.url;
             console.log(trendingGif);
             let imgGif = document.createElement('img');
             imgGif.src = trendingGif;
-            let liGif = document.getElementById('liGif');
             liGif.appendChild(imgGif);
             //imgGif.style.height = '187px';
             //imgGif.style.width = '156px';
@@ -267,3 +293,48 @@ async function trendingByApiKey(){
     // Hover en 'trending gifs'
 
     //function trendingGifHover
+
+    //Funcionalidad de carrusel 'Trending gifs'
+
+        //2° Intento
+
+        const btnLeft = document.getElementById('btn-slider-left');
+        const btnRight = document.getElementById('btn-slider-right');
+        const trendingUl = document.getElementById('trendingUl');
+        const trendingSlider = document.getElementById('trending-slider');
+
+        btnRight.addEventListener('click', () => {
+            //alert('Derechaaaa');
+            trendingUl.style.transform =  `translateX(${360}px)`;
+        });
+            
+        btnLeft.addEventListener('click', () => {
+            //alert('Izquierdaaa');
+            trendingUl.style.transform =  `translateX(${360}px)`;
+            trendingUl.style.transition = '1s ease';
+        });
+
+        /*const btnLeft = document.getElementById('btn-slider-left');
+        const btnRight = document.getElementById('btn-slider-right');
+        const trendingUl = document.getElementById('trendingUl');
+        
+        const trendingWidth = liGif[0].offsetWidth;
+
+        btnLeft.onclick = () => Move(1);
+        btnRight.onclick = () => Move(2);
+
+        function Move(value) {
+            const trendingUlWidth = trendingUl.offsetWidth;
+            const liGifWidth = liGif.offsetWidth;
+
+            trendingUl.style.left == "" ? leftPosition = trendingUl.style.left = 0 : leftPosition = parseFloat(trendingUl.style.left.slice(0, -2) * -1);
+
+            if(leftPosition < (trendingUlWidth - liGif) && value == 2) {
+                trendingUl.style.left = `${-1 * (leftPosition + liGifWidth)}px`;
+            } else if(leftPosition > 0 && value == 1) {
+                trendingUl.style.left = `${-1 * (leftPosition - liGifWidth)}px`;
+            }
+        }*/
+
+
+    
