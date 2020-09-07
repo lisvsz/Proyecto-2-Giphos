@@ -19,7 +19,7 @@ main{
             h1{
                 color: $color-primary;
             }
-            #btnsearch{
+            #btnSearch{
                 #iconsearch1{
                 display: none;
                 }
@@ -195,6 +195,9 @@ main{
                     list-style: none;
                 }
             }
+            .inputClose{
+                width: 0px;
+            }
 
             #iconsearch2dark{
                 display: none;
@@ -226,13 +229,22 @@ main{
                 border-bottom: 1px solid $color-quaternary;
             }
 
-            button{
+            #btnSearch{
                 border: none;
                 cursor: pointer;
                 position: relative;
                 left: 145px;
                 top: -35px;
-                z-index: 1;
+                z-index: 2;
+            }
+            #btn-close{
+                display: none;
+                border: none;
+                cursor: pointer;
+                position: relative;
+                left: 136px;
+                top: -231px;
+                z-index: 2;
             }
         }
         h3{
@@ -276,10 +288,10 @@ main{
             grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
             margin: 46px 21px 78px 21px;
             row-gap: 25px;
-            .img{
+            /*.img{
                 height:120px;
                 width: 156px;
-            }
+            }*/
         }
         .btn-ver{
             background-color: $color-primary;
@@ -618,8 +630,12 @@ main{
                     padding-right: 300px;
                     width: 551px;
                 }
-                button{
+                #btnSearch{
                     left: 245px;
+                }
+                #btn-close{
+                    display: none;
+                    left: 241px;
                 }
             }
             h3{
@@ -635,13 +651,17 @@ main{
                 column-gap: 29px;
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
-                grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+                grid-template-rows: 1fr 1fr 1fr;
                 margin: 46px 21px 78px 21px;
                 row-gap: 28px;
-                .img{
-                    height: 200px;
-                    width: 260px;
-                }
+                /*.img{
+                    height: 500px;
+                    width: 600px;
+                }*/
+            }
+            .gifDesktop{
+                height:200px;
+                width: 260px;
             }
         }
         #gallery{

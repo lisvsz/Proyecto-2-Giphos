@@ -337,11 +337,11 @@ body.dark main #container-search h1 {
   color: white;
 }
 
-body.dark main #container-search #btnsearch #iconsearch1 {
+body.dark main #container-search #btnSearch #iconsearch1 {
   display: none;
 }
 
-body.dark main #container-search #btnsearch #iconsearch2dark {
+body.dark main #container-search #btnSearch #iconsearch2dark {
   display: block;
 }
 
@@ -570,6 +570,10 @@ main #container-search .boxsearch .inputOpen li {
   list-style: none;
 }
 
+main #container-search .boxsearch .inputClose {
+  width: 0px;
+}
+
 main #container-search .boxsearch #iconsearch2dark {
   display: none;
 }
@@ -613,13 +617,23 @@ main #container-search .boxsearch .srcOpen {
   border-bottom: 1px solid #9CAFC3;
 }
 
-main #container-search .boxsearch button {
+main #container-search .boxsearch #btnSearch {
   border: none;
   cursor: pointer;
   position: relative;
   left: 145px;
   top: -35px;
-  z-index: 1;
+  z-index: 2;
+}
+
+main #container-search .boxsearch #btn-close {
+  display: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  left: 136px;
+  top: -231px;
+  z-index: 2;
 }
 
 main #container-search h3 {
@@ -672,11 +686,10 @@ main #container-search #grid-search {
       grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   margin: 46px 21px 78px 21px;
   row-gap: 25px;
-}
-
-main #container-search #grid-search .img {
-  height: 120px;
-  width: 156px;
+  /*.img{
+                height:120px;
+                width: 156px;
+            }*/
 }
 
 main #container-search .btn-ver {
@@ -1063,8 +1076,12 @@ main #gallery .trending-slider ul li img {
     padding-right: 300px;
     width: 551px;
   }
-  main #container-search .boxsearch button {
+  main #container-search .boxsearch #btnSearch {
     left: 245px;
+  }
+  main #container-search .boxsearch #btn-close {
+    display: none;
+    left: 241px;
   }
   main #container-search h3 {
     font-size: 18px;
@@ -1082,12 +1099,16 @@ main #gallery .trending-slider ul li img {
     display: grid;
     -ms-grid-columns: 1fr 1fr 1fr 1fr;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-    -ms-grid-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    -ms-grid-rows: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
     margin: 46px 21px 78px 21px;
     row-gap: 28px;
+    /*.img{
+                    height: 500px;
+                    width: 600px;
+                }*/
   }
-  main #container-search #grid-search .img {
+  main #container-search .gifDesktop {
     height: 200px;
     width: 260px;
   }

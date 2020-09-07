@@ -118,7 +118,8 @@ navmine.addEventListener('click', function(){
 //LLAMAR API
 
 let searchInput = document.getElementById('search');
-let btnSearch = document.getElementById('btnsearch');
+let btnSearch = document.getElementById('btnSearch');
+let btnClose = document.getElementById('btn-close');
 let searchTitle = document.getElementById('searchTitle');
 let huge_list = document.getElementById('huge_list');
 
@@ -145,6 +146,8 @@ searchInput.addEventListener('keyup', () => {
     })}
 })
 
+
+
 // Barra de búsqueda - Autocompletar
     //`https://api.giphy.com/v1/trending/searches?api_key=${apiKey}`;
     //https://api.giphy.com/v1/gifs/search/tags?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&q=korea :)
@@ -160,16 +163,48 @@ searchInput.addEventListener('keyup', () => {
     function processingResults(suggestionArray) {
         huge_list.innerHTML = "";
         huge_list.classList.add('inputOpen');
+        
         //Modificar estilo barra de búsqueda
         let search = document.getElementById('search');
         search.classList.add('srcOpen');
         console.log('hola');
         suggestionArray.forEach((item) => {
         console.log('Element: ', item.name);
+        
+        //Modificar ubicación del botón de búsqueda
+        btnSearch.style.top = '-235px';
+        
         // Crear e imprimir en pantalla nueva opción
         let option = document.createElement('li');
         option.value = item.name;
         option.innerHTML = "<img src='assets/icon-search-mod-grey.svg'> " + item.name;
+        
+        //Modificar ícono de lupa por 'x'
+        function openClose (searchInput) {
+            if(searchInput !== '' || null){
+                btnSearch.style.display = 'none';
+                btnClose.style.display = 'inline';
+            } else {
+                btnClose.style.display = 'none';
+                btnSearch.style.display = 'inline';
+            }
+        }
+        btnClose.addEventListener('click', () => {
+            //alert('clear :D');
+        })
+        openClose();
+            //let iconSearch1 = document.getElementById('iconsearch1');
+            //iconSearch1.src = 'assets/close.svg';
+        
+        //Seleccionar sugerencia, abrirla e imprimirla en pantalla
+        option.addEventListener ('click', () => {
+            searchByApiKey(item.name).then((arrayGifs)=>
+            showGifs(arrayGifs));
+            //Reemplazar texto mostrado
+            searchTitle.innerHTML = item.name;
+        })
+        option.style.cursor = 'pointer';
+        
         // Agregar nueva opción
         huge_list.appendChild(option);
         });
@@ -197,8 +232,19 @@ function showGifs(gifsArray){
         searchGif.src = imgGif;
         let searchResults = document.getElementById('grid-search');
         searchResults.appendChild(searchGif);
-        searchGif.style.height = "120px";
-        searchGif.style.width = "156px";
+
+        //Medidas GIF
+
+        //INTENTO PARA MODIFICAR TAMAÑO
+            if (window.matchMedia("(min-width: 1366px)").matches) {
+                searchGif.style.height = "200px";
+                searchGif.style.width = "260px";
+            } else {
+                searchGif.style.height = "120px";
+                searchGif.style.width = "156px";
+            }
+        }
+
         //Visualizar categoría de búsqueda
         searchTitle.innerHTML = searchInput.value;
         //Visualizar área de resultados
@@ -216,7 +262,7 @@ function showGifs(gifsArray){
       }
       myFunction(x) // Call listener function at run time
       x.addListener(myFunction) // Attach listener function on state changes*/
-};
+;
 
 //Botón 'Ver más'
 
