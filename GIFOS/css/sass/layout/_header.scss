@@ -79,6 +79,10 @@ header{
             right: -5px;
             top: -33px;
             z-index: 2;
+            &:hover{
+                color: $color-details;
+                cursor: pointer;
+            }
         }
     }
     #logodesktop{

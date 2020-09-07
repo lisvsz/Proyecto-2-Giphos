@@ -21,6 +21,26 @@ darkMode();
 
 // Mostrar secciones :|
 
+//COMO SE MOSTRARÁ LA PÁGINA PRINCIPAL??
+/*const home = document.getElementById('gifos');
+
+home.addEventListener('click', function principal(){
+    const favsection = document.getElementById("fav");
+    const minesection = document.getElementById("mine");
+    const searchsection = document.getElementById("container-search");
+    const principalsection = document.getElementById("principal");
+
+    if(home.style.display === "none"){
+        home.style.display = "block";
+        minesection.style.display = "none";
+        favsection.style.display = "none";
+    }
+    else{
+        home.style.display = "none";
+    }
+})*/
+
+
 const navfav = document.getElementById("favorites");
 
 navfav.addEventListener('click', function favorites(){
@@ -145,13 +165,13 @@ searchInput.addEventListener('keyup', () => {
         search.classList.add('srcOpen');
         console.log('hola');
         suggestionArray.forEach((item) => {
-            console.log('Element: ', item.name);
-            // Crear e imprimir en pantalla nueva opción
-            let option = document.createElement('li');
-            option.value = item.name;
-            option.innerHTML = "<img src='assets/icon-search-mod-grey.svg'> " + item.name;
-            // Agregar nueva opción
-            huge_list.appendChild(option);
+        console.log('Element: ', item.name);
+        // Crear e imprimir en pantalla nueva opción
+        let option = document.createElement('li');
+        option.value = item.name;
+        option.innerHTML = "<img src='assets/icon-search-mod-grey.svg'> " + item.name;
+        // Agregar nueva opción
+        huge_list.appendChild(option);
         });
     };
     
@@ -167,7 +187,7 @@ async function searchByApiKey(searchInput){
     return info.data;
 }
 
-//Cuarto intento para mostrar resultados de la búsqueda
+//Cuarto intento para mostrar resultados de la búsqueda de Gif's
 
 function showGifs(gifsArray){ 
     for (let i=0; i < gifsArray.length; i++ ) {
@@ -183,19 +203,28 @@ function showGifs(gifsArray){
         searchTitle.innerHTML = searchInput.value;
         //Visualizar área de resultados
         let activeSearch = document.getElementById('activeSearch');
-        activeSearch.style.display = "block";
+        activeSearch.style.display = "block";        
     };
+    //PRUEBA MAXIMIZAR TAMAÑO GIF
+    /*var x = window.matchMedia("(min-width: 1366px)")
+    function myFunction(x) {
+        if (x.matches) { // If media query matches
+          document.body.style.backgroundColor = "yellow";
+        } else {
+          document.body.style.backgroundColor = "pink";
+        }
+      }
+      myFunction(x) // Call listener function at run time
+      x.addListener(myFunction) // Attach listener function on state changes*/
 };
 
 //Botón 'Ver más'
 
-/*function moreBtn(){
-    let btnVer = document.getElementsByClassName('btn-ver');
+    /*let btnVer = document.getElementsByClassName('btn-ver');
     btnVer.addEventListener('click', () => {
-       
-    );
-    })
-};*/
+       alert('hola');
+    });*/
+
 
 /*
 // Tercer intento obtener imagenes
@@ -268,18 +297,18 @@ async function trendingByApiKey(){
     });
 
     //Reflejar 'trending gifs' en HTML
-    
+
     let liGif = document.getElementById('liGif');
 
     async function trendingGifByApiKey(){
-        let url = `https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=12&rating=g`;
+        let url = `https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=20&rating=g`;
         let respTGif = await fetch(url);
         let infoTGif = await respTGif.json();
         console.log(infoTGif);
         return infoTGif;
     }
     trendingGifByApiKey().then(infoTGif =>{
-        for(let i= 0; i<12; i++){ 
+        for(let i= 0; i<20; i++){ 
             var trendingGif = infoTGif.data[i].images.downsized.url;
             console.log(trendingGif);
             let imgGif = document.createElement('img');
@@ -288,6 +317,19 @@ async function trendingByApiKey(){
             //imgGif.style.height = '187px';
             //imgGif.style.width = '156px';
         }
+        /*CORRECTO
+            infoTGif.data.forEach(element => {
+            let trendingGif = element.images.downsized.url;
+            console.log(trendingGif);
+            let liGif = document.createElement('li');
+            liGif.setAttribute("class","liGif");
+            let imgGif = document.createElement('img');
+            imgGif.src = trendingGif;
+            liGif.appendChild(imgGif);
+            ulGif.appendChild(liGif);
+            //imgGif.style.height = '187px';
+            //imgGif.style.width = '156px'; 
+        }); */
     });
 
     // Hover en 'trending gifs'
@@ -296,45 +338,43 @@ async function trendingByApiKey(){
 
     //Funcionalidad de carrusel 'Trending gifs'
 
-        //2° Intento
-
+        //Variables
         const btnLeft = document.getElementById('btn-slider-left');
         const btnRight = document.getElementById('btn-slider-right');
-        const trendingUl = document.getElementById('trendingUl');
-        const trendingSlider = document.getElementById('trending-slider');
+        const trendingUl = document.getElementById('trendingUl').offsetWidth;
+        let index = 0;
 
         btnRight.addEventListener('click', () => {
-            //alert('Derechaaaa');
-            trendingUl.style.transform =  `translateX(${360}px)`;
-        });
-            
+            index++;
+            liGif.style.transform = `translateX(-${index*trendingUl}px)`;
+            liGif.style.transition = '1s ease';
+        })
         btnLeft.addEventListener('click', () => {
-            //alert('Izquierdaaa');
-            trendingUl.style.transform =  `translateX(${360}px)`;
-            trendingUl.style.transition = '1s ease';
-        });
-
-        /*const btnLeft = document.getElementById('btn-slider-left');
-        const btnRight = document.getElementById('btn-slider-right');
-        const trendingUl = document.getElementById('trendingUl');
-        
-        const trendingWidth = liGif[0].offsetWidth;
-
-        btnLeft.onclick = () => Move(1);
-        btnRight.onclick = () => Move(2);
-
-        function Move(value) {
-            const trendingUlWidth = trendingUl.offsetWidth;
-            const liGifWidth = liGif.offsetWidth;
-
-            trendingUl.style.left == "" ? leftPosition = trendingUl.style.left = 0 : leftPosition = parseFloat(trendingUl.style.left.slice(0, -2) * -1);
-
-            if(leftPosition < (trendingUlWidth - liGif) && value == 2) {
-                trendingUl.style.left = `${-1 * (leftPosition + liGifWidth)}px`;
-            } else if(leftPosition > 0 && value == 1) {
-                trendingUl.style.left = `${-1 * (leftPosition - liGifWidth)}px`;
-            }
-        }*/
+            index--;
+            liGif.style.transform = `translateX(-${index*trendingUl}px)`;
+            liGif.style.transition = '1s ease';
+        })
 
 
+
+        /*
+        //Funcionalidad botón 'Detener'
+
+btnFinish.addEventListener('click', () => {
+    const sleep = m => new Promise(r => setTimeout(r, m));
+        await sleep(3000);
     
+        await recorder.stopRecording();
+        let blob = await recorder.getBlob();
+        invokeSaveAsDialog(blob);
+        let form = new FormData();
+        form.append('file', blob, 'myGif.gif');
+        console.log(form.get('file'));
+
+    let url = fetch("url", {
+        headers: {
+            'Content-Type': 'text/xml'
+        }
+    });
+    
+});*/
