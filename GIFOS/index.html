@@ -9,11 +9,11 @@
 </head>
 <body>
     <header>
-        <nav id="navbar-header" a href="#principal">
+        <nav id="navbar-header">
             <div id="container-logo">
                 <img src="assets/logo-mobile.svg" id="logomobile" alt="logomobile">
                 <img src="assets/logo-desktop.svg" id="logodesktop" alt="logomobile">
-                <span id="gifos">GIFOS</span>
+                <a href="#principal" id="principal"><span id="gifos">GIFOS</span></a>
             </div>
             <a href="#navbar-header" class="navbar-menu-mobile open">
                 <img id="burger" src="assets/burger.svg" alt="menuhamburguesa">
@@ -46,19 +46,19 @@
                     <img id="iconsearch1" src="assets/icon-search.svg" data-src="assets/icon-search.svg" alt="iconsearch1">
                     <img id="iconsearch2dark" src="assets/icon-search-mod-noc.svg" alt="iconsearch2dark">
                 </button>
-                 <!--Botón alternativo-->
-                <button value="clear" class="btnBoxSearch" id="btnClose"></button>
+                <!--Botón alternativo-->
+                <button value="clear" class="btnBoxSearch" id="btnClose">
                     <img id="btn-close" src="assets/button-close.svg" data-src="assets/icon-search.svg" alt="close">
                 </button>
             </div>
 
             <h3>Trending:</h3>
-            <p id="trendingSection"></p>
+            <div id="trendingSection"></div>
             <div id="activeSearch">
                 <hr>
-                <h2 id="searchTitle"> </h2>
+                <p id="searchTitle"> </p>
                 <div id="grid-search"></div>
-                <button class="btn-ver">VER MÁS</button>
+                <button class="btn-ver" id="btn-more-search">VER MÁS</button>
             </div>
         </section>
 
@@ -66,36 +66,24 @@
             <img src="assets/icon-favoritos.svg" id="icon-favoritos" alt="fav-icon">
             <h2>Favoritos</h2>
                 <div class="container-fav">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <div id="noFav">
+                        <img src="assets/icon-fav-empty.PNG" alt="favorites icon">
+                        <p id="textnoFav">"¡Guarda tu primer GIFO en Favoritos para que se muestre aquí!"</p>
+                    </div>
                 </div>
-                <a href="#" class="btn-ver">VER MÁS</a>
+                <a href="#" class="btn-ver" id="btn-more-fav" style="display:none">VER MÁS</a>
         </section>
 
         <section id="mine" style="display:none">
             <img src="assets/icon-mis-gifos.svg" id="icon-mis-gifos" alt="mygifos-icon">
             <h2>Mis GIFOS</h2>
                 <div class="container-mine">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
-                    <img src="assets/icon-favoritos.svg" class="gif" alt="gif">
+                    <div id="noMine">
+                        <img src="assets/icon-mis-gifos-sin-contenido.svg" alt="my gifs">
+                        <p id="textnoMine">¡Anímate a crear tu primer GIFO!</p>
+                    </div>
                 </div>
-                <a href="#" class="btn-ver">VER MÁS</a>
+                <a href="#" class="btn-ver" id="btn-more-mine" style="display:none">VER MÁS</a>
         </section>
 
         <section id="create" style="display:none">
@@ -121,7 +109,7 @@
                 <button class="btn-counting" id="btn2">2</button>
                 <button class="btn-counting" id="btn3">3</button>
             </div>
-            <div id="timeStamp">00:00:00</div>
+            <div id="timeStamp"></div>
             <hr>
             <img id="tapeimg" src="assets/pelicula.svg" alt="pelicula"> <img id="tapeimgdark" src="assets/pelicula-modo-noc.svg" alt="tape">
             <div class="line"></div>
@@ -129,27 +117,16 @@
                 <!-- Botones dinámicos-->
                 <button class="btnCreate" id="btn-record" style="display:none">GRABAR</button>
                 <button class="btnCreate" id="btn-finish" style="display:none">FINALIZAR</button>
+                <button class="btnCreate" id="btn-upload" style="display:none">SUBIR GIFO</button>
+                <button id="btn-repeat" style="display:none">REPETIR CAPTURA</button>
         </section>
 
         <section id="gallery">
             <h2>Trending GIFOS</h2>
             <p>Mira los últimos<br>GIFOS de nuestra comunidad.</p>
             <button class="btn-slider" id="btn-slider-left"><img src= "assets/button-left.svg" alt="button-left"></button>
-            <div class="trending-slider">
-                <ul id="trendingUl">
-                    <li id="liGif"></li>
-                    <li id="liGif"></li>
-                    <li id="liGif"></li>
-                    <li id="liGif"></li>
-                    <li id="liGif"></li>
-                    <li id="liGif"></li>
-                    <li id="liGif"></li>
-                    <li id="liGif"></li>
-                    <li id="liGif"></li>
-                    <li id="liGif"></li>
-                    <li id="liGif"></li>
-                    <li id="liGif"></li>
-                </ul>
+            <div id="trending-slider">
+                <div id="track"> </div>
             </div>
             <button class="btn-slider" id="btn-slider-right"><img src= "assets/button-right.svg" alt="button-right"></button>
         </section>
@@ -165,7 +142,8 @@
     </footer>
     <script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
     <script src="js/script.js"></script>
-    <script src="js/createGif.js"></script>
+    <script src="js/sections.js"></script>
+    <script src="js/createGif2.js"></script>
 </body>
 </html>
 

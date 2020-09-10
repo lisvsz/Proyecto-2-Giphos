@@ -5,6 +5,7 @@ var constraints = { audio: true, video: { width: 1280, height: 720 } };
 let btnStart = document.getElementById('btn-start');
 let btnRecord = document.getElementById('btn-record');
 let btnFinish = document.getElementById('btn-finish');
+let btnRepeat = document.getElementById('btn-repeat');
 let btn1 = document.getElementById('btn1');
 let btn2 = document.getElementById('btn2');
 let btn3 = document.getElementById('btn3');
@@ -17,14 +18,7 @@ let time = 0, counting = 0;
 let verify = false;
 
 
-//Funcionalidad del botón 'Comenzar'
-btnStart.addEventListener('click', () => { 
-    btnStart.style.display = 'none';
-    videoCover.style.display = 'none';
-    btn1.style.backgroundColor = '#572EE5';
-    btn1.style.color = '#FFFFFF';
-    videoStep1.style.display = 'block';
-});
+
 
 //Funcionalidad del botón 2 'Acceso a la cámara'
 btn2.addEventListener('click', () => {
@@ -82,11 +76,11 @@ btnRecord.addEventListener('click', () => {
         }
     });
 
-    getRecord()
+    //getRecord()
 
     //Función del temporizador
 
-    function countingTime(){
+    /*function countingTime(){
         if(verify == false){
             counting = setInterval(() => {
                 time += 0.01;
@@ -97,7 +91,7 @@ btnRecord.addEventListener('click', () => {
             verify = false;
             clearInterval(counting);
         }
-    }
+    }*/
     
     /*function countingTime(timeStamp, counting, verify){
         if(verify == false){
@@ -107,8 +101,11 @@ btnRecord.addEventListener('click', () => {
             verify = true;
         }
     countingTime(timeStamp, counting, verify);*/
-    countingTime();
+    //countingTime();
+});
+        //2° intento timer
 
+       
         //Intento reset
     /*function resetTime() {
         verify = false;
@@ -116,7 +113,7 @@ btnRecord.addEventListener('click', () => {
         counting.innerHTML = time + '00:00:00';
         clearInterval(counting);
     }*/
-});
+
 
 //Funcionalidad botón 'Detener'
 
@@ -142,6 +139,25 @@ function uploadGif(gif) {
 });
 }*/
 
+//Funcionalidad botón 'Detener'
 
+/*btnFinish.addEventListener('click', () => {
+    const sleep = m => new Promise(r => setTimeout(r, m));
+        await sleep(3000);
+    
+        await recorder.stopRecording();
+        let blob = await recorder.getBlob();
+        invokeSaveAsDialog(blob);
+        let form = new FormData();
+        form.append('file', blob, 'myGif.gif');
+        console.log(form.get('file'));
+
+    let url = fetch("url", {
+        headers: {
+            'Content-Type': 'text/xml'
+        }
+    });
+    
+});*/
 
 

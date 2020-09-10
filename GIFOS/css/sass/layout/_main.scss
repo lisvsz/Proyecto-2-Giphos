@@ -62,6 +62,9 @@ main{
             h2{
                 color: $color-primary;
             }
+            #container-fav{
+                height: 382px;
+            }
             .btn-ver{
                 background-color: $color-grey;
                 border: 1px solid $color-primary;
@@ -138,7 +141,7 @@ main{
             p{
                 color: $color-primary;
             }
-            .trending-slider{
+            #trending-slider{
                 background-color: #222326;
             }
         }
@@ -194,9 +197,6 @@ main{
                 li{
                     list-style: none;
                 }
-            }
-            .inputClose{
-                width: 0px;
             }
 
             #iconsearch2dark{
@@ -259,12 +259,16 @@ main{
             font-family: $font-primary;
             font-size: 14px;
             line-height: 24px;
+            list-style: none;
             margin: auto;
             min-height: 50px;
             padding-bottom: 35px;
             text-transform: capitalize;
             width: 225px;
-            word-wrap: break-word;
+            li{
+                display: inline-flex;
+                cursor: pointer;
+            }
         }
         hr{
             border: 1px solid $color-quaternary;
@@ -272,10 +276,11 @@ main{
             opacity: 0.5;
             width: 157px;
         }
-        h2{
+        #searchTitle{
             color: $color-secondary;
             font-family: $font-primary;
             font-size: 25px; 
+            font-weight: bolder;
             padding-top: 43px;
         }
         #activeSearch{
@@ -311,7 +316,7 @@ main{
     }
 
     #fav{
-        min-height: 1125px;
+        min-height: 610px;
         #icon-favoritos{
             margin: 5px 7px;
         }
@@ -320,7 +325,23 @@ main{
             font-family: $font-primary;
             font-size: 20px; 
         }
-        .container-fav{
+        #noFav{
+            img{
+                margin-bottom: 24px;
+                margin-top: 110px;
+            }
+            #textnoFav{
+                color: $color-details;
+                font-family: $font-primary;
+                font-size: 22px;
+                font-weight: bolder;
+                margin-left: 30px;
+                margin-right: 30px;
+                text-align: center;
+            }
+        }
+        //Contenedor favorito deshabilitado por ahora
+        /*.container-fav{
             column-gap: 21px;
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -331,7 +352,7 @@ main{
                 height:120px;
                 width: 156px;
             }
-        }
+        }*/
         .btn-ver{
             background-color: $color-primary;
             border: 1px solid $color-secondary;
@@ -349,7 +370,7 @@ main{
     }
     
     #mine{
-        min-height: 860px;
+        min-height: 610px;
         #icon-mis-gifos{
             margin: 5px 6px;
         }
@@ -358,7 +379,23 @@ main{
             font-family: $font-primary;
             font-size: 20px; 
         }
-        .container-mine{
+        #noMine{
+            img{
+                margin-bottom: 24px;
+                margin-top: 110px;
+            }
+            #textnoMine{
+                color: $color-details;
+                font-family: $font-primary;
+                font-size: 22px;
+                font-weight: bolder;
+                margin-left: 30px;
+                margin-right: 30px;
+                text-align: center;
+            }
+        }
+        //Contenedor favorito deshabilitado por ahora
+        /*.container-mine{
             column-gap: 21px;
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -369,7 +406,7 @@ main{
                 height:120px;
                 width: 156px;
             }
-        }
+        }*/
         .btn-ver{
             background-color: $color-primary;
             border: 1px solid $color-secondary;
@@ -537,10 +574,23 @@ main{
                     background-color: $color-secondary;
                 }
         }
+        #btn-repeat{
+            background-color: $color-primary;
+            border-bottom: 2px solid $color-details;
+            border-left: none;
+            border-right: none;
+            border-top: none;
+            bottom: 309px;
+            color: $color-secondary;
+            font-family: $font-primary;
+            font-size: 13px;
+            font-weight: bolder;
+            left: 237px;
+            position: relative;
+        }
     }
 
     #gallery{
-        border: 2px solid crimson;
         background-color: #F3F5F8;
         height: 430px;
         h2{
@@ -559,47 +609,21 @@ main{
         .btn-slider{
             display: none;
         }
-        .trending-slider{
+        #trending-slider{
             background-color: aliceblue;
             overflow-x: auto;
             &::-webkit-scrollbar{
                 width: 0;
-                }
-            ul{
-                li{
-                    display: inline-flex;
-                    flex-direction: row;
-                    list-style: none;
-                    margin-left: 22px;
-                    img{
-                        height: 187px;
-                        margin-right: 22px;
-                        width: 243px;
-                    }
-                    /*.overlay{
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 0;
-                        transition: 1s ease;
-                        overflow: hidden;
-                        border-radius: 5%;
-                        h3{
-                        color: #ffffff;
-                        font-size: 1.2em;
-                        font-weight: 500;
-                        position: absolute;
-                        top: 50%;
-                        right: 50%;
-                        text-align: center;
-                        transform: translate (-50%, -50%);
-                        }
-                        &:hover .overlay{
-                        height: 100%;
-                        cursor: pointer;
-                        }
-                    }*/
+            }
+            #track{
+                display: inline-flex;
+                flex-direction: row;
+                list-style: none;
+                margin-left: 22px;
+                img{
+                    height: 187px;
+                    margin-right: 22px;
+                    width: 243px;
                 }
             }
         }
@@ -638,6 +662,9 @@ main{
                     left: 241px;
                 }
             }
+            #searchTitle{
+                font-size: 35px;
+            }
             h3{
                 font-size: 18px;
                 margin-bottom: 7px;
@@ -652,16 +679,12 @@ main{
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
                 grid-template-rows: 1fr 1fr 1fr;
-                margin: 46px 21px 78px 21px;
+                margin: 46px 100px 78px 98px;
                 row-gap: 28px;
                 /*.img{
                     height: 500px;
                     width: 600px;
                 }*/
-            }
-            .gifDesktop{
-                height:200px;
-                width: 260px;
             }
         }
         #gallery{
@@ -703,20 +726,36 @@ main{
                     background-color: $color-secondary;
                 }
             }
-            .trending-slider{
-                width: 1250px;
+            #trending-slider{
+                //margin-left: 100px;
+                margin-right: 100px;
                 padding: 53px 100px 0 65px;
-                ul{
+                width: 1250px;
+                #track{
                     overflow: hidden;
                     padding-left: 30px;
-                    width: 1150px;
-                    li{
-                        img{
-                            height: 275px;
-                            margin-right: 22px;
-                            width: 357px;
-                        }
+                    margin-left: 50px;
+                    //width: 1145px;
+                    img{
+                        height: 275px;
+                        margin-right: 22px;
+                        width: 357px;
                     }
+                    //Diseño de trending gif - mouse over
+                    .gifcard{
+                        background-color: #572EE5;
+                        height: 275px;
+                        opacity: 0.6;
+                        width: 357px;
+                    }
+                    .hoverBtns{
+                        height: 32px;
+                        left: 230px;
+                        position: absolute;
+                        top: 30px;
+                        width: 104px;
+                        }
+                    
                 }
             }
         }

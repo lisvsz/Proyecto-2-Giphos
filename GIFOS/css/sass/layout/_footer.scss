@@ -53,7 +53,6 @@ footer{
 /* Desktop 1440px*/
 @media (min-width: 1366px){ 
     footer{
-        border: 2px solid cyan;
         height: 116px;
         display: flex;
         flex-direction: row;
@@ -78,6 +77,5 @@ footer{
             margin: 49.5px 158px 51.5px 630px;
             width: 200px;
         }
-    
     }
 }
