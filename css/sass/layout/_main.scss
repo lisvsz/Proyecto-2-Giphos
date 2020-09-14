@@ -208,6 +208,11 @@ main{
                     color: $color-quaternary;
                 }
             }*/
+            //Línea interactiva de separación en buscador
+            #hugeListLine {
+                color: $color-quaternary;
+                width: 85%;
+            }
             .src{
                 border: 1px solid $color-secondary;
                 border-radius: 27px;
@@ -226,7 +231,8 @@ main{
             //Estilo de barra de búsqueda al desplegar resultados NO APLICADO AÚN
             .srcOpen{
                 border-radius: 27px 27px 0px 0px;
-                border-bottom: 1px solid $color-quaternary;
+                border-bottom: none;
+                border-collapse: collapse;
             }
 
             #btnSearch{
@@ -237,13 +243,12 @@ main{
                 top: -35px;
                 z-index: 2;
             }
-            #btn-close{
-                display: none;
+            #btnClose{
                 border: none;
                 cursor: pointer;
                 position: relative;
-                left: 136px;
-                top: -231px;
+                left: 123px;
+                top: -39px;
                 z-index: 2;
             }
         }
@@ -471,7 +476,7 @@ main{
                 height: 27px;
                 margin: 20px;
                 position: relative;
-                top: -329px;
+                top: -358px;
                 width: 25px;
                 z-index: 3;
             }
@@ -482,7 +487,7 @@ main{
                 margin: 20px;
                 margin-left: 641px;
                 position: relative;
-                top: -373px;
+                top: -402px;
                 width: 27px;
                 z-index: 3;
             }
@@ -508,10 +513,32 @@ main{
                 top: -85px;
             }
             #video{
-                bottom: 310px;
-                height: 290px;
+                bottom: 326px;
+                height: 320px;
                 position: relative;
-                width: 540px;
+                width: 480px;
+            }
+            #videoStepUpload{
+                img{
+                    position: relative;
+                    top: 30px;
+                }
+                p{
+                    color: $color-primary;
+                    font-family: $font-primary;
+                    font-size: 15px;
+                    font-weight: bolder;
+                    position: relative;
+                    top: 50px;
+                    z-index: 3;
+                }
+            }
+            //Clase que se aplica al video cuando se 'SUBE GIF'
+            .videoPurpleScreen{
+                background: $color-secondary;
+                height: 320px;
+                opacity: 0.6;
+                width: 480px;
             }
         }
         #number-counting{
@@ -742,20 +769,44 @@ main{
                         width: 357px;
                     }
                     //Diseño de trending gif - mouse over
-                    .gifcard{
+                    #gifcard{
                         background-color: #572EE5;
                         height: 275px;
                         opacity: 0.6;
                         width: 357px;
-                    }
-                    .hoverBtns{
+                        #hoverBtns{
                         height: 32px;
                         left: 230px;
                         position: absolute;
                         top: 30px;
                         width: 104px;
+                            button{
+                            background: white;
+                            border-radius: 6px;
+                            height: 32px;
+                            opacity: 0.7;
+                            width: 32px;
+                            }
                         }
-                    
+                        #userCard{
+                        bottom: 76px;
+                        color: white;
+                        position: relative;
+                        font-family: Arial, Helvetica, sans-serif;
+                        font-size: 15px;
+                        left: 18px;
+                        top: 181px;
+                        }
+                        #titleCard{
+                        color: white;
+                        font-family: Arial, Helvetica, sans-serif;
+                        font-size: 16px;
+                        font-weight: bolder;
+                        left: 18.5px;
+                        position: absolute;
+                        top: 205px;
+                        }
+                    }
                 }
             }
         }

@@ -149,12 +149,10 @@ header .navbar-container {
   overflow: hidden;
   position: absolute;
   top: 100px;
-  -webkit-transition: height 0.4s ease;
-  transition: height 0.4s ease;
+  -webkit-transition: height 0.7s ease;
+  transition: height 0.7s ease;
   width: 100%;
   z-index: 3;
-  -webkit-transition: 0.7s ease all;
-  transition: 0.7s ease all;
 }
 
 header #burgerdark {
@@ -578,6 +576,11 @@ main #container-search .boxsearch #iconsearch2dark {
   display: none;
 }
 
+main #container-search .boxsearch #hugeListLine {
+  color: #9CAFC3;
+  width: 85%;
+}
+
 main #container-search .boxsearch .src {
   border: 1px solid #572EE5;
   border-radius: 27px;
@@ -614,7 +617,8 @@ main #container-search .boxsearch .src::placeholder {
 
 main #container-search .boxsearch .srcOpen {
   border-radius: 27px 27px 0px 0px;
-  border-bottom: 1px solid #9CAFC3;
+  border-bottom: none;
+  border-collapse: collapse;
 }
 
 main #container-search .boxsearch #btnSearch {
@@ -626,13 +630,12 @@ main #container-search .boxsearch #btnSearch {
   z-index: 2;
 }
 
-main #container-search .boxsearch #btn-close {
-  display: none;
+main #container-search .boxsearch #btnClose {
   border: none;
   cursor: pointer;
   position: relative;
-  left: 136px;
-  top: -231px;
+  left: 123px;
+  top: -39px;
   z-index: 2;
 }
 
@@ -887,7 +890,7 @@ main #create #screen-container #frame3 {
   height: 27px;
   margin: 20px;
   position: relative;
-  top: -329px;
+  top: -358px;
   width: 25px;
   z-index: 3;
 }
@@ -899,7 +902,7 @@ main #create #screen-container #frame4 {
   margin: 20px;
   margin-left: 641px;
   position: relative;
-  top: -373px;
+  top: -402px;
   width: 27px;
   z-index: 3;
 }
@@ -929,10 +932,32 @@ main #create #screen-container p {
 }
 
 main #create #screen-container #video {
-  bottom: 310px;
-  height: 290px;
+  bottom: 326px;
+  height: 320px;
   position: relative;
-  width: 540px;
+  width: 480px;
+}
+
+main #create #screen-container #videoStepUpload img {
+  position: relative;
+  top: 30px;
+}
+
+main #create #screen-container #videoStepUpload p {
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: bolder;
+  position: relative;
+  top: 50px;
+  z-index: 3;
+}
+
+main #create #screen-container .videoPurpleScreen {
+  background: #572EE5;
+  height: 320px;
+  opacity: 0.6;
+  width: 480px;
 }
 
 main #create #number-counting .btn-counting {
@@ -1182,18 +1207,43 @@ main #gallery #trending-slider #track img {
     margin-right: 22px;
     width: 357px;
   }
-  main #gallery #trending-slider #track .gifcard {
+  main #gallery #trending-slider #track #gifcard {
     background-color: #572EE5;
     height: 275px;
     opacity: 0.6;
     width: 357px;
   }
-  main #gallery #trending-slider #track .hoverBtns {
+  main #gallery #trending-slider #track #gifcard #hoverBtns {
     height: 32px;
     left: 230px;
     position: absolute;
     top: 30px;
     width: 104px;
+  }
+  main #gallery #trending-slider #track #gifcard #hoverBtns button {
+    background: white;
+    border-radius: 6px;
+    height: 32px;
+    opacity: 0.7;
+    width: 32px;
+  }
+  main #gallery #trending-slider #track #gifcard #userCard {
+    bottom: 76px;
+    color: white;
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    left: 18px;
+    top: 181px;
+  }
+  main #gallery #trending-slider #track #gifcard #titleCard {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: bolder;
+    left: 18.5px;
+    position: absolute;
+    top: 205px;
   }
 }
 

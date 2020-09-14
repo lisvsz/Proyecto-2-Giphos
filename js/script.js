@@ -10,33 +10,45 @@ darkMode();
 
 //LLAMAR API
 
-let searchInput = document.getElementById('search');
+let searchInput = document.getElementById('search'); //lo ingresado en el input
+let search = document.getElementById('search'); // input
+let hugeListLine = document.getElementById('hugeListLine') // línea de separación de la barra de búsqueda
 let btnSearch = document.getElementById('btnSearch');
 let btnClose = document.getElementById('btn-close');
 let huge_list = document.getElementById('huge_list');
+let searchTitle = document.getElementById('searchTitle');
+let gridResults = document.getElementById('grid-search');
+
 
 //Variables API
 let apiKey = 'PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT';
 
 // Botones búsqueda
 
-btnSearch.addEventListener('click', () => {
-    searchByApiKey(searchInput.value).then((arrayGifs) =>
-        showGifs(arrayGifs)
-    );
-});
-searchInput.addEventListener('keyup', () => {
-    if (event.which === 13 || event.keyCode == 13){
-        searchByApiKey(searchInput.value).then((arrayGifs)=>
-        showGifs(arrayGifs)
+function lookingForInput(btnSearch, searchInput) {
+    btnSearch.addEventListener('click', () => {
+        //Visualizar resultado
+        searchTitle.innerHTML = searchInput.value;
+        searchByApiKey(searchInput.value).then((arrayGifs) =>
+            showGifs(arrayGifs)
         );
-    } else{
-        autocompleteByApiKey(searchInput.value).then((arraySugestions)=>{
-            console.log('AUTOCOMPLETE');
-            processingResults(arraySugestions);
-    })}
-})
+    });
+    searchInput.addEventListener('keyup', () => {
+        if (event.which === 13 || event.keyCode == 13){
+            //Visualizar resultado
+            searchTitle.innerHTML = searchInput.value;
+            searchByApiKey(searchInput.value).then((arrayGifs)=>
+            showGifs(arrayGifs)
+        );
+        } else{
+            autocompleteByApiKey(searchInput.value).then((arraySugestions)=>{
+                console.log('AUTOCOMPLETE');
+                processingResults(arraySugestions);
+        })}
+    })
+}
 
+lookingForInput(btnSearch, searchInput);
 
 // Barra de búsqueda - Autocompletar
     //`https://api.giphy.com/v1/trending/searches?api_key=${apiKey}`;
@@ -55,13 +67,14 @@ searchInput.addEventListener('keyup', () => {
         huge_list.classList.add('inputOpen');
         
         //Modificar estilo barra de búsqueda
-        let search = document.getElementById('search');
         search.classList.add('srcOpen');
+        hugeListLine.style.display = 'block';
+
         //console.log('hola');
         suggestionArray.forEach((item) => {
         console.log('Element: ', item.name);
         
-        //Modificar ubicación del botón de búsqueda
+        //Modificar ubicación del botón de búsqueda al desplegar lista con opciones
         btnSearch.style.top = '-235px';
         
         // Crear e imprimir en pantalla nueva opción
@@ -69,8 +82,8 @@ searchInput.addEventListener('keyup', () => {
         option.value = item.name;
         option.innerHTML = "<img src='assets/icon-search-mod-grey.svg'> " + item.name;
         
-        //Modificar ícono de lupa por 'x'
-        function openClose (searchInput) {
+        //Modificar ícono de lupa por 'x'   //////// ELIMINAR SI FUNCIONA FUERA DE LA FUNCIÓN
+        /*function openClose (searchInput) {
             if(searchInput !== ''){
                 btnSearch.style.display = 'none';
                 btnClose.style.display = 'inline';
@@ -86,23 +99,46 @@ searchInput.addEventListener('keyup', () => {
             btnSearch.style.top = '-35px';
         });
         
-        openClose();
+        openClose();*/
         
         //Seleccionar sugerencia, abrirla e imprimirla en pantalla
         option.addEventListener ('click', () => {
             searchByApiKey(item.name).then((arrayGifs)=>
             showGifs(arrayGifs));
             //Reemplazar texto mostrado
-            let searchTitle = document.getElementById('searchTitle');
+            option.style.cursor = 'pointer';
             searchTitle.innerHTML = item.name;
+            //Cerrar lista
+            huge_list.style.display = 'none';
+            hugeListLine.style.display = 'none';
+            //Reestablecer bordes del input
+            search.classList.remove('srcOpen');
+            search.classList.add('src');
+            //Mover botón search
+            btnSearch.style.top = '-36px';
         })
-        option.style.cursor = 'pointer';
         
         // Agregar nueva opción
         huge_list.appendChild(option);
         });
     };
     
+
+    //Botón cerrar
+    /* function openClose(){  TRABAR EN ELLO
+        // Si está abierta cerrarla, si no abierta
+        btnClose.addEventListener('click', () => {
+            if(searchInput !== ''){
+                btnSearch.style.display = 'inline';
+                btnClose.style.display = 'none';
+                huge_list.style.height = '0px';
+            } else {
+                btnSearch.style.display = 'none';
+                btnClose.style.display = 'inline';
+            }
+        });
+    }; */
+
 /**
  * Funcion que nos sirve para hacer el llamado a la API KEY
  * @param {*} searchInput este parámetro es proporcionado por el usuario
@@ -142,19 +178,24 @@ function showGifs(gifsArray){
         
         //Visualizar categoría de búsqueda
         autocompleteByApiKey(searchInput.value);
-    };
+
+        //Eliminar resultados de búsquedas
+        if (gridResults.childElementCount > 0){
+            remove(imgGif);
+        }
+};
+
     //PRUEBA MAXIMIZAR TAMAÑO GIF
     /*var x = window.matchMedia("(min-width: 1366px)")
     function myFunction(x) {
         if (x.matches) { // If media query matches
-          document.body.style.backgroundColor = "yellow";
+        document.body.style.backgroundColor = "yellow";
         } else {
           document.body.style.backgroundColor = "pink";
         }
       }
       myFunction(x) // Call listener function at run time
       x.addListener(myFunction) // Attach listener function on state changes*/
-;
 
 //Botón 'Ver más'
 
@@ -238,17 +279,13 @@ async function trendingByApiKey(){
                 trendingTopic.innerHTML = topic + ' ' + ',';
                 trendingSection.appendChild(trendingTopic);
 
+                //Visualizar resultado del gif en grid
                 trendingTopic.addEventListener('click', () => {
                     //Visualizar en barra de búsqueda, buscar gif y visualizarlo
                     console.log(topic);
-                    searchByApiKey(topic);
-
-                    //Intentos
-                        //console.log(showGifs(topic));
-                        //console.log(autocompleteByApiKey(topic));
-                        //searchByApiKey(topic);
-                        //showGifs(topic);
-                        //console.log(topic.images.downsized.url);
+                    searchTitle.innerHTML = topic;
+                    searchByApiKey(topic).then((arrayGifs) =>
+                    showGifs(arrayGifs));
                 })
             })
         }
@@ -272,12 +309,12 @@ async function trendingByApiKey(){
             imgGif.src = trendingGif;
             trackSlider.appendChild(imgGif);
             //Agregar diseño mouse over & mouseout  /// AGREGAR EN EL ADD EVENT LISTENER LA FUNCION QUE CREA TODA LA CAPA DE HOVER MOUSE OVER
-            imgGif.addEventListener('mouseover', () => {
+            /*imgGif.addEventListener('mouseover', () => {
                 imgGif.classList.add('gifcard');
             }) 
             imgGif.addEventListener('mouseout', () => {
                 imgGif.classList.remove('gifcard');
-            })
+            }) */
         }
         /*CORRECTO OPCION 2
             infoTGif.data.forEach(element => {
@@ -293,18 +330,21 @@ async function trendingByApiKey(){
     });
 
     // Hover en 'trending gifs'
-
     function hoverTrendingGifs (user, titleGifo, url, index){
-
         //Crear los elementos que componen el hover
+
+        //Diseño tarjeta hover
         let purpleCard = document.createElement('div');
-        let favBtn = document.createElement('img');
+        purpleCard.classList.add = 'gifcard'
+
+        //Diseño botón favorito
+        let btnFav  = document.createElement('img');
+        btnFav.src = 'assets/icon-fav-hover.svg';
+        btnFav.classList.add('hoverBtns');
     }
 
-    //function trendingGifHover
 
     //Funcionalidad de carrusel 'Trending gifs'
-
     //Variables 
         const btnLeft = document.getElementById('btn-slider-left');
         const btnRight = document.getElementById('btn-slider-right');

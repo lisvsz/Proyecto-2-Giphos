@@ -21,7 +21,8 @@ navfav.addEventListener('click', () => {
         createsection.style.display = "none";
     }
     else{
-        favsection.style.display = "none";
+        favsection.style.display = "block";
+        gallerysection.style.display = "block";
     }
 })
 //Mostrar sección 'Mis Gifos'
@@ -33,7 +34,8 @@ navmine.addEventListener('click', () => {
         createsection.style.display = "none";
     }
     else{
-        minesection.style.display = "none";
+        minesection.style.display = "block";
+        gallerysection.style.display = "block";
     }
 })
 //Mostrar sección 'Crear mi Gifo'
@@ -46,7 +48,7 @@ navcreate.addEventListener('click', () => {
         createsection.style.display = "block";
     }
     else{
-        createsection.style.display = "none";
+        createsection.style.display = "block";
     }
 })
 //Mostrar la pantalla inicial
@@ -59,6 +61,7 @@ logomain.addEventListener('click', () => {
         createsection.style.display = "none";
     }
     else{
-        searchsection.style.display === "none";
+        searchsection.style.display === "block";
+        gallerysection.style.display = "block";
     }
 })
