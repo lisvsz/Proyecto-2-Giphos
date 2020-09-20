@@ -1209,25 +1209,26 @@ main #gallery #trending-slider #track img {
   }
   main #gallery #trending-slider #track #gifcard {
     background-color: #572EE5;
+    border: 5px solid purple;
     height: 275px;
     opacity: 0.6;
     width: 357px;
   }
-  main #gallery #trending-slider #track #gifcard #hoverBtns {
+  main #gallery #trending-slider #track #gifcard .hoverBtns {
     height: 32px;
     left: 230px;
     position: absolute;
     top: 30px;
     width: 104px;
   }
-  main #gallery #trending-slider #track #gifcard #hoverBtns button {
+  main #gallery #trending-slider #track #gifcard .hoverBtns button {
     background: white;
     border-radius: 6px;
     height: 32px;
     opacity: 0.7;
     width: 32px;
   }
-  main #gallery #trending-slider #track #gifcard #userCard {
+  main #gallery #trending-slider #track #gifcard .userName {
     bottom: 76px;
     color: white;
     position: relative;
@@ -1236,7 +1237,7 @@ main #gallery #trending-slider #track img {
     left: 18px;
     top: 181px;
   }
-  main #gallery #trending-slider #track #gifcard #titleCard {
+  main #gallery #trending-slider #track #gifcard .gifTitle {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;

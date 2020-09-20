@@ -18,10 +18,13 @@ let btnClose = document.getElementById('btn-close');
 let huge_list = document.getElementById('huge_list');
 let searchTitle = document.getElementById('searchTitle');
 let gridResults = document.getElementById('grid-search');
+let btnMoreSearch = document.getElementById('btn-more-search');
+let count = 0; // Indice de los gifs ('ver más')
 
 
 //Variables API
 let apiKey = 'PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT';
+
 
 // Botones búsqueda
 
@@ -29,7 +32,7 @@ function lookingForInput(btnSearch, searchInput) {
     btnSearch.addEventListener('click', () => {
         //Visualizar resultado
         searchTitle.innerHTML = searchInput.value;
-        searchByApiKey(searchInput.value).then((arrayGifs) =>
+        searchByApiKey(searchInput.value, 0).then((arrayGifs) =>
             showGifs(arrayGifs)
         );
     });
@@ -144,6 +147,7 @@ lookingForInput(btnSearch, searchInput);
  * @param {*} searchInput este parámetro es proporcionado por el usuario
  */
 async function searchByApiKey(searchInput, offset){
+    //Parámetros para el request
     let url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchInput}&limit=12&offset=${offset}&rating=g&lang=es`;
     let resp = await fetch(url);
     let info = await resp.json();
@@ -170,7 +174,7 @@ function showGifs(gifsArray){
                 searchGif.style.height = "120px";
                 searchGif.style.width = "156px";
             }
-        }
+    }
 
         //Visualizar área de resultados
         let activeSearch = document.getElementById('activeSearch');
@@ -179,11 +183,21 @@ function showGifs(gifsArray){
         //Visualizar categoría de búsqueda
         autocompleteByApiKey(searchInput.value);
 
-        //Eliminar resultados de búsquedas
-        if (gridResults.childElementCount > 0){
-            remove(imgGif);
-        }
+        //Eliminar resultados de búsquedas ////// NO FUNCIONA
+        /*if (gridResults.firstChild !== ''){
+            gridResults.removeChild(gridResults.lastChild);
+        }*/
 };
+
+        //Botón 'Ver más' /////// Nota: reiniciar en función buscador el contador , así como el título
+        
+        btnMoreSearch.addEventListener('click', () => {
+        count += 12;
+        searchTitle.innerHTML = searchInput.value;
+        searchByApiKey(searchInput.value, count).then((arrayGifs) =>
+            showGifs(arrayGifs)
+        );
+        });
 
     //PRUEBA MAXIMIZAR TAMAÑO GIF
     /*var x = window.matchMedia("(min-width: 1366px)")
@@ -191,20 +205,11 @@ function showGifs(gifsArray){
         if (x.matches) { // If media query matches
         document.body.style.backgroundColor = "yellow";
         } else {
-          document.body.style.backgroundColor = "pink";
+            document.body.style.backgroundColor = "pink";
         }
-      }
+    }
       myFunction(x) // Call listener function at run time
       x.addListener(myFunction) // Attach listener function on state changes*/
-
-//Botón 'Ver más'
-
-    let btnMoreSearch = document.getElementById('btn-more-search');
-    btnMoreSearch.addEventListener('click', () => {
-        searchByApiKey(searchInput, offset);
-        showGifs(gifsArray);
-    });
-
 
 /*
 // Tercer intento obtener imagenes
@@ -256,6 +261,9 @@ gifResult.then(info => {
 }*/
 
 // Sección trendings
+
+    //Variable tarjeta morada
+    let gifcard = document.getElementById('gifcard');
 
 async function trendingByApiKey(){
     let url = `https://api.giphy.com/v1/trending/searches?api_key=${apiKey}`;
@@ -309,13 +317,15 @@ async function trendingByApiKey(){
             imgGif.src = trendingGif;
             trackSlider.appendChild(imgGif);
             //Agregar diseño mouse over & mouseout  /// AGREGAR EN EL ADD EVENT LISTENER LA FUNCION QUE CREA TODA LA CAPA DE HOVER MOUSE OVER
-            /*imgGif.addEventListener('mouseover', () => {
-                imgGif.classList.add('gifcard');
+            imgGif.addEventListener('mouseover', () => {
+                //gifcard.style.display = 'initial';
+                hoverTrendingGifs(infoTGif.username ,infoTGif.data[i].tags.title)
             }) 
             imgGif.addEventListener('mouseout', () => {
-                imgGif.classList.remove('gifcard');
-            }) */
+                //imgGif.classList.remove('gifcard');
+            })
         }
+
         /*CORRECTO OPCION 2
             infoTGif.data.forEach(element => {
             let trendingGif = element.images.downsized.url;
@@ -327,21 +337,54 @@ async function trendingByApiKey(){
             liGif.appendChild(imgGif);
             ulGif.appendChild(liGif);
         }); */
-    });
+});
 
-    // Hover en 'trending gifs'
-    function hoverTrendingGifs (user, titleGifo, url, index){
-        //Crear los elementos que componen el hover
-
-        //Diseño tarjeta hover
-        let purpleCard = document.createElement('div');
-        purpleCard.classList.add = 'gifcard'
-
-        //Diseño botón favorito
-        let btnFav  = document.createElement('img');
-        btnFav.src = 'assets/icon-fav-hover.svg';
-        btnFav.classList.add('hoverBtns');
-    }
+// Hover en 'trending gifs'
+        /////////////PRIMER INTENTO
+        function hoverTrendingGifs(user, title){
+            //Crear los elementos que componen el hover
+            //Diseño tarjeta hover
+            let purpleCard = document.createElement('div');
+            purpleCard.style.width = '357px';
+            purpleCard.style.height = '275px';
+            purpleCard.style.color = '#572EE5';
+            purpleCard.style.opacity = '0.6';
+    
+            //Diseño botón favorito
+            let btnFav  = document.createElement('img');
+            btnFav.src = 'assets/icon-fav-hover.svg';
+            btnFav.classList.add('hoverBtns');
+    
+            //Diseño botón descargar
+            let btnDownload = document.createElement('img');
+            btnDownload.src = 'assets/icon-download.svg';
+            btnDownload.classList.add('hoverBtns');
+    
+            //Diseño botón expandir
+            let btnMax = document.createElement('img');
+            btnMax.src = 'assets/icon-max.svg';
+            btnMax.classList.add('hoverBtns');
+    
+            //Diseño Usuario
+            //let userTitle = infoTGif.data[i].user.username;
+            let userTitle = document.createElement('p');
+            userTitle.classList.add('userName');
+            userTitle.innerHTML = 'user'; 
+    
+            //Diseño Título Gif
+            //let gifTitle = infoTGif.data[i].tags.title;
+            let gifTitle = document.createElement('p');
+            gifTitle.classList.add('gifTitle');
+            gifTitle.innerHTML = 'title';
+    
+            //Se inserta todo en el div principal
+            purpleCard.appendChild(btnFav);
+            purpleCard.appendChild(btnDownload);
+            purpleCard.appendChild(btnMax);
+            purpleCard.appendChild(userTitle);
+            purpleCard.appendChild(gifTitle);
+            return purpleCard;
+        }
 
 
     //Funcionalidad de carrusel 'Trending gifs'
