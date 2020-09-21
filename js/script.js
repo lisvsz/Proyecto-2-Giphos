@@ -313,13 +313,18 @@ async function trendingByApiKey(){
         for(let i= 0; i<20; i++){ 
             var trendingGif = infoTGif.data[i].images.downsized.url;
             console.log(trendingGif);
+            let userTGif = infoTGif.data[i].username;
+            let titleTGif = infoTGif.data[i].title;
+            console.log(titleTGif);
             let imgGif = document.createElement('img');
             imgGif.src = trendingGif;
             trackSlider.appendChild(imgGif);
             //Agregar diseño mouse over & mouseout  /// AGREGAR EN EL ADD EVENT LISTENER LA FUNCION QUE CREA TODA LA CAPA DE HOVER MOUSE OVER
             imgGif.addEventListener('mouseover', () => {
                 //gifcard.style.display = 'initial';
-                hoverTrendingGifs(infoTGif.username ,infoTGif.data[i].tags.title)
+                console.log(userTGif);
+                console.log(titleTGif);
+                imgGif.appendChild(hoverTrendingGifs(userTGif, titleTGif));
             }) 
             imgGif.addEventListener('mouseout', () => {
                 //imgGif.classList.remove('gifcard');
@@ -349,6 +354,8 @@ async function trendingByApiKey(){
             purpleCard.style.height = '275px';
             purpleCard.style.color = '#572EE5';
             purpleCard.style.opacity = '0.6';
+            purpleCard.style.position = 'relative';
+            purpleCard.style.zIndex = '2';
     
             //Diseño botón favorito
             let btnFav  = document.createElement('img');
