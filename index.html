@@ -114,7 +114,7 @@
                 <button class="btn-counting" id="btn2">2</button>
                 <button class="btn-counting" id="btn3">3</button>
             </div>
-            <div id="timeStamp"></div>
+            <div class="time" id="timeStamp" style="display:none"><span id="minutes">00</span>:<span id="seconds">00</span>:<span id="hundredths">00</span></div>
             <hr>
             <img id="tapeimg" src="assets/pelicula.svg" alt="pelicula"> <img id="tapeimgdark" src="assets/pelicula-modo-noc.svg" alt="tape">
             <div class="line"></div>
@@ -128,21 +128,11 @@
 
         <section id="gallery">
             <h2>Trending GIFOS</h2>
-            <p>Mira los últimos<br>GIFOS de nuestra comunidad.</p>
-            <!--Gif Card hover-->
-            <div id="gifcard" style="display:none">
-                <div class="hoverBtns">
-                    <button id="btn-fav"><img src="assets/icon-fav-hover.svg"></button>
-                    <button i="btn-down"><img src="assets/icon-download.svg"></button>
-                    <button id="btn-max"><img src="assets/icon-max.svg"></button>
-                </div>
-                <p class="userName">user</p>
-                <p class="gifTitle">Título GIFO</p>
-            </div>
-
+            <p id="galleryText">Mira los últimos<br>GIFOS de nuestra comunidad.</p>
             <button class="btn-slider" id="btn-slider-left"><img src= "assets/button-left.svg" alt="button-left"></button>
             <div id="trending-slider">
-                <div id="track"> </div>
+                <div id="track">
+                </div>
             </div>
             <button class="btn-slider" id="btn-slider-right"><img src= "assets/button-right.svg" alt="button-right"></button>
         </section>
