@@ -4,6 +4,117 @@
 /* Colores */
 /* Dark mode */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;700&display=swap");
+.gifTcard {
+  background-color: #572EE5;
+  border: 2px solid purple;
+  height: 275px;
+  opacity: 0.6;
+  width: 357px;
+}
+
+.btnHover {
+  background-color: white;
+  border-radius: 6px;
+  height: 32px;
+  opacity: 0.7;
+  position: relative;
+  top: 10px;
+  width: 32px;
+}
+
+.btnHover:hover {
+  opacity: 1;
+}
+
+.userName {
+  bottom: 76px;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  position: relative;
+  right: 120px;
+  top: 140px;
+}
+
+.gifTitle {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: bolder;
+  position: relative;
+  right: 22px;
+  top: 160px;
+}
+
+.gifScard {
+  background-color: #572EE5;
+  border: 2px solid purple;
+  bottom: 205px;
+  height: 200px;
+  opacity: 0.6;
+  padding-top: 10px;
+  position: relative;
+  width: 260px;
+  z-index: 3;
+}
+
+.userSName {
+  bottom: 76px;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  position: relative;
+  right: 60px;
+  top: 85px;
+}
+
+.gifSTitle {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: bolder;
+  position: relative;
+  right: 22px;
+  top: 90px;
+}
+
+.cardTGif {
+  display: inline-block;
+  position: relative;
+}
+
+.cardTGif.active {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  top: 0;
+  left: 0;
+}
+
+.cardTGif img {
+  z-index: 1;
+}
+
+.cardTGif.active::after {
+  content: '';
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 0;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -1053,7 +1164,7 @@ main #gallery h2 {
   padding-top: 46px;
 }
 
-main #gallery p {
+main #gallery #galleryText {
   color: #000000;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
@@ -1090,6 +1201,8 @@ main #gallery #trending-slider #track img {
   height: 187px;
   margin-right: 22px;
   width: 243px;
+  position: relative;
+  z-index: 3;
 }
 
 /* Desktop 1440px*/
@@ -1158,10 +1271,10 @@ main #gallery #trending-slider #track img {
   main #gallery h2 {
     font-size: 25px;
   }
-  main #gallery p {
+  main #gallery #galleryText {
     font-size: 18px;
   }
-  main #gallery p br {
+  main #gallery #galleryText br {
     display: none;
   }
   main #gallery #btn-slider-left {
@@ -1202,49 +1315,10 @@ main #gallery #trending-slider #track img {
     padding-left: 30px;
     margin-left: 50px;
   }
-  main #gallery #trending-slider #track img {
+  main #gallery #trending-slider #track div img {
     height: 275px;
     margin-right: 22px;
     width: 357px;
-  }
-  main #gallery #trending-slider #track #gifcard {
-    background-color: #572EE5;
-    border: 5px solid purple;
-    height: 275px;
-    opacity: 0.6;
-    width: 357px;
-  }
-  main #gallery #trending-slider #track #gifcard .hoverBtns {
-    height: 32px;
-    left: 230px;
-    position: absolute;
-    top: 30px;
-    width: 104px;
-  }
-  main #gallery #trending-slider #track #gifcard .hoverBtns button {
-    background: white;
-    border-radius: 6px;
-    height: 32px;
-    opacity: 0.7;
-    width: 32px;
-  }
-  main #gallery #trending-slider #track #gifcard .userName {
-    bottom: 76px;
-    color: white;
-    position: relative;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
-    left: 18px;
-    top: 181px;
-  }
-  main #gallery #trending-slider #track #gifcard .gifTitle {
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    font-weight: bolder;
-    left: 18.5px;
-    position: absolute;
-    top: 205px;
   }
 }
 

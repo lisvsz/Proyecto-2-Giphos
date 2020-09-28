@@ -626,7 +626,7 @@ main{
             font-size: 20px;
             padding-top:46px;
         }
-        p{
+        #galleryText{
             color: $color-tertiary;
             font-family: $font-secondary;
             font-size: 16px;
@@ -647,11 +647,14 @@ main{
                 flex-direction: row;
                 list-style: none;
                 margin-left: 22px;
-                img{
+                    img{
                     height: 187px;
                     margin-right: 22px;
                     width: 243px;
-                }
+                    position: relative;
+                    z-index: 3;
+                    }
+                
             }
         }
     }
@@ -719,7 +722,7 @@ main{
             h2{
                 font-size: 25px;
             }
-            p{
+            #galleryText{
                 font-size: 18px;
                 br{
                     display: none;
@@ -763,49 +766,11 @@ main{
                     padding-left: 30px;
                     margin-left: 50px;
                     //width: 1145px;
-                    img{
+                    div{
+                        img{
                         height: 275px;
                         margin-right: 22px;
                         width: 357px;
-                    }
-                    //Diseño de trending gif - mouse over //// No funciona adecuadamente
-                    #gifcard{
-                        background-color: #572EE5;
-                        border: 5px solid purple;
-                        height: 275px;
-                        opacity: 0.6;
-                        width: 357px;
-                        .hoverBtns{
-                        height: 32px;
-                        left: 230px;
-                        position: absolute;
-                        top: 30px;
-                        width: 104px;
-                            button{
-                            background: white;
-                            border-radius: 6px;
-                            height: 32px;
-                            opacity: 0.7;
-                            width: 32px;
-                            }
-                        }
-                        .userName{
-                        bottom: 76px;
-                        color: white;
-                        position: relative;
-                        font-family: Arial, Helvetica, sans-serif;
-                        font-size: 15px;
-                        left: 18px;
-                        top: 181px;
-                        }
-                        .gifTitle{
-                        color: white;
-                        font-family: Arial, Helvetica, sans-serif;
-                        font-size: 16px;
-                        font-weight: bolder;
-                        left: 18.5px;
-                        position: absolute;
-                        top: 205px;
                         }
                     }
                 }

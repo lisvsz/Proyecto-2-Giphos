@@ -1,0 +1,30 @@
+/*.cardTGif{
+    display: inline-block;
+    position: relative;
+}*/
+/*.cardTGif.active{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+}   
+
+.cardTGif img {
+    z-index: 1;
+}
+
+.cardTGif.active::after{
+    content: '';
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 0;
+}*/
+/*# sourceMappingURL=maxGif.css.map */
