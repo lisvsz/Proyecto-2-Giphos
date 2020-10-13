@@ -11,10 +11,10 @@ darkMode();
 //LLAMAR API
 
 let searchInput = document.getElementById('search'); //lo ingresado en el input
-let search = document.getElementById('search'); // input
+//let search = document.getElementById('search'); // input duplicado
 let hugeListLine = document.getElementById('hugeListLine') // línea de separación de la barra de búsqueda
 let btnSearch = document.getElementById('btnSearch');
-let btnClose = document.getElementById('btn-close');
+let btnClose = document.getElementById('btnClose');
 let huge_list = document.getElementById('huge_list');
 let searchTitle = document.getElementById('searchTitle');
 let gridResults = document.getElementById('grid-search');
@@ -38,6 +38,10 @@ function lookingForInput(btnSearch, searchInput) {
     });
     searchInput.addEventListener('keyup', () => {
         if (event.which === 13 || event.keyCode == 13){
+            //Intentos cambiar visualización NO FUNCIONA CORRECTAMENTE
+            btnSearch.style.display = 'flex';
+            btnClose.style.display = 'none';
+            //huge_list.style.display = 'none';
             //Visualizar resultado
             searchTitle.innerHTML = searchInput.value;
             searchByApiKey(searchInput.value).then((arrayGifs)=>
@@ -47,6 +51,16 @@ function lookingForInput(btnSearch, searchInput) {
             autocompleteByApiKey(searchInput.value).then((arraySugestions)=>{
                 console.log('AUTOCOMPLETE');
                 processingResults(arraySugestions);
+                
+                //Mostrar la lista de sugerencias
+                huge_list.classList.add('inputOpen');
+                huge_list.style.display = 'flex';
+
+                //Visualización de botones
+                btnClose.style.display = 'flex';
+                btnClose.style.left = '294px';
+                btnClose.style.top = '-233px';
+                btnSearch.style.display = 'none';
         })}
     })
 }
@@ -68,10 +82,10 @@ lookingForInput(btnSearch, searchInput);
     function processingResults(suggestionArray) { //agregué el for
         for (let i=0; i < suggestionArray.length; i++ ) {
         huge_list.innerHTML = "";
-        huge_list.classList.add('inputOpen');
+        //huge_list.classList.add('inputOpen');
         
-        //Modificar estilo barra de búsqueda
-        search.classList.add('srcOpen');
+        //Modificar estilo barra de búsqueda // INTENTO PONERLO ARRIBA
+        searchInput.classList.add('srcOpen');
         hugeListLine.style.display = 'block';
 
         //console.log('hola');
@@ -101,7 +115,7 @@ lookingForInput(btnSearch, searchInput);
         /*btnClose.addEventListener('click', () => {
             searchInput.value == '';
             huge_list.style.display = 'none';
-            search.classList.remove('srcOpen');
+            searchInput.classList.remove('srcOpen');
             btnClose.style.display = 'none';
             btnSearch.style.display = 'inline';
             btnSearch.style.top = '-35px';
@@ -120,8 +134,8 @@ lookingForInput(btnSearch, searchInput);
             huge_list.style.display = 'none';
             hugeListLine.style.display = 'none';
             //Reestablecer bordes del input
-            search.classList.remove('srcOpen');
-            search.classList.add('src');
+            searchInput.classList.remove('srcOpen');
+            searchInput.classList.add('boxsearch');
             //Mover botón search
             btnSearch.style.top = '-36px';
         })
@@ -147,6 +161,18 @@ lookingForInput(btnSearch, searchInput);
             }
         });
     }; */
+    btnClose.addEventListener('click', () => {
+        //Borrar contenido y cerrar lista
+        searchInput.value = '';
+        huge_list.style.display = 'none';
+        //hugeListLine.style.display = 'none';
+        //Reestablecer bordes del input
+        searchInput.classList.remove('srcOpen');
+        searchInput.classList.add('boxsearch');
+        //Cambiar botones //// NO FUNCIONAAAAAAAAAA
+        btnSearch.display.style = 'block';
+        btnClose.display.style = 'none';
+    })
 
 /**
  * Funcion que nos sirve para hacer el llamado a la API KEY
@@ -188,10 +214,21 @@ function showGifs(gifsArray){
                 searchGif.style.width = "260px";
                 cardSGif.style.height = "200px";
                 cardSGif.style.width = "260px";
-                //25/08/20 Pintar gif del search input ////falllaaa
-                searchGif.addEventListener('mouseover', () => {
-                cardSGif.appendChild(hoverSearchedGifs(searchGifUser,searchGifTitle));
+                
+                //Agregar diseño mouse over & mouseout  /////// MODIFICAR matchMedia
+                cardSGif.appendChild(hoverSearchedGifs(searchGifUser, searchGifTitle));
+                let Scard = cardSGif.querySelector('.gifScard');
+                Scard.style.visibility = 'hidden';
+
+                cardSGif.addEventListener('mouseover', () => {
+                    let Scard = cardSGif.querySelector('.gifScard');
+                    Scard.style.visibility = 'visible';
                 })
+            
+                cardSGif.addEventListener('mouseout', () => {
+                    let Scard = cardSGif.querySelector('.gifScard');
+                    Scard.style.visibility = 'hidden';
+                });
             } else {
                 searchGif.style.height = "120px";
                 searchGif.style.width = "156px";
@@ -212,13 +249,17 @@ function showGifs(gifsArray){
 };
 
         //Botón 'Ver más' /////// Nota: reiniciar en función buscador el contador , así como el título
-        
         btnMoreSearch.addEventListener('click', () => {
         count += 12;
         searchTitle.innerHTML = searchInput.value;
         searchByApiKey(searchInput.value, count).then((arrayGifs) =>
             showGifs(arrayGifs)
         );
+
+        autocompleteByApiKey(searchInput.value, count).then((arraySugestions)=>{
+            processingResults(arraySugestions);
+        });
+        
         });
 
     //PRUEBA MAXIMIZAR TAMAÑO GIF
@@ -263,24 +304,6 @@ gifResult.then(info => {
 }).catch(err =>{
     console.error('Error', err);
 }) */
-
-/*function showResultApi(){
-    //console.log(':D');
-    let information = searchByApiKey(searchInput.value);
-    information.then(response => {
-        console.log(response.data);
-        //imprimir en pantalla
-        let fig = document.createElement('figure');
-        let gifsearch = document.createElement('img');
-        gifsearch.src = response.data[0].images.downsized.url;
-        results.appendChild(img);
-        let results = document.getElementsById('container-search');
-        results.inserAdjacentElement('afterbegin', fig);
-    }) .catch(error => {
-    console.log(error);
-        alert('No se encontraron resultados');
-    });
-}*/
 
 // Sección trendings
 
@@ -359,24 +382,25 @@ async function trendingByApiKey(){
                 })
             })*/
             ///
-            //Agregar diseño mouse over & mouseout  /// AGREGAR EN EL ADD EVENT LISTENER LA FUNCION QUE CREA TODA LA CAPA DE HOVER MOUSE OVER
-            
+            //Agregar diseño mouse over & mouseout
+
             if (window.matchMedia("(min-width: 1366px)").matches) {
-                imgGif.addEventListener('mouseover', () => {
-                cardTGif.appendChild(hoverTrendingGifs(userTGif, titleTGif));
-                //alert('hola');
-                }) 
-                //imgGif.addEventListener('mouseout', () => {
-                imgGif.removeEventListener('mouseout', () => {
-                //document.getElementsByClassName('gifTcard').style.display = 'none';
-                //this.removeEventListener(hoverTrendingGifs(userTGif, titleTGif));
-                //document.getElementsByClassName('gifTcard').remove;
-                //this.classList.remove('gifTcard');
-                cardTGif.removeChild(hoverTrendingGifs(userTGif, titleTGif));
-                //cardTGif.classList.remove('gifTcard');
-                //alert('adios');
-                });
+            cardTGif.appendChild(hoverTrendingGifs(userTGif, titleTGif));
+
+            let Tcard = cardTGif.querySelector('.gifTcard');
+            Tcard.style.visibility = 'hidden';
+
+            cardTGif.addEventListener('mouseover', () => {
+                let Tcard = cardTGif.querySelector('.gifTcard');
+                Tcard.style.visibility = 'visible';
+            }) 
+            
+            cardTGif.addEventListener('mouseout', () => {
+                let Tcard = cardTGif.querySelector('.gifTcard');
+                Tcard.style.visibility = 'hidden';
+            });
             }
+            
         }
 
         /*CORRECTO OPCION 2
@@ -442,13 +466,11 @@ async function trendingByApiKey(){
             btnMax.appendChild(imgMax);
 
             //Diseño Usuario
-            //let userTitle = infoTGif.data[i].user.username;
             let userTitle = document.createElement('p');
             userTitle.classList.add('userName');
             userTitle.innerHTML = userTGif; 
     
             //Diseño Título Gif
-            //let gifTitle = infoTGif.data[i].tags.title;
             let gifTitle = document.createElement('p');
             gifTitle.classList.add('gifTitle');
             gifTitle.innerHTML = titleTGif;
@@ -494,6 +516,8 @@ async function trendingByApiKey(){
         imgDown.style.width = '18px';
         imgDown.style.margin = 'auto';
         btnDownload.appendChild(imgDown);
+        //Funcionalidad del botón download
+        //downloadGif(btnDownload, url);
 
         //Diseño botón expandir
         let btnMax = document.createElement('button');
@@ -535,21 +559,20 @@ async function trendingByApiKey(){
         }*/
     
     //Función para descargar Gif
-        function downloadGif(tagIcon, url) {
-            let linkdown = document.createElement("a");
-            linkdown.id = "linkdown";
-    
+        function downloadGif(btnDownload, url) {
+            //Se genera anchor 
+            let downloadLink = document.createElement("a");
+            downloadLink.id = "downloadLink";
+            //Se genera blob
             fetch(url)
             .then(response => response.blob())
             .then(blob => {
-
             const url = URL.createObjectURL(blob);
-            linkdown.href = url;
-            linkdown.download = "myGiphy.gif";
-            linkdown.appendChild(tagIcon);
-
+            downloadLink.href = url;
+            downloadLink.download = "myGif.gif";
+            btnDownload.appendChild(downloadLink);
             }).catch(console.error);
-            return linkdown;
+            return downloadLink;
         }
 
     //Funcionalidad de carrusel 'Trending gifs'

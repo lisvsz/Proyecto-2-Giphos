@@ -1,0 +1,90 @@
+//Estilos de barra de búsqueda activa e inactiva
+
+//Estilo activo
+.inputOpen{
+    align-items: flex-start;
+    background-color: $color-primary;
+    border: 1px solid $color-secondary;
+    border-radius: 0px 0px 27px 27px;
+    border-collapse: collapse;
+    border-top: hidden;
+    color: $color-quaternary;
+    display: flex;
+    flex-direction: column;
+    font-family: $font-secondary;
+    font-size: 16px;
+    height: 200px;
+    justify-content: space-evenly;
+    padding-left: 23.5px;
+    position: relative;
+    text-decoration: none;
+    z-index: 2;
+    li{
+        list-style: none;
+    }
+} 
+
+
+//Estilo pasivo
+
+.boxsearch{
+    margin: 0 auto;
+    height: 50px;
+    width: 334px;
+    input{
+        padding-left: 10px;
+    }
+
+    #iconsearch2dark{
+        display: none;
+    }
+    /*#huge_list{
+        background-color: $color-primary;
+        li{
+            color: $color-quaternary;
+        }
+    }*/
+    //Línea interactiva de separación en buscador
+    #hugeListLine {
+        color: $color-quaternary;
+        width: 85%;
+    }
+    .src{
+        border: 1px solid $color-secondary;
+        border-radius: 27px;
+        color: $color-tertiary;
+        font-family: $font-secondary;
+        height: 50px;
+        padding-right: 80px;
+        width: 334px;
+        &::placeholder{
+            color: #6B7989;
+            font-size: 16px;
+            text-align: center;
+        }
+    }
+    
+    //Estilo de barra de búsqueda al desplegar resultados NO APLICADO AÚN
+    .srcOpen{
+        border-radius: 27px 27px 0px 0px;
+        border-bottom: none;
+        border-collapse: collapse;
+    }
+
+    #btnSearch{
+        border: none;
+        cursor: pointer;
+        position: relative;
+        left: 145px;
+        top: -35px;
+        z-index: 2;
+    }
+    #btnClose{
+        border: none;
+        cursor: pointer;
+        position: relative;
+        left: 123px;
+        top: -39px;
+        z-index: 2;
+    }
+}

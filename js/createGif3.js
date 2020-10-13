@@ -1,6 +1,10 @@
 // Funcionalidad de la sección 'Crear tu Gif'
+    ////INICIALIZAR LOCALSTORAGE MYGIFOS /// REVISAR
+    if(localStorage.getItem("NuevosGifos") == undefined ) {
+    localStorage.setItem("NuevosGifos", "fvMyDds5Bc6ufJHdLs");
+    }
 
-    //Variable botones
+    //Variables botones
     let btnStart = document.getElementById('btn-start');
     let btnRecord = document.getElementById('btn-record'); ////= capturar = record
     let btnFinish = document.getElementById('btn-finish');
@@ -10,14 +14,14 @@
     let btn2 = document.getElementById('btn2');
     let btn3 = document.getElementById('btn3');
         //Variable para manejar el timer
-    let recording = false;
+    let recording = true;
         //Variables visualización y video
     let timeStamp = document.getElementById('timeStamp')
     let video = document.getElementById('video');
     let videoCover = document.getElementById('videoCover');
     let videoStep1 = document.getElementById('videoStep1');
     let videoStepUpload = document.getElementById('videoStepUpload');
-    
+        //Variable Video
     let constraints = { audio: false, video: { width: 480, height: 320 } };
 
     //Objeto recorder
@@ -50,6 +54,7 @@
         btnFinish.style.display = 'inline';
         timeStamp.style.display = 'inline';
         getRecord(recorder);
+        getDuration();
     });
     
     //Funcionalidad del botón 'finalizar'
@@ -75,6 +80,10 @@
         btn2.style.color = '#572EE5';
         btn3.style.backgroundColor = '#572EE5';
         btn3.style.color = '#ffffff';
+        //Crear div morado para sobreponer a video
+        //let divPurpleScreen = document.createElement('div');
+        //divPurpleScreen.classList.add('videoPurpleScreen');
+        //divPurpleScreen.appendChild(video);
         video.classList.add('videoPurpleScreen');
         //Borrar contenido de pantalla de video y ajustar video
         videoCover.style.display = 'none';
