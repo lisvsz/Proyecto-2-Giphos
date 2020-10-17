@@ -210,7 +210,7 @@ function showGifs(gifsArray){
                 cardSGif.style.width = "260px";
                 
                 //Agregar diseño mouse over & mouseout  /////// MODIFICAR matchMedia
-                cardSGif.appendChild(hoverSearchedGifs(searchGifUser, searchGifTitle));
+                cardSGif.appendChild(hoverSearchedGifs(imgGif, searchGifUser, searchGifTitle));
                 let Scard = cardSGif.querySelector('.gifScard');
                 Scard.style.visibility = 'hidden';
 
@@ -489,7 +489,7 @@ async function trendingByApiKey(){
         }
 
     // Hover en 'resultados de búsqueda'
-    function hoverSearchedGifs(searchGU, searchGT){
+    function hoverSearchedGifs(imgGif, searchGU, searchGT){
         //Crear los elementos que componen el hover
         //Diseño tarjeta hover
         let purpleCardS = document.createElement('div');
@@ -537,7 +537,7 @@ async function trendingByApiKey(){
         btnMax.appendChild(imgMax);
         //Funcionalidad botón Maximizar SEARCHED GIF
         btnMax.addEventListener ('click', () => {
-            //gifMax.src = imgGif;
+            gifMax.src = imgGif;
             userMax.innerHTML = searchGU;
             titleMax.innerHTML = searchGT;
             overlay.style.visibility = 'visible';
