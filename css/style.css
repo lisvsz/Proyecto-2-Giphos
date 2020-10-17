@@ -78,11 +78,6 @@
     opacity: 0.7;
     width: 480px;
   }
-  .successScreen {
-    background-color: #572EE5;
-    height: 320px;
-    width: 480px;
-  }
 }
 
 #overlay {
@@ -122,19 +117,29 @@
 }
 
 #overlay .slideshow #gifMax {
-  border: 1px solid black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 245px;
-  left: 7%;
+  left: 17%;
+  margin-left: 20px;
+  margin-right: 20px;
   -o-object-fit: contain;
      object-fit: contain;
   position: relative;
-  top: 15%;
+  top: 10%;
   width: 318px;
 }
 
-#overlay .slideshow .btnCloseMax {
+#overlay .slideshow #btnCloseMax {
   position: absolute;
-  top: -10%;
+  top: -15%;
   right: -10%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -151,44 +156,22 @@
   width: 20px;
 }
 
-#overlay .slideshow .btnCloseMax:hover {
+#overlay .slideshow #btnCloseMax:hover {
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
   cursor: pointer;
 }
 
 #overlay .slideshow .btnLeftMax {
-  background-color: white;
-  border: 1px solid #572EE5;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  height: 30px;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  left: -17%;
-  position: absolute;
-  top: 50%;
-  width: 30px;
-  z-index: 5;
+  display: none;
 }
 
 #overlay .slideshow .btnRightMax {
-  background-color: white;
-  border: 1px solid #572EE5;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  height: 30px;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  left: 106%;
-  position: absolute;
-  top: 50%;
-  width: 30px;
-  z-index: 5;
+  display: none;
+}
+
+#overlay .slideshow .captions {
+  margin-left: 20px;
 }
 
 #overlay .slideshow .captions .infoMax #userMax {
@@ -197,7 +180,7 @@
   font-size: 15px;
   position: relative;
   right: 280px;
-  top: 320px;
+  top: 290px;
 }
 
 #overlay .slideshow .captions .infoMax #titleMax {
@@ -207,7 +190,7 @@
   font-weight: bold;
   position: relative;
   right: 280px;
-  top: 330px;
+  top: 300px;
 }
 
 #overlay .slideshow .captions .iconsMax #btnFavMax {
@@ -237,33 +220,54 @@
   }
   #overlay .slideshow #gifMax {
     height: 385px;
+    left: 18%;
     top: 22%;
     width: 695px;
   }
-  #overlay .slideshow .btnCloseMax {
+  #overlay .slideshow #btnCloseMax {
     height: 16px;
     right: -2%;
     width: 16px;
     top: 35px;
   }
   #overlay .slideshow .btnLeftMax {
+    background-color: white;
+    border: 1px solid #572EE5;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
     height: 40px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     left: 8%;
+    position: absolute;
     top: 70%;
     width: 40px;
+    z-index: 5;
   }
   #overlay .slideshow .btnRightMax {
+    background-color: white;
+    border: 1px solid #572EE5;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
     height: 40px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     left: 94%;
+    position: absolute;
     top: 70%;
     width: 40px;
+    z-index: 5;
   }
   #overlay .slideshow .captions .infoMax #userMax {
-    right: 630px;
+    right: 515px;
     top: 490px;
   }
   #overlay .slideshow .captions .infoMax #titleMax {
-    right: 630px;
+    right: 515px;
     top: 500px;
   }
   #overlay .slideshow .captions .iconsMax #btnFavMax {

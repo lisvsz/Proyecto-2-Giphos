@@ -173,7 +173,14 @@ function cameraS() {
 //Función para crear pantalla morada GIF subido con éxito
 function successUpload (id) {
     let successScreen = document.createElement('div');
-    successScreen.classList.add('successScreen');
+    successScreen.classList.add('videoPurpleScreen');
+    getUrlById(id).then(url => createDownloadL(iconDownG, url, downG));
+}
+
+function getUrlById(id) {
+    return fetch(`https://api.giphy.com/v1/gifs/${id}?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT`)
+    .then(response => response.json())
+    .then(json => json.data.images.fixed_height.url);
 }
 
 //Función para subir gif
@@ -185,7 +192,10 @@ function uploadGif(gif) {
     }).then(res => {
       if(res.ok) {
         res.json().then(res => { 
-             cardSuccessGif(res.data.id); //////CAMBIAR
+            let oldIDS = localStorage.getItem("NuevosGifos");
+            oldIDS = oldIDS + "," + res.data.id;
+            localStorage.setItem("NuevosGifos", oldIDS);
+            cardSuccessGif(res.data.id); //////CAMBIAR
            });
       } else {
         console.log("Hubo un problema al subir tu GIF. Vuelve a intentarlo más tarde.");
