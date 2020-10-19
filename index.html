@@ -60,7 +60,7 @@
             <h1>Inspírate, busca, guarda, y crea <br> los mejores <span>GIFOS</span></h1>
             <img id="guys" src="assets/ilustra_header.svg" alt="higuys">
             <div class="boxsearch">
-                <input type="text" id="search" name="search" placeholder="Busca GIFOS y más" class="src">
+                <input type="text" id="search" name="search" placeholder="Busca GIFOS y más" class="src" value="">
                 <hr id="hugeListLine" style="display:none">
                 <ul id="huge_list"></ul>
                 <button type="submit" class="btnBoxSearch" id="btnSearch">
@@ -113,6 +113,7 @@
             <div id="screen-container">
                 <div class="frame" id="frame1"></div>
                 <div class="frame" id="frame2"></div>
+                <!-- Pantallas de crear mi Gifo-->
                 <div id="videoCover">
                     <h2>Aquí podrás <br>crear tus propios<span> GIFOS</span></h2>
                         <p>¡Crea tu GIFO en sólo 3 pasos!<br> (sólo necesitas una cámara para grabar un video)</p>
@@ -124,6 +125,10 @@
                 <div id="videoStepUpload" style="display:none">
                     <img id="loader" src="assets/loader.svg" alt="loader">
                         <p>Estamos subiendo tu GIFO</p>
+                </div>
+                <div id="videoSuccessUpload" style="display:none">
+                    <img id="check" src="assets/check.svg" alt="check">
+                        <p>GIFO subido con éxito</p>
                 </div>
                 <video id=video></video>
                 <div class="frame" id="frame3"></div>

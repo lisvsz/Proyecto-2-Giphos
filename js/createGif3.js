@@ -21,6 +21,7 @@
     let videoCover = document.getElementById('videoCover');
     let videoStep1 = document.getElementById('videoStep1');
     let videoStepUpload = document.getElementById('videoStepUpload');
+    let videoSuccessUpload = document.getElementById('videoSuccessUpload');
         //Variable Video
     let constraints = { audio: false, video: { width: 480, height: 320 } };
 
@@ -123,32 +124,6 @@
         
         console.log(form.get("file"));
     }
-    
-    //Función 'detener'
-    
-    
-    //Función 'timer'
-    function getDuration() {
-        let seconds = 0;
-        let minutes = 0;
-        let timer = setInterval(() => {
-            if(recording) {
-                if(seconds < 60) {
-                    if (seconds <= 9) {
-                        seconds = '0' + seconds;
-                    }
-                    timeStamp.innerHTML = `00:0${minutes}:${seconds}`;
-                    seconds++;
-                    } else {
-                        minutes++;
-                        seconds = 0;
-                    }
-                }
-            else {
-                clearInterval(timer);
-            }
-        }, 1000);
-    }
 
 /////////
 
@@ -174,13 +149,63 @@ function cameraS() {
 function successUpload (id) {
     let successScreen = document.createElement('div');
     successScreen.classList.add('videoPurpleScreen');
-    getUrlById(id).then(url => createDownloadL(iconDownG, url, downG));
+    videoStepUpload.style.display = 'none';
+    videoSuccessUpload.style.display = 'inline';
+
+    //Botón download 'Mi Gifo'
+    let btnDownload = document.createElement('button');
+    btnDownload.classList.add('btnHover');
+    btnDownload.style.cursor = 'pointer';
+    btnDownload.style.left = '105px';
+    let imgDown = document.createElement('img');
+    imgDown.alt = 'icon-download';
+    imgDown.src = 'assets/icon-download.svg';
+    imgDown.style.height = '15.9px';
+    imgDown.style.width = '18px';
+    imgDown.style.margin = 'auto';
+    btnDownload.appendChild(imgDown);
+
+    getUrlById(id).then(url => createDownloadL(btnDownload, url));
+
+    //Botón link 'Mi Gifo'
+    let btnLink = document.createElement('button');
+    btnLink.classList.add('btnHover');
+    btnLink.style.cursor = 'pointer';
+    btnLink.style.left = '105px';
+    let imgLink = document.createElement('img');
+    imgLink.alt = 'icon-link';
+    imgLink.src = 'assets/icon-link.svg';
+    imgLink.style.height = '15.9px';
+    imgLink.style.width = '18px';
+    imgLink.style.margin = 'auto';
+    btnLink.appendChild(imgLink);
+
+    btnLink.onclick = () => { alert("Comparte tu gif: " + "https://giphy.com/gifs/" + id) }
 }
 
 function getUrlById(id) {
     return fetch(`https://api.giphy.com/v1/gifs/${id}?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT`)
     .then(response => response.json())
     .then(json => json.data.images.fixed_height.url);
+}
+
+//Función de descarga 'Mi Gifo'
+function createDownloadL(tagIcon, url /*, contenedor*/) {
+    let linkdown = document.createElement('a');
+    console.log('URL FUNCION CREATEDOWN ' + url);
+    fetch(url)
+        .then(response => response.blob())
+        .then(blob => {
+
+        const url = URL.createObjectURL(blob);
+        linkdown.href = url;
+        linkdown.download = 'myGiphy.gif';
+        linkdown.appendChild(tagIcon);
+        //contenedor.appendChild(linkdown);
+        
+        }).catch(console.error);
+    return linkdown;
+
 }
 
 //Función para subir gif
@@ -190,15 +215,41 @@ function uploadGif(gif) {
         method: "POST",
         body: gif    
     }).then(res => {
-      if(res.ok) {
+        if(res.ok) {
         res.json().then(res => { 
             let oldIDS = localStorage.getItem("NuevosGifos");
             oldIDS = oldIDS + "," + res.data.id;
             localStorage.setItem("NuevosGifos", oldIDS);
-            cardSuccessGif(res.data.id); //////CAMBIAR
-           });
-      } else {
+            successUpload(res.data.id); //////CAMBIAR
+        });
+        } else {
         console.log("Hubo un problema al subir tu GIF. Vuelve a intentarlo más tarde.");
-      }
+    }
     });
-  }
+}
+
+//Función 'detener'
+    
+    
+    //Función 'timer'
+    function getDuration() {
+        let seconds = 0;
+        let minutes = 0;
+        let timer = setInterval(() => {
+            if(recording) {
+                if(seconds < 60) {
+                    if (seconds <= 9) {
+                        seconds = '0' + seconds;
+                    }
+                    timeStamp.innerHTML = `00:0${minutes}:${seconds}`;
+                    seconds++;
+                    } else {
+                        minutes++;
+                        seconds = 0;
+                    }
+                }
+            else {
+                clearInterval(timer);
+            }
+        }, 1000);
+    }

@@ -47,9 +47,11 @@ function lookingForInput(btnSearch, searchInput) {
     searchInput.addEventListener('keyup', () => {
         if (event.which === 13 || event.keyCode == 13 && searchInput != ""){
             //Intentos cambiar visualización NO FUNCIONA CORRECTAMENTE
-            btnSearch.style.display = 'flex';
             btnClose.style.display = 'none';
             huge_list.style.display = 'none';
+            btnSearch.style.left = '294px';
+            btnSearch.style.top = '-233px';
+            btnSearch.style.display = 'block';
             //Visualizar resultado
             searchTitle.innerHTML = searchInput.value;
             searchByApiKey(searchInput.value).then((arrayGifs)=>
@@ -57,33 +59,11 @@ function lookingForInput(btnSearch, searchInput) {
         );
         } else{
             autocompleteByApiKey(searchInput.value).then((arraySugestions)=>{
-                console.log('AUTOCOMPLETE');
+                //console.log('AUTOCOMPLETE');
                 processingResults(arraySugestions);
                 //Mostrar la lista de sugerencias
                 huge_list.classList.add('inputOpen');
                 huge_list.style.display = 'flex';
-                //btnCloseF(btnClose);
-                /*if (btnCloseF(btnClose)) {
-                    btnSearch.style.display = 'block';
-                    btnClose.style.display = 'none';
-                } else if (searchInput !== "") {
-                    btnSearch.style.display = 'block';
-                    btnClose.style.display = 'none';
-                    btnSearch.style.left = '300px';
-                    btnSearch.style.top = '-233px';
-                }*/
-                //Visualización de botones
-                /*if (btnCloseF){
-                    btnClose.style.display = 'block';
-                    btnClose.style.left = '300px';
-                    btnClose.style.top = '-233px';
-                    btnSearch.style.display = 'none';
-                } else {
-                    btnClose.style.display = 'none';
-                    btnSearch.style.display = 'block';
-                    btnSearch.style.left = '300px';
-                    btnSearch.style.top = '-233px';
-                }*/
                 //Modificar botones barra de búsqueda
                 btnSearch.style.display = 'none';
                 btnClose.style.left = '294px';
@@ -136,6 +116,10 @@ lookingForInput(btnSearch, searchInput);
             //Reemplazar texto mostrado
             option.style.cursor = 'pointer';
             searchTitle.innerHTML = item.name;
+            ////////////////////////////////////////Cómo pintar el input cuando doy click al trending topic
+            searchInput.value = option.value;
+            searchInput.innerHTML = option.value;
+
             //Cerrar lista
             huge_list.style.display = 'none';
             hugeListLine.style.display = 'none';
@@ -145,7 +129,15 @@ lookingForInput(btnSearch, searchInput);
             //Mover botón search
             btnSearch.style.top = '-36px';
         })
-        
+
+        //171020  Botón 'Ver más' para option
+        /*btnMoreSearch.addEventListener('click', () => {
+            count += 12;
+            searchByApiKey(item.name).then((arrayGifs)=>
+            showGifs(arrayGifs));
+            console.log(item.name)
+        });*/
+
         // Agregar nueva opción
         huge_list.appendChild(option);
         });
@@ -194,7 +186,8 @@ function showGifs(gifsArray){
         let searchGifUser = gifsArray[i].username;
         console.log(searchGifUser);
         //Crear la img, div y contenedor de Gif
-        let searchGif = document.createElement('img');    
+        let searchGif = document.createElement('img');
+        searchGif.alt = 'gif';    
         searchGif.src = imgGif;
         let cardSGif = document.createElement('div');
         cardSGif.className = 'cardSGif';
@@ -342,6 +335,7 @@ async function trendingByApiKey(){
             let userTGif = infoTGif.data[i].username;
             let titleTGif = infoTGif.data[i].title;
             let imgGif = document.createElement('img');
+            imgGif.alt = 'gif';
             imgGif.src = trendingGif;
             let cardTGif = document.createElement('div');
             cardTGif.className = 'cardTGif';
@@ -372,8 +366,8 @@ async function trendingByApiKey(){
         // Hacer grande los gifs en la versión mobile
             if (window.matchMedia("(max-width: 800px)").matches) {
                 cardTGif.addEventListener('click', () => {
-                console.log(gifMax);
-                gifMax.src = trendingGif;
+                //console.log(gifMax);
+                gifMax.src = imgGif.src;
                 userMax.innerHTML = userTGif;
                 overlay.style.visibility = 'visible';
                 titleMax.innerHTML = titleTGif;
@@ -413,6 +407,7 @@ async function trendingByApiKey(){
             btnFav.style.cursor = 'pointer';
             btnFav.style.left = '95px';
             let imgFav = document.createElement('img');
+            imgFav.alt = 'icon-fav';
             imgFav.src = 'assets/icon-fav-hover.svg';
             imgFav.style.height = '15.9px';
             imgFav.style.width = '18px';
@@ -425,16 +420,15 @@ async function trendingByApiKey(){
             btnDownload.style.cursor = 'pointer';
             btnDownload.style.left = '105px';
             let imgDown = document.createElement('img');
+            imgDown.alt = 'icon-download';
             imgDown.src = 'assets/icon-download.svg';
             imgDown.style.height = '15.9px';
             imgDown.style.width = '18px';
             imgDown.style.margin = 'auto';
             btnDownload.appendChild(imgDown);
-            //funcionalidad botón Download 
-            /*let downloadAction = downloadGif(tagIcon, url);
-            btnDownload.appendChild(downloadAction);*/
             //Funcionalidad del botón download
             btnDownload.addEventListener('click', () => {
+                url = trendingGif;
                 downloadGif(btnDownload, url);
             })
     
@@ -444,6 +438,7 @@ async function trendingByApiKey(){
             btnMax.style.cursor = 'pointer';
             btnMax.style.left = '115px';
             let imgMax = document.createElement('img');
+            imgMax.alt = 'icon-max';
             imgMax.src = 'assets/icon-max.svg';
             imgMax.style.height = '15.9px';
             imgMax.style.width = '18px';
@@ -502,6 +497,7 @@ async function trendingByApiKey(){
         //btnFav.style.position = 'relative';
         btnFav.style.left = '50px';
         let imgFav = document.createElement('img');
+        imgFav.alt = 'icon-fav';
         imgFav.src = 'assets/icon-fav-hover.svg';
         imgFav.style.height = '15.9px';
         imgFav.style.width = '18px';
@@ -515,6 +511,7 @@ async function trendingByApiKey(){
         //btnDownload.style.position = 'relative';
         btnDownload.style.left = '61px';
         let imgDown = document.createElement('img');
+        imgDown.alt = 'icon-download';
         imgDown.src = 'assets/icon-download.svg';
         imgDown.style.height = '15.9px';
         imgDown.style.width = '18px';
@@ -530,6 +527,7 @@ async function trendingByApiKey(){
         //btnMax.style.position = 'relative';
         btnMax.style.left = '72px';
         let imgMax = document.createElement('img');
+        imgMax.alt = 'icon-max';
         imgMax.src = 'assets/icon-max.svg';
         imgMax.style.height = '15.9px';
         imgMax.style.width = '18px';
@@ -577,15 +575,14 @@ async function trendingByApiKey(){
         function downloadGif(btnDownload, url) {
             //Se genera anchor 
             let downloadLink = document.createElement("a");
-            downloadLink.id = "downloadLink";
             //Se genera blob
             fetch(url)
-            .then(response => response.blob())
-            .then(blob => {
-            const url = URL.createObjectURL(blob);
-            downloadLink.href = url;
-            downloadLink.download = "myGif.gif";
-            btnDownload.appendChild(downloadLink);
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    downloadLink.href = url;
+                    downloadLink.download = "myGif.gif";
+                    btnDownload.appendChild(downloadLink);
             }).catch(console.error);
             return downloadLink;
         }

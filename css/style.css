@@ -38,6 +38,7 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     font-weight: bolder;
+    padding-left: 5%;
     position: relative;
     right: 22px;
     top: 160px;
@@ -58,6 +59,7 @@
     color: white;
     font-family: "Roboto", sans-serif;
     font-size: 15px;
+    padding-left: 8%;
     position: relative;
     right: 60px;
     top: 85px;
@@ -67,6 +69,7 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     font-weight: bolder;
+    padding-left: 8%;
     position: relative;
     right: 22px;
     top: 90px;
@@ -215,7 +218,11 @@
 
 /* Desktop 1366px*/
 @media (min-width: 1366px) {
+  #overlay {
+    background-color: white;
+  }
   #overlay .slideshow {
+    background-color: white;
     top: -110px;
   }
   #overlay .slideshow #gifMax {
@@ -1316,11 +1323,11 @@ main #gallery #trending-slider #track img {
     position: relative;
     width: 480px;
   }
-  main #create #screen-container #videoStepUpload img {
+  main #create #screen-container #videoStepUpload #videoSuccessUpload img {
     position: relative;
     top: 30px;
   }
-  main #create #screen-container #videoStepUpload p {
+  main #create #screen-container #videoStepUpload #videoSuccessUpload p {
     color: white;
     font-family: "Montserrat", sans-serif;
     font-size: 15px;
