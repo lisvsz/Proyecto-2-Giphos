@@ -336,7 +336,7 @@ function getDuration() {
   
   
   //FUNCION PARA PANTALLA MORADA 2
-  /*function cardSuccessGif(id) {
+  function cardSuccessGif(id) {
     let cardSubirGIFOS = document.getElementById("cardSubirGIFOS");
     cardSubirGIFOS.remove();
   
@@ -382,18 +382,18 @@ function getDuration() {
     linkG.appendChild(iconLinkG);
     linkG.onclick = () => { alert("Comparte tu gif: " + "https://giphy.com/gifs/" + id) }
   
-  }*/
+  }
   
-  /*function getUrlById(id) {
+  function getUrlById(id) {
   
     return fetch(`https://api.giphy.com/v1/gifs/${id}?api_key=Ods4EcKhWO60qYc7JGihzArT2MGDIqip`)
       .then(response => response.json())
       .then(json => json.data.images.fixed_height.url);
-  }*/
+  }
   
   //FUNCION DE DESCARGA
   //Función de descarga de Trending GIFOS
-  /*function createDownloadL(tagIcon, url, contenedor) {
+  function createDownloadL(tagIcon, url, contenedor) {
     let linkdown = document.createElement("a");
     linkdown.id = "linkdown";
     console.log("URL FUNCION CREATEDOWN" + url);
@@ -410,7 +410,7 @@ function getDuration() {
       }).catch(console.error);
     return linkdown;
   
-  }*/
+  }
   
   
   //FUNCION PARA SUBIR EL GIF A GIPHY

@@ -78,8 +78,14 @@
             <div id="activeSearch">
                 <hr>
                 <p id="searchTitle"> </p>
-                <div id="grid-search"></div>
+                <div class="gridFormat" id="grid-search"></div>
                 <button class="btn-ver" id="btn-more-search">VER MÁS</button>
+            </div>
+            <div id="noResults" style="display:none">
+                <hr id="lineNoResults">
+                <p id="lorem"> Lorem Ipsum</p>
+                <img src="assets/icon-busqueda-sin-resultado.svg">
+                <p id="tryAnother">Intenta con otra búsqueda</p>
             </div>
         </section>
 
@@ -92,6 +98,7 @@
                         <p id="textnoFav">"¡Guarda tu primer GIFO en Favoritos para que se muestre aquí!"</p>
                     </div>
                 </div>
+                <div class="gridFormat" id="grid-fav"></div> <!--Verificar el lugar, si se debe o no meter en container-fav-->
                 <a href="#" class="btn-ver" id="btn-more-fav" style="display:none">VER MÁS</a>
         </section>
 
@@ -104,6 +111,7 @@
                         <p id="textnoMine">¡Anímate a crear tu primer GIFO!</p>
                     </div>
                 </div>
+                <div class="gridFormat" id="grid-mine"></div>
                 <a href="#" class="btn-ver" id="btn-more-mine" style="display:none">VER MÁS</a>
         </section>
 
@@ -116,19 +124,21 @@
                 <!-- Pantallas de crear mi Gifo-->
                 <div id="videoCover">
                     <h2>Aquí podrás <br>crear tus propios<span> GIFOS</span></h2>
-                        <p>¡Crea tu GIFO en sólo 3 pasos!<br> (sólo necesitas una cámara para grabar un video)</p>
+                        <p class="textVideo">¡Crea tu GIFO en sólo 3 pasos!<br> (sólo necesitas una cámara para grabar un video)</p>
                 </div>
                 <div id="videoStep1" style="display:none">
                     <h2 id="titleVideo">¿Nos das acceso<br> a tu cámara?</h2>
-                        <p id="textVideo">El acceso a tu cámara será válido sólo<br> por el tiempo en el que estés creando el GIFO.</p>
+                        <p class="textVideo">El acceso a tu cámara será válido sólo<br> por el tiempo en el que estés creando el GIFO.</p>
                 </div>
-                <div id="videoStepUpload" style="display:none">
+                <div id="videoStepUpload" style="display:none" >
                     <img id="loader" src="assets/loader.svg" alt="loader">
-                        <p>Estamos subiendo tu GIFO</p>
+                        <p class="textPurpleScreen">Estamos subiendo tu GIFO</p>
                 </div>
                 <div id="videoSuccessUpload" style="display:none">
+                    <button id="btnDownloadC"><img src= "assets/icon-download.svg" alt="button-download"></button>
+                    <button id="btnLinkC"><img src= "assets/icon-link.svg" alt="button-link"></button>
                     <img id="check" src="assets/check.svg" alt="check">
-                        <p>GIFO subido con éxito</p>
+                    <p class="textPurpleScreen">GIFO subido con éxito</p>
                 </div>
                 <video id=video></video>
                 <div class="frame" id="frame3"></div>
@@ -154,12 +164,20 @@
         <section id="gallery">
             <h2>Trending GIFOS</h2>
             <p id="galleryText">Mira los últimos<br>GIFOS de nuestra comunidad.</p>
-            <button class="btn-slider" id="btn-slider-left"><img src= "assets/button-left.svg" alt="button-left"></button>
+            <button class="btn-slider" id="btn-slider-left">
+                <img id="imgLeft" src= "assets/button-left.svg" alt="button-left">
+                <img id="imgLeftHover" src= "assets/button-left-hover.svg" alt="button-left">
+                <img id="imgLeftDark" src= "assets/button-left-modo-noc.svg" alt="button-left">
+            </button>
             <div id="trending-slider">
                 <div id="track">
                 </div>
             </div>
-            <button class="btn-slider" id="btn-slider-right"><img src= "assets/button-right.svg" alt="button-right"></button>
+            <button class="btn-slider" id="btn-slider-right">
+                <img id="imgRight" src= "assets/button-right.svg" alt="button-right">
+                <img id="imgRightHover" src= "assets/button-right-hover.svg" alt="button-right">
+                <img id="imgRightDark" src= "assets/button-right-modo-noc.svg" alt="button-left">
+            </button>
         </section>
     </main>
     <footer>
@@ -175,6 +193,7 @@
     <script src="js/script.js"></script>
     <script src="js/sections.js"></script>
     <script src="js/createGif3.js"></script>
+    <script src="js/myGifos.js"></script>
 </body>
 </html>
 

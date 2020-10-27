@@ -1,8 +1,4 @@
 // Funcionalidad de la sección 'Crear tu Gif'
-    ////INICIALIZAR LOCALSTORAGE MYGIFOS /// REVISAR
-    if(localStorage.getItem("NuevosGifos") == undefined ) {
-    localStorage.setItem("NuevosGifos", "fvMyDds5Bc6ufJHdLs");
-    }
 
     //Variables botones
     let btnStart = document.getElementById('btn-start');
@@ -98,17 +94,7 @@
 
         //cardUPGif(); FORMATO PANTALLA MORADA
         uploadGif(form);
-    })
-    
-    //Obtener video y grabación
-    /*async function getStream() {
-        return await navigator.mediaDevices.getUserMedia({
-            audio: false,
-            video: {
-                height: { max: 280}
-            }
-        });
-    }*/
+    });
     
     //Función de la grabación
     async function getRecord(recorder) {
@@ -123,7 +109,7 @@
         form.append("file", blob, "myGif.gif");
         
         console.log(form.get("file"));
-    }
+    };
 
 /////////
 
@@ -137,13 +123,38 @@ function cameraS() {
         recorder = new RecordRTCPromisesHandler(mediaStream, {
         type: 'gif',
         frameRate: 60,
-        quality: 50,
+        quality: 200,
         width: 360
         });
     }).catch(function (err) {
         console.log(err.name + ": " + err.message);
     })
 };
+
+function getUrlById(id) {
+    return fetch(`https://api.giphy.com/v1/gifs/${id}?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT`)
+    .then(response => response.json())
+    .then(json => json.data.images.fixed_height.url);
+}
+
+//Función de descarga 'Mi Gifo'
+function createDownloadL(tagIcon, urlD, container) {
+    let linkdown = document.createElement('a');
+    console.log('URL FUNCION CREATEDOWN ' + urlD);
+    fetch(urlD)
+        .then(response => response.blob())
+        .then(blob => {
+        const urlD = URL.createObjectURL(blob);
+        linkdown.href = urlD;
+        linkdown.download = 'myGifo.gif';
+        linkdown.appendChild(tagIcon);
+        container.appendChild(linkdown);
+        /*videoSuccessUpload.appendChild(linkdown);
+        linkdown.click();
+        linkdown.remove();*/
+        //contenedor.appendChild(linkdown);
+    }).catch(console.error);
+}
 
 //Función para crear pantalla morada GIF subido con éxito
 function successUpload (id) {
@@ -153,63 +164,27 @@ function successUpload (id) {
     videoSuccessUpload.style.display = 'inline';
 
     //Botón download 'Mi Gifo'
-    let btnDownload = document.createElement('button');
-    btnDownload.classList.add('btnHover');
-    btnDownload.style.cursor = 'pointer';
-    btnDownload.style.left = '105px';
-    let imgDown = document.createElement('img');
-    imgDown.alt = 'icon-download';
-    imgDown.src = 'assets/icon-download.svg';
-    imgDown.style.height = '15.9px';
-    imgDown.style.width = '18px';
-    imgDown.style.margin = 'auto';
-    btnDownload.appendChild(imgDown);
-
-    getUrlById(id).then(url => createDownloadL(btnDownload, url));
+    let btnDownloadC = document.getElementById('btnDownloadC');
+    videoSuccessUpload.appendChild(btnDownloadC);
+    getUrlById(id).then(urlD => createDownloadL(btnDownloadC, urlD, videoSuccessUpload));
+    /*btnDownloadC.addEventListener('click', () => {
+        getUrlById(id).then(urlD => createDownloadL(videoSuccessUpload, urlD))
+        urlD.click();
+        urlD.remove();*/
+    //createDownloadL(btnDownloadC, urlD));
 
     //Botón link 'Mi Gifo'
-    let btnLink = document.createElement('button');
-    btnLink.classList.add('btnHover');
-    btnLink.style.cursor = 'pointer';
-    btnLink.style.left = '105px';
-    let imgLink = document.createElement('img');
-    imgLink.alt = 'icon-link';
-    imgLink.src = 'assets/icon-link.svg';
-    imgLink.style.height = '15.9px';
-    imgLink.style.width = '18px';
-    imgLink.style.margin = 'auto';
-    btnLink.appendChild(imgLink);
+    let btnLinkC = document.getElementById('btnLinkC');    
+    btnLinkC.addEventListener('click', () => { 
+        alert("Comparte tu gif: " + "https://giphy.com/gifs/" + id)}
+    )
 
-    btnLink.onclick = () => { alert("Comparte tu gif: " + "https://giphy.com/gifs/" + id) }
-}
-
-function getUrlById(id) {
-    return fetch(`https://api.giphy.com/v1/gifs/${id}?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT`)
-    .then(response => response.json())
-    .then(json => json.data.images.fixed_height.url);
-}
-
-//Función de descarga 'Mi Gifo'
-function createDownloadL(tagIcon, url /*, contenedor*/) {
-    let linkdown = document.createElement('a');
-    console.log('URL FUNCION CREATEDOWN ' + url);
-    fetch(url)
-        .then(response => response.blob())
-        .then(blob => {
-
-        const url = URL.createObjectURL(blob);
-        linkdown.href = url;
-        linkdown.download = 'myGiphy.gif';
-        linkdown.appendChild(tagIcon);
-        //contenedor.appendChild(linkdown);
-        
-        }).catch(console.error);
-    return linkdown;
-
+    //successScreen.appendChild(btnDownloadC);
+    //successScreen.appendChild(btnLinkC);
+    //return successScreen;
 }
 
 //Función para subir gif
-
 function uploadGif(gif) {
     fetch("https://upload.giphy.com/v1/gifs?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT", {
         method: "POST",
@@ -217,9 +192,16 @@ function uploadGif(gif) {
     }).then(res => {
         if(res.ok) {
         res.json().then(res => { 
-            let oldIDS = localStorage.getItem("NuevosGifos");
+            let oldIDS = localStorage.getItem("NewGifs");
             oldIDS = oldIDS + "," + res.data.id;
-            localStorage.setItem("NuevosGifos", oldIDS);
+            
+            /////////////////////
+            /*if(!oldIDS){
+                oldIDS = [];
+            }
+            oldIDS.push(res.data.id);*/
+
+            localStorage.setItem("NewGifs", oldIDS);
             successUpload(res.data.id); //////CAMBIAR
         });
         } else {
@@ -229,7 +211,6 @@ function uploadGif(gif) {
 }
 
 //Función 'detener'
-    
     
     //Función 'timer'
     function getDuration() {
@@ -253,3 +234,17 @@ function uploadGif(gif) {
             }
         }, 1000);
     }
+
+//////////Mis GIFOS /////// Verificar si es necesario
+
+//Local storage 'Mis Gifos'
+if(localStorage.getItem("NewGifs") == undefined ) {
+    localStorage.setItem("NewGifs", "ys0TZuRXUbbDD7tZzM");
+}
+/*    if(localStorage.getItem("myGifs") == undefined ) {
+        localStorage.setItem("myGifs", "ys0TZuRXUbbDD7tZzM");
+        }*/
+
+
+
+

@@ -1,5 +1,8 @@
 // Visualización de las diferentes secciones
 
+//Exportar variables
+//import {myG} from './myGifos';
+
 //Variables secciones
 
 const navfav = document.getElementById("favorites");
@@ -25,7 +28,7 @@ navfav.addEventListener('click', () => {
         gallerysection.style.display = "block";
     }
 })
-//Mostrar sección 'Mis Gifos'
+//Mostrar sección 'Mis Gifos'  ////////DEBO LLAMAR A LA FUNCIÓN QUE TRAE LOS GIFS
 navmine.addEventListener('click', () => {
     if(minesection.style.display === "none"){
         favsection.style.display = "none";
@@ -37,6 +40,21 @@ navmine.addEventListener('click', () => {
         minesection.style.display = "block";
         gallerysection.style.display = "block";
     }
+    ////// MIS GIFOS
+    /*let ids = localStorage.getItem("NuevosGifos");
+    fetch(`https://api.giphy.com/v1/gifs?PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&ids=${ids}`).then(response => response.json())
+    .then(json => {
+
+        let arrayMyG = json.data;
+
+        arrayMyG.forEach(value) => {
+
+        }
+
+    let myGifs = JSON.parse(window.localStorage.getItem("myGifs"));
+    console.log(myGifs);*/
+
+
 })
 //Mostrar sección 'Crear mi Gifo'
 navcreate.addEventListener('click', () => {
@@ -57,7 +75,7 @@ logomain.addEventListener('click', () => {
         favsection.style.display = "none";
         minesection.style.display = "none";
         searchsection.style.display = "block";
-        gallerysection.style.display = "none";
+        gallerysection.style.display = "block";
         createsection.style.display = "none";
     }
     else{

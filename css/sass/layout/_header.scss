@@ -52,16 +52,28 @@ header{
             background-color: $color-grey;
             border: 1px solid $color-primary;
             #pluswhite{
-                display: blocK;
+                display: block;
             }
             #plus{
                 display: none;
             }
             &:hover{
                 background-color: $color-primary;
+                #plusblack{
+                    display: block;
+                }
+                #pluswhite{
+                    display: none;
+                }
             }
             &:active{
                 background-color: $color-quaternary;
+                #plusblack{
+                    display: none;
+                }
+                #pluswhite{
+                    display: block;
+                }
             }
         }
     }
