@@ -14,8 +14,8 @@ let gridMyGif = document.getElementById('grid-mine');
 
 //Local storage 'Mis Gifos'
 if(localStorage.getItem("NewGifs") == undefined ) {
-    localStorage.setItem("NewGifs", "ys0TZuRXUbbDD7tZzM");
-    }
+    localStorage.setItem("NewGifs", "ys0TZuRXUbbDD7tZzM, KgOBWvi4oSC7heYKn0");
+}
 
 function showMyGifos(array) {
 if(array == null || array.length == 0 || array == undefined) {

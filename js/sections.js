@@ -83,3 +83,14 @@ logomain.addEventListener('click', () => {
         gallerysection.style.display = "block";
     }
 })
+
+// Dark mode
+
+function darkMode() {
+    const btnSwitch = document.getElementById("switch");
+    btnSwitch.addEventListener("click", function dark() {
+        document.body.classList.toggle("dark");
+    });
+}
+
+darkMode();
