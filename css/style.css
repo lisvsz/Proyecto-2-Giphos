@@ -92,6 +92,128 @@
   }
 }
 
+body.dark #overlay {
+  background-color: #37383C;
+}
+
+body.dark #overlay .slideshow {
+  background-color: #37383C;
+}
+
+body.dark #overlay .slideshow #btnCloseMax #btnCloseM {
+  display: none;
+}
+
+body.dark #overlay .slideshow #btnCloseMax #btnCloseMD {
+  display: block;
+}
+
+body.dark #overlay .slideshow .btnLeftMax {
+  background-color: #37383C;
+  border: 1px solid white;
+}
+
+body.dark #overlay .slideshow .btnLeftMax:hover {
+  background-color: white;
+}
+
+body.dark #overlay .slideshow .btnLeftMax:hover #imgLeftMax {
+  display: none;
+}
+
+body.dark #overlay .slideshow .btnLeftMax:hover #imgLeftDarkMax {
+  display: inline-block;
+}
+
+body.dark #overlay .slideshow .btnLeftMax:hover #imgLeftHoverMax {
+  display: none;
+}
+
+body.dark #overlay .slideshow .btnLeftMax:active {
+  background-color: #9CAFC3;
+}
+
+body.dark #overlay .slideshow .btnLeftMax:active #imgLeftMax {
+  display: none;
+}
+
+body.dark #overlay .slideshow .btnLeftMax:active #imgLeftDarkMax {
+  display: none;
+}
+
+body.dark #overlay .slideshow .btnLeftMax:active #imgLeftHoverMax {
+  display: inline-block;
+}
+
+body.dark #overlay .slideshow .btnLeftMax #imgLeftMax {
+  display: none;
+}
+
+body.dark #overlay .slideshow .btnLeftMax #imgLeftDarkMax {
+  display: none;
+}
+
+body.dark #overlay .slideshow .btnLeftMax #imgLeftHoverMax {
+  display: inline-block;
+}
+
+body.dark #overlay .slideshow .btnRightMax {
+  background-color: #37383C;
+  border: 1px solid white;
+}
+
+body.dark #overlay .slideshow .btnRightMax:hover {
+  background-color: white;
+}
+
+body.dark #overlay .slideshow .btnRightMax:hover #imgRightMax {
+  display: none;
+}
+
+body.dark #overlay .slideshow .btnRightMax:hover #imgRightDarkMax {
+  display: inline-block;
+}
+
+body.dark #overlay .slideshow .btnRightMax:hover #imgRightHoverMax {
+  display: none;
+}
+
+body.dark #overlay .slideshow .btnRightMax:active {
+  background-color: #9CAFC3;
+}
+
+body.dark #overlay .slideshow .btnRightMax:active #imgRightMax {
+  display: none;
+}
+
+body.dark #overlay .slideshow .btnRightMax:active #imgRightDarkMax {
+  display: none;
+}
+
+body.dark #overlay .slideshow .btnRightMax:active #imgRightHoverMax {
+  display: inline-block;
+}
+
+body.dark #overlay .slideshow .btnRightMax #imgRightMax {
+  display: none;
+}
+
+body.dark #overlay .slideshow .btnRightMax #imgRightDarkMax {
+  display: none;
+}
+
+body.dark #overlay .slideshow .btnRightMax #imgRightHoverMax {
+  display: inline-block;
+}
+
+body.dark #overlay .slideshow .captions .infoMax #userMax {
+  color: white;
+}
+
+body.dark #overlay .slideshow .captions .infoMax #titleMax {
+  color: white;
+}
+
 #overlay {
   position: fixed;
   left: 0;
@@ -174,6 +296,14 @@
   cursor: pointer;
 }
 
+#overlay .slideshow #btnCloseMax #btnCloseM {
+  display: block;
+}
+
+#overlay .slideshow #btnCloseMax #btnCloseMD {
+  display: none;
+}
+
 #overlay .slideshow .btnLeftMax {
   display: none;
 }
@@ -206,6 +336,7 @@
 }
 
 #overlay .slideshow .captions .iconsMax #btnFavMax {
+  background-color: transparent;
   border: none;
   height: 18px;
   position: absolute;
@@ -246,6 +377,12 @@
     width: 16px;
     top: 35px;
   }
+  #overlay .slideshow #btnCloseMax #btnCloseM {
+    display: block;
+  }
+  #overlay .slideshow #btnCloseMax #btnCloseMD {
+    display: none;
+  }
   #overlay .slideshow .btnLeftMax {
     background-color: white;
     border: 1px solid #572EE5;
@@ -262,6 +399,36 @@
     width: 40px;
     z-index: 5;
   }
+  #overlay .slideshow .btnLeftMax:hover {
+    background-color: #572EE5;
+  }
+  #overlay .slideshow .btnLeftMax:hover #imgLeftMax {
+    display: none;
+  }
+  #overlay .slideshow .btnLeftMax:hover #imgLeftHoverMax {
+    display: inline-block;
+  }
+  #overlay .slideshow .btnLeftMax:active {
+    background-color: #9CAFC3;
+  }
+  #overlay .slideshow .btnLeftMax:active #imgLeftMax {
+    display: none;
+  }
+  #overlay .slideshow .btnLeftMax:active #imgLeftDarkMax {
+    display: none;
+  }
+  #overlay .slideshow .btnLeftMax:active #imgLeftHoverMax {
+    display: inline;
+  }
+  #overlay .slideshow .btnLeftMax #imgLeftMax {
+    display: inline-block;
+  }
+  #overlay .slideshow .btnLeftMax #imgLeftDarkMax {
+    display: none;
+  }
+  #overlay .slideshow .btnLeftMax #imgLeftHoverMax {
+    display: none;
+  }
   #overlay .slideshow .btnRightMax {
     background-color: white;
     border: 1px solid #572EE5;
@@ -277,6 +444,36 @@
     top: 70%;
     width: 40px;
     z-index: 5;
+  }
+  #overlay .slideshow .btnRightMax:hover {
+    background-color: #572EE5;
+  }
+  #overlay .slideshow .btnRightMax:hover #imgRightMax {
+    display: none;
+  }
+  #overlay .slideshow .btnRightMax:hover #imgRightHoverMax {
+    display: inline-block;
+  }
+  #overlay .slideshow .btnRightMax:active {
+    background-color: #9CAFC3;
+  }
+  #overlay .slideshow .btnRightMax:active #imgLeftMax {
+    display: none;
+  }
+  #overlay .slideshow .btnRightMax:active #imgLeftDarkMax {
+    display: none;
+  }
+  #overlay .slideshow .btnRightMax:active #imgLeftHoverMax {
+    display: inline;
+  }
+  #overlay .slideshow .btnRightMax #imgRightMax {
+    display: inline-block;
+  }
+  #overlay .slideshow .btnRightMax #imgRightDarkMax {
+    display: none;
+  }
+  #overlay .slideshow .btnRightMax #imgRightHoverMax {
+    display: none;
   }
   #overlay .slideshow .captions .infoMax #userMax {
     right: 515px;
@@ -299,6 +496,10 @@
     right: 9%;
     top: 130%;
   }
+}
+
+body.dark main #container-search .inputOpen {
+  border: 1px solid white;
 }
 
 .inputOpen {
@@ -800,7 +1001,14 @@ body.dark main #container-search #btnSearch #iconsearch1 {
 
 body.dark main #container-search #btnSearch #iconsearch2dark {
   display: block;
-  fill-opacity: 100%;
+}
+
+body.dark main #container-search #btnClose #btn-close {
+  display: none;
+}
+
+body.dark main #container-search #btnClose #btn-close-dark {
+  display: block;
 }
 
 body.dark main #container-search .src {
@@ -1069,17 +1277,6 @@ body.dark main #gallery #trending-slider {
 
 main #container-search {
   min-height: 470px;
-  /*.gridFormat{ /////////7VER SI FUNCIONA EN GRID.SCSS
-            column-gap: 21px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-            margin: 46px 21px 78px 21px;
-            row-gap: 25px;
-            /*.img{
-                height:120px;
-                width: 156px;
-            }*/
 }
 
 main #container-search h1 {
@@ -1114,10 +1311,11 @@ main #container-search h3 {
 }
 
 main #container-search .boxsearch #btnSearch {
-  fill-opacity: 100%;
+  background-color: transparent;
 }
 
 main #container-search .boxsearch #btnClose {
+  background-color: transparent;
   display: none;
 }
 
@@ -1370,17 +1568,6 @@ main #gallery #trending-slider #track img {
 @media (min-width: 1366px) {
   main #container-search {
     min-height: 665px;
-    /*.gridFormat{ //////////VER SI FUNCIONA EN GRID
-                column-gap: 29px;
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr;
-                grid-template-rows: 1fr 1fr 1fr;
-                margin: 46px 100px 78px 98px;
-                row-gap: 28px;
-                /*.img{
-                    height: 500px;
-                    width: 600px;
-                }*/
   }
   main #container-search h1 {
     font-size: 35px;
@@ -1404,10 +1591,6 @@ main #gallery #trending-slider #track img {
   }
   main #container-search .boxsearch #btnSearch {
     left: 245px;
-  }
-  main #container-search .boxsearch #btn-close {
-    display: none;
-    left: 241px;
   }
   main #container-search #searchTitle {
     font-size: 35px;

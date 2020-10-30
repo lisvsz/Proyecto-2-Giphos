@@ -1,5 +1,16 @@
 //Estilos de barra de búsqueda activa e inactiva
 
+//Dark Mode
+main{
+    body.dark & {
+        #container-search{
+            .inputOpen{
+                border: 1px solid $color-primary;
+            }
+        }
+    }
+}
+
 //Estilo activo
 .inputOpen{
     align-items: flex-start;

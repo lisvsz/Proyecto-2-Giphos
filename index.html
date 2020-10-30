@@ -11,9 +11,20 @@
     <!-- Visualización 'Maximizar Gif' con click-->
     <div id="overlay">
         <div class="slideshow">
-            <div id="btnCloseMax"><img src="assets/close.svg" alt="button-close"></div>
-            <div class="btnLeftMax"><img src= "assets/button-left.svg" alt="button-left"></div>
-            <div class="btnRightMax"><img src= "assets/button-right.svg" alt="button-right"></div>
+            <div id="btnCloseMax">
+                <img id="btnCloseM" src="assets/close.svg" alt="button-close">
+                <img id="btnCloseMD" src="assets/button-close-modo-noc.svg" alt="close">
+            </div>
+            <div class="btnLeftMax" id="btnLeftMax" >
+                <img id="imgLeftMax" src= "assets/button-left.svg" alt="button-left">
+                <img id="imgLeftHoverMax" src= "assets/button-left-hover.svg" alt="button-left">
+                <img id="imgLeftDarkMax" src= "assets/button-left-modo-noc.svg" alt="button-left">
+            </div>
+            <div class="btnRightMax" id="btnRightMax">
+                <img id="imgRightMax" src= "assets/button-right.svg" alt="button-right">
+                <img id="imgRightHoverMax" src= "assets/button-right-hover.svg" alt="button-right">
+                <img id="imgRightDarkMax" src= "assets/button-right-modo-noc.svg" alt="button-left">
+            </div>
             <img src="assets/ilustra_header.svg" alt="gif" id="gifMax">
             <div class="captions">
                 <div class= "infoMax">
@@ -21,7 +32,7 @@
                     <p id="titleMax">Title</p>
                 </div>
                 <div class="iconsMax">
-                    <button id="btnFavMax"><img src= "assets/icon-fav-hover.svg" alt="button-fav"></button>
+                    <button id="btnFavMax"><img id="btnFavMaxImg" src= "assets/icon-fav-hover.svg" alt="button-fav"></button>
                     <button id="btnDownloadMax"><img src= "assets/icon-download.svg" alt="button-download"></button>
                 </div>
             </div>
@@ -70,9 +81,9 @@
                 <!--Botón alternativo-->
                 <button class="btnBoxSearch" id="btnClose">
                     <img id="btn-close" src="assets/button-close.svg" data-src="assets/icon-search.svg" alt="close">
+                    <img id="btn-close-dark" src="assets/button-close-modo-noc.svg" data-src="assets/icon-search.svg" alt="close">
                 </button>
             </div>
-
             <h3>Trending:</h3>
             <div id="trendingSection"></div>
             <div id="activeSearch">
@@ -84,7 +95,7 @@
             <div id="noResults" style="display:none">
                 <hr id="lineNoResults">
                 <p id="lorem"> Lorem Ipsum</p>
-                <img src="assets/icon-busqueda-sin-resultado.svg">
+                <img src="assets/icon-busqueda-sin-resultado.svg" alt="noResults">
                 <p id="tryAnother">Intenta con otra búsqueda</p>
             </div>
         </section>

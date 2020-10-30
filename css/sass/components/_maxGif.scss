@@ -1,5 +1,110 @@
 // Diseño para expandir Gif
 
+//Dark Mode
+body{
+    &.dark {
+        #overlay{
+            background-color: $color-grey;
+            .slideshow{
+                background-color: $color-grey;
+                #btnCloseMax{
+                    #btnCloseM{
+                        display: none;
+                    }
+                    #btnCloseMD{
+                        display: block;
+                    }
+                }
+                .btnLeftMax{
+                    background-color: $color-grey;
+                    border: 1px solid $color-primary;
+                    &:hover{
+                        background-color: $color-primary;
+                        #imgLeftMax{
+                            display: none;
+                        }
+                        #imgLeftDarkMax{
+                            display: inline-block;
+                        }
+                        #imgLeftHoverMax{
+                            display: none;
+                        }
+                    }
+                    &:active{
+                        background-color: $color-quaternary;
+                        #imgLeftMax{
+                            display: none;
+                        }
+                        #imgLeftDarkMax{
+                            display: none;
+                        }
+                        #imgLeftHoverMax{
+                            display: inline-block;
+                        }
+                    }
+                    #imgLeftMax{
+                        display: none;
+                    }
+                    #imgLeftDarkMax{
+                        display: none;
+                    }
+                    #imgLeftHoverMax{
+                        display: inline-block;
+                    }
+                }
+                .btnRightMax{
+                    background-color: $color-grey;
+                    border: 1px solid $color-primary;
+                    &:hover{
+                        background-color: $color-primary;
+                        #imgRightMax{
+                            display: none;
+                        }
+                        #imgRightDarkMax{
+                            display: inline-block;
+                        }
+                        #imgRightHoverMax{
+                            display: none;
+                        }
+                    }
+                    &:active{
+                        background-color: $color-quaternary;
+                        #imgRightMax{
+                            display: none;
+                        }
+                        #imgRightDarkMax{
+                            display: none;
+                        }
+                        #imgRightHoverMax{
+                            display: inline-block;
+                        }
+                    }
+                    #imgRightMax{
+                        display: none;
+                    }
+                    #imgRightDarkMax{
+                        display: none;
+                    }
+                    #imgRightHoverMax{
+                        display: inline-block;
+                    }
+                }
+                .captions{
+                    .infoMax{
+                        #userMax{
+                            color: $color-primary;
+                        }
+                        #titleMax{
+                            color: $color-primary;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 #overlay{
     position: fixed;
     left: 0;
@@ -13,7 +118,6 @@
     align-items: center;
     transition: all .7s ease;
     visibility: hidden; 
-    //opacity: 1;
     .slideshow{
     width: 70%;
     height: 60%;
@@ -50,6 +154,12 @@
         transform: scale(1.2);
         cursor: pointer;
         }
+        #btnCloseM{
+            display: block;
+        }
+        #btnCloseMD{
+            display: none;
+        }
     }
     .btnLeftMax{
         display: none;
@@ -80,6 +190,7 @@
         }
         .iconsMax{
             #btnFavMax{
+                background-color: transparent;
                 border: none;
                 height: 18px;
                 position: absolute;
@@ -96,12 +207,12 @@
                 right: -10%;
                 top: 102%;
                 width: 36px;
+                }
             }
         }
     }
 }
 
-}
 
 /* Desktop 1366px*/
 @media (min-width: 1366px){ 
@@ -121,6 +232,12 @@
             right: -2%;
             width: 16px;
             top: 35px;
+            #btnCloseM{
+                display: block;
+            }
+            #btnCloseMD{
+                display: none;
+            }
         }
         .btnLeftMax{
             background-color: $color-primary;
@@ -133,7 +250,36 @@
             top: 70%;
             width: 40px;
             z-index: 5;
-            //HOVER
+            &:hover{
+                background-color: $color-secondary;
+                #imgLeftMax{
+                    display: none;
+                }
+                #imgLeftHoverMax{
+                    display: inline-block;
+                }
+            }
+            &:active{
+                background-color: $color-quaternary;
+                #imgLeftMax{
+                    display: none;
+                }
+                #imgLeftDarkMax{ 
+                    display: none;
+                }
+                #imgLeftHoverMax{
+                    display: inline;
+                }
+            }
+            #imgLeftMax{
+                display: inline-block;
+            }
+            #imgLeftDarkMax{
+                display: none;
+            }
+            #imgLeftHoverMax{
+                display: none;
+            }
         }
         .btnRightMax{
             background-color: $color-primary;
@@ -146,7 +292,36 @@
             top: 70%;
             width: 40px;
             z-index: 5;
-            //HOVER
+            &:hover{
+                background-color: $color-secondary;
+                #imgRightMax{
+                    display: none;
+                }
+                #imgRightHoverMax{
+                    display: inline-block;
+                }
+            }
+            &:active{
+                background-color: $color-quaternary;
+                #imgLeftMax{
+                    display: none;
+                }
+                #imgLeftDarkMax{ 
+                    display: none;
+                }
+                #imgLeftHoverMax{
+                    display: inline;
+                }
+            }
+            #imgRightMax{
+                display: inline-block;
+            }
+            #imgRightDarkMax{
+                display: none;
+            }
+            #imgRightHoverMax{
+                display: none;
+            }
         }
         .captions{
             .infoMax{
@@ -176,5 +351,5 @@
             }
         }
     }
-    }
+}
 }

@@ -4,24 +4,31 @@ let activeSearch = document.getElementById('activeSearch');
 let hugeListLine = document.getElementById('hugeListLine') // línea de separación de la barra de búsqueda
 let btnSearch = document.getElementById('btnSearch');
 let btnClose = document.getElementById('btnClose');
+let btnCloseImg = document.getElementById('btn-close');
 let huge_list = document.getElementById('huge_list');
 let noResults = document.getElementById('noResults');
 let searchTitle = document.getElementById('searchTitle');
 let gridFormat = document.querySelectorAll('gridFormat');
 let searchResults = document.getElementById('grid-search');
 let btnMoreSearch = document.getElementById('btn-more-search');
-let count = 0; // Indice de los gifs ('ver más')
 let trackSlider = document.getElementById('track'); // Carrusel Trending Gifs
+let count = 0; // Indice de los gifs ('ver más')
+//Variables favoritos
+let btnMoreFav = document.getElementById('btn-more-fav');
 //Variables Modal
 let overlay = document.getElementById('overlay');
 let slideshow = document.getElementsByClassName('slideshow');
 let gifMax = document.getElementById('gifMax');
+let overlaycounter = 0; // Contador de las flechas overlay
 let btnCloseMax = document.getElementById('btnCloseMax');
-let btnLeftMax = document.getElementsByClassName('btnLeftMax');
-let btnRightMax = document.getElementsByClassName('btnRightMax');
+let btnLeftMax = document.getElementById('btnLeftMax');
+let btnRightMax = document.getElementById('btnRightMax');
 let userMax = document.getElementById('userMax');
 let titleMax = document.getElementById('titleMax');
 let btnDownloadMax = document.getElementById('btnDownloadMax');
+let btnFavMaxImg = document.getElementById('btnFavMaxImg');
+    btnFavMax.style.cursor = 'pointer';
+    btnDownloadMax.style.cursor = 'pointer';
 
 //Variables API
 let apiKey = 'PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT';
@@ -33,6 +40,7 @@ let apiKey = 'PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT';
 
     if(localStorage.getItem("MyFavorites") == undefined ) {
         localStorage.setItem("MyFavorites", idsFav); ////////No funciona
+        idsFav.push("MyFavorites"); //////////////////////////////////////////////////////////////Intentar agregar al array
     }
     let noFav = document.getElementById('noFav');
     let gridFav = document.getElementById('grid-fav');
@@ -57,10 +65,15 @@ function lookingForInput(btnSearch, searchInput) {
             activeSearch.style.display = 'none';        ///////////NO FUNCIONAAAAA
             btnClose.style.display = 'none';
             huge_list.style.display = 'none';
-            btnSearch.style.left = '294px';
-            btnSearch.style.top = '-33px';
-            btnSearch.style.display = 'block';
             hugeListLine.style.display = 'none';
+            btnSearch.style.display = 'block';
+            if (window.matchMedia("(min-width: 1366px)").matches) {
+                btnSearch.style.left = '510px';
+                btnSearch.style.top = '-33px';
+            } else if(window.matchMedia("(max-width: 800px)").matches) {
+                btnSearch.style.left = '294px';
+                btnSearch.style.top = '-35px';
+            }
             searchInput.classList.remove('srcOpen');
             //Visualizar resultado
             searchTitle.innerHTML = searchInput.value;
@@ -76,7 +89,7 @@ function lookingForInput(btnSearch, searchInput) {
                 huge_list.style.display = 'flex';
                 //Modificar botones barra de búsqueda
                 btnSearch.style.display = 'none';
-                btnClose.style.left = '294px';
+                btnClose.style.left = '515px';
                 btnClose.style.top = '-233px';
                 btnClose.style.display = 'block';
                 //activeSearch.style.display = "inline"; ///////////////////PRUEBA
@@ -138,50 +151,11 @@ lookingForInput(btnSearch, searchInput);
             searchInput.classList.add('boxsearch');
             //Mover botón search
             btnClose.style.top = '-31px';
-
-            ////////Intento 2 221020
-            /*btnMoreSearch.addEventListener('click', () => {
-                count += 12;
-                searchTitle.innerHTML = searchInput.value;
-                searchByApiKey(searchInput.value, count).then((arrayGifs) =>
-                    showGifs(arrayGifs)
-                );
-        
-                autocompleteByApiKey(searchInput.value, count).then((arraySugestions)=>{
-                    processingResults(arraySugestions);
-                });
-                
-                /*searchByApiKey(item.name, count).then((arrayGifs) =>
-                        showGifs(arrayGifs));*/
-                //});
-
         })
-
-        //171020  Botón 'Ver más' para option
-        /*btnMoreSearch.addEventListener('click', () => {
-            count += 12;
-            searchByApiKey(item.name).then((arrayGifs)=>
-            showGifs(arrayGifs));
-            console.log(item.name)
-        });*/
-
         // Agregar nueva opción
         huge_list.appendChild(option);
         });
         }
-
-        ///Intento 221020
-        /*btnMoreSearch.addEventListener('click', () => {
-            alert(':D');
-            //count += 12;
-            //searchTitle.innerHTML = searchInput.value;
-            //searchTitle.innerHTML = item.name;
-            //console.log(item.name);
-            /*searchByApiKey(searchInput.value, count).then((arrayGifs) =>
-                showGifs(arrayGifs)*/
-            //searchByApiKey(option.value, count).then((arrayGifs)=>
-            //    showGifs(arrayGifs))*/
-        //})
     };
 
     //Botón cerrar searching bar
@@ -189,8 +163,14 @@ lookingForInput(btnSearch, searchInput);
         //Cambiar botones 
         btnClose.style.display = 'none';
         btnSearch.style.display = 'block';
-        btnSearch.style.left = '294px';
-        btnSearch.style.top = '-35px';
+        if (window.matchMedia("(min-width: 1366px)").matches) {
+            btnSearch.style.left = '510px';
+            btnSearch.style.top = '-33px';
+        } else if(window.matchMedia("(max-width: 800px)").matches) {
+            btnSearch.style.left = '294px';
+            btnSearch.style.top = '-35px';
+        }
+
         //Borrar contenido y cerrar lista
         searchInput.value = '';
         huge_list.style.display = 'none';
@@ -274,9 +254,10 @@ function showGifs(gifsArray){
                 overlay.style.visibility = 'visible';
                 titleMax.innerHTML = searchGifTitle;
                 //Funcionalidad botón descarga en Modal      ///////////// AL ACTIVARLO, VA AUMENTANDO +1 LA VENTANA PARA DESCARGAR EL GIF
-                /*btnDownloadMax.addEventListener('click', ()=> {
+                btnDownloadMax.addEventListener('click', (e)=> {
+                    e.stopImmediatePropagation();
                     downloadGif(trackSlider, imgGif);
-                })*/
+                })
                 btnCloseMax.addEventListener('click', () => {
                     overlay.style.visibility = 'hidden';
                 })
@@ -301,25 +282,15 @@ function showGifs(gifsArray){
         }*/
 };
 
-    //Botón 'Ver más' /////// Nota: reiniciar en función buscador el contador , así como el título NO FUNCIONA EN TRENDING TOPICS
+    //Botón 'Ver más' /////// Nota: reiniciar en función buscador el contador
         btnMoreSearch.addEventListener('click', () => {
-        //searchInput.classList.remove('srcOpen'); ////////////////////////MODIFICAR ESTILOS
-        //searchInput.classList.add('src');
+        searchInput.classList.remove('srcOpen'); 
+        searchInput.classList.add('src');
         count += 12;
-        searchTitle.innerHTML = searchInput.value;
         searchByApiKey(searchInput.value, count).then((arrayGifs) =>
             showGifs(arrayGifs)
-        );
-        //searchInput.classList.remove('srcOpen');
-        //searchInput.classList.add('src');
-        autocompleteByApiKey(searchInput.value, count).then((arraySugestions)=>{
-            processingResults(arraySugestions);
+            );
         });
-        
-        /*searchByApiKey(item.name, count).then((arrayGifs) =>
-                showGifs(arrayGifs));*/
-        });
-
 
 // Sección trendings
 async function trendingByApiKey(){
@@ -343,19 +314,26 @@ async function trendingByApiKey(){
                 trendingTopic.innerHTML = topic + ' ' + ',';
                 trendingSection.appendChild(trendingTopic);
                 
-
                 //Visualizar resultado del gif en grid
                 trendingTopic.addEventListener('click', () => {
                     //Visualizar en barra de búsqueda, buscar gif y visualizarlo
                     console.log(topic);
                     searchTitle.innerHTML = topic;
+                    searchInput.innerHTML = topic;
                     searchByApiKey(topic).then((arrayGifs) =>
                     showGifs(arrayGifs));
                     ///Se debe visualizar en el search input autocompleteByApiKey(searchInput.value);
+                    btnMoreSearch.addEventListener('click', () => {
+                        searchInput.classList.remove('srcOpen'); ////////////////////////MODIFICAR ESTILOS
+                        searchInput.classList.add('src');
+                        count += 12;
+                        searchByApiKey(topic, count).then((arrayGifs) =>
+                            showGifs(arrayGifs)
+                        );
+                    })
                 })
             })
         }
-
     });
 
     //Reflejar 'trending gifs' en HTML
@@ -388,7 +366,6 @@ async function trendingByApiKey(){
             cardTGif.appendChild(imgGif);
 
             //Agregar diseño mouse over & mouseout
-
             if (window.matchMedia("(min-width: 1366px)").matches) {
             cardTGif.appendChild(hoverTrendingGifs(trendingGif, userTGif, titleTGif, idTGif));
 
@@ -411,19 +388,21 @@ async function trendingByApiKey(){
                 userMax.innerHTML = userTGif;
                 overlay.style.visibility = 'visible';
                 titleMax.innerHTML = titleTGif;
-                /*btnDownloadMax.addEventListener('click', ()=> {  ///////////// AL ACTIVARLO, VA AUMENTANDO +1 LA VENTANA PARA DESCARGAR EL GIF
+                btnDownloadMax.addEventListener('click', (e)=> {  ///////////// AL ACTIVARLO, VA AUMENTANDO +1 LA VENTANA PARA DESCARGAR EL GIF
+                    e.stopImmediatePropagation();
                     downloadGif(trackSlider, trendingGif);
-                })*/
+                })
+                btnFavMax.addEventListener('click', (e) => {
+                    e.stopImmediatePropagation();
+                    console.log(':D');
+                    //FUNCION QUE CAMBIE EL CORAZON DE COLOR, QUE AGREGUE EL GIF A FAVORITOS
+                    //hoverTrendingGifs(trendingGif, userTGif, titleTGif, idTGif)
+                })
                 btnCloseMax.addEventListener('click', () => {
                     overlay.style.visibility = 'hidden';
                 })
             });
             }
-
-            //Funcionalidad del botón download ////// SE ABRE UNA Y OTRA VEEEZ
-            /*btnDownloadMax.addEventListener('click', () => {
-                downloadGif(trackSlider, trendingGif);
-                });*/
         }
         /*CORRECTO OPCION 2
             infoTGif.data.forEach(element => {
@@ -460,7 +439,7 @@ async function trendingByApiKey(){
             imgFav.style.width = '18px';
             imgFav.style.margin = 'auto';
             btnFav.appendChild(imgFav);
-            //Funcionalidad del botón favoritos
+            //Funcionalidad del botón favoritos  //////////////////////// PARA ENVIAR A FAVORITOS
             btnFav.addEventListener('click', () => {       
                 //addGifFav();  https://media.giphy.com/media/a7H3KazB5KinC/source.gif
                 fetch(`https://api.giphy.com/v1/gifs?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&ids=${idsFav}`).then(response => response.json())
@@ -482,7 +461,10 @@ async function trendingByApiKey(){
             
                 let myFavUser = arrayMyFavGif[i].username;
                 console.log(myFavUser);
-                ////////TAL VEZ USAR ID
+                ////////TAL VEZ USAR ID /////////////no funciona
+                let myFavId = arrayMyFavGif[i].id;
+                console.log(myFavId);
+
                 let imgFavGif = document.createElement('img');
                 imgFavGif.alt = 'gif';    
                 imgFavGif.src = myFavsrc;
@@ -517,23 +499,24 @@ async function trendingByApiKey(){
                     userMax.innerHTML = myFavUser;
                     overlay.style.visibility = 'visible';
                     titleMax.innerHTML = myFavTitle;
-                    //Funcionalidad botón descarga en Modal      ///////////// AL ACTIVARLO, VA AUMENTANDO +1 LA VENTANA PARA DESCARGAR EL GIF
-                    /*btnDownloadMax.addEventListener('click', ()=> {
+                    //Funcionalidad botón descarga en Modal    
+                    btnDownloadMax.addEventListener('click', (e)=> {
+                        e.stopImmediatePropagation();
                         downloadGif(trackSlider, imgGif);
-                    })*/
+                    })
                     btnCloseMax.addEventListener('click', () => {
                         overlay.style.visibility = 'hidden';
                     })
     
                     imgFavGif.style.height = "120px";
                     imgFavGif.style.width = "156px";
-                }) 
-
+                    cardFGif.style.height = "120px";
+                    cardFGif.style.width = "156px";
+                    }) 
+                }
             }
-            
-            }
-            })
-            })
+        })
+        })
             
             //Diseño botón descargar
             let btnDownload = document.createElement('button');
@@ -549,11 +532,9 @@ async function trendingByApiKey(){
             imgDown.style.margin = 'auto';
             btnDownload.appendChild(imgDown);
             //Funcionalidad del botón download
-            btnDownload.addEventListener('click', (/*event*/) => {
-                //event.stopImmediatePropagation(); 
+            btnDownload.addEventListener('click', () => {
                 downloadGif(trackSlider, trendingGif);
             })
-            //imgDown.onclick = () => {(downloadGif(btnDownload, trendingGif))};
     
             //Diseño botón expandir
             let btnMax = document.createElement('button');
@@ -575,10 +556,105 @@ async function trendingByApiKey(){
                 titleMax.innerHTML = titleTGif;
                 overlay.style.visibility = 'visible';
                 // Funcionalidad botones de Descarga en Modal en Treding Gif
-                btnDownloadMax.style.cursor = 'pointer';
-                btnDownloadMax.addEventListener('click', () => {
+                
+                btnDownloadMax.addEventListener('click', (e) => {
+                    e.stopImmediatePropagation();
                     downloadGif(trackSlider, trendingGif);
                 })
+                ///////////Aquí debe estar la funcionalidad del botón de corazón para AGREGAR A FAVORITOS EN OVERLAY mobile y escritorio??
+                btnFavMax.addEventListener('click', (e) => {
+                    e.stopImmediatePropagation();
+                    btnFavMaxImg.src = 'assets/icon-fav-active.svg'
+                    fetch(`https://api.giphy.com/v1/gifs?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&ids=${idsFav}`).then(response => response.json())
+                    .then(json => {
+                    let arrayMyFavGif = json.data;
+                    console.log(arrayMyFavGif);
+                    for( let i=0; i < arrayMyFavGif.length; i++) {
+                        noFav.style.display = 'none';
+            
+                        let myFavsrc = arrayMyFavGif[i].images.downsized.url;
+                        console.log(myFavsrc);
+            
+                        let myFavTitle = arrayMyFavGif[i].title;
+                        console.log(myFavTitle);
+                    
+                        let myFavUser = arrayMyFavGif[i].username;
+                        console.log(myFavUser);
+                        let imgFavGif = document.createElement('img');
+                        imgFavGif.alt = 'gif';    
+                        imgFavGif.src = myFavsrc;
+                        
+                        let cardFGif = document.createElement('div');
+                        cardFGif.className = 'cardSGif';
+                        cardFGif.append(imgFavGif);
+                        gridFav.className = 'gridFormat'; 
+                        gridFav.appendChild(cardFGif);
+                        if (window.matchMedia("(min-width: 1366px)").matches) {
+                            imgFavGif.style.height = "200px";
+                            imgFavGif.style.width = "260px";
+                            cardFGif.style.height = "200px";
+                            cardFGif.style.width = "260px";
+            
+                            cardFGif.appendChild(hoverFavoriteGifs(myFavsrc, myFavUser, myFavTitle));
+                            let Fcard = cardFGif.querySelector('.gifScard');
+                            Fcard.style.visibility = 'hidden';
+            
+                            cardFGif.addEventListener('mouseover', () => {
+                                Fcard.style.visibility = 'visible';
+                            })
+            
+                            cardFGif.addEventListener('mouseout', () => {
+                                //let Scard = cardSGif.querySelector('.gifScard');
+                                Fcard.style.visibility = 'hidden';
+                            });
+                        } else if (window.matchMedia("(max-width: 800px)").matches) { /////////////////////////AÚN NO FUNCIONA
+                            cardFGif.addEventListener('click', () => {
+                            gifMax.src = imgFavGif.src;
+                            userMax.innerHTML = myFavUser;
+                            overlay.style.visibility = 'visible';
+                            titleMax.innerHTML = myFavTitle;
+                            //Funcionalidad botón descarga en Modal    
+                            btnDownloadMax.addEventListener('click', (e)=> {
+                                e.stopImmediatePropagation();
+                                downloadGif(trackSlider, imgGif);
+                            })
+                            btnCloseMax.addEventListener('click', () => {
+                                overlay.style.visibility = 'hidden';
+                            })
+            
+                            imgFavGif.style.height = "120px";
+                            imgFavGif.style.width = "156px";
+                            cardFGif.style.height = "120px";
+                            cardFGif.style.width = "156px";
+                            })
+                        }
+                        }
+                    });
+                })
+                
+                /// FUNCIONALIDAD DE FLECHAS GALERIA TRENDING GIF                   //////////////intento 291020
+                /*trendingSlider.addEventListener('click', function (event) {
+                    let tgt = event.target
+                    if(tgt == btnLeftMax) {
+                        alert('izq');
+                        if (overlaycounter > 0) {
+                            gifMax.src = arrayMyFavGif[ overlaycounter - 1];
+                            overlaycounter--;
+                        } else {
+                            img.src = arrayMyFavGif[ array.length - 1];
+                            overlaycounter = arrayMyFavGif.length - 1;
+                        }
+                    } else if (tgt == btnRightMax) {
+                            alert('der');
+                            if (overlaycounter < arrayMyFavGif.length - 1) {
+                                img.src = arrayMyFavGif[ overlaycounter + 1]
+                                contador++;
+                            } else {
+                                img.src = arrayMyFavGif[0];
+                                overlaycounter = 0;
+                            }
+                        }
+                })*/
             });
 
             btnCloseMax.addEventListener('click', () => {
@@ -678,7 +754,7 @@ async function trendingByApiKey(){
                 userMax.innerHTML = myFavUser;
                 overlay.style.visibility = 'visible';
                 titleMax.innerHTML = myFavTitle;
-                //Funcionalidad botón descarga en Modal      ///////////// AL ACTIVARLO, VA AUMENTANDO +1 LA VENTANA PARA DESCARGAR EL GIF
+                //Funcionalidad botón descarga en Modal      //////////FUNCIONA SIN ESTA FUNCION
                 /*btnDownloadMax.addEventListener('click', ()=> {
                     downloadGif(trackSlider, imgGif);
                 })*/
@@ -734,7 +810,8 @@ async function trendingByApiKey(){
             overlay.style.visibility = 'visible';
             // Funcionalidad botones de Descarga en Modal en Searched Gif
             btnDownloadMax.style.cursor = 'pointer';
-            btnDownloadMax.addEventListener('click', () => {
+            btnDownloadMax.addEventListener('click', (e) => {
+                e.stopImmediatePropagation();
                 downloadGif(trackSlider, imgGif);
             })
         });
@@ -803,7 +880,6 @@ async function trendingByApiKey(){
             //console.log(imgGif);
             downloadGif(trackSlider, imgGif);
         })
-
         //Diseño botón expandir
         let btnMaxF = document.createElement('button');
         btnMaxF.classList.add('btnHover');
@@ -825,11 +901,11 @@ async function trendingByApiKey(){
             overlay.style.visibility = 'visible';
             // Funcionalidad botones de Descarga en Modal en Searched Gif
             btnDownloadMax.style.cursor = 'pointer';
-            btnDownloadMax.addEventListener('click', () => {
+            btnDownloadMax.addEventListener('click', (e) => {
+                e.stopImmediatePropagation();
                 downloadGif(trackSlider, imgGif);
             })
         });
-
         btnCloseMax.addEventListener('click', () => {
             overlay.style.visibility = 'hidden';
         })
@@ -853,13 +929,84 @@ async function trendingByApiKey(){
         return purpleCardF;
     }
 
-        /*function addGifFav() {
-            let localStorageFav = JSON.parse(localStorage.getItem('favStorage'));
-            if (localStorageFav == undefined || localStorageFav == null || localStorageFav == ""){
-                localStorageFav = [];
-                noFav.style.display = 'inline';
-            } 
-        }*/
+    function addGifFav(btnFav) {
+        /*let localStorageFav = JSON.parse(localStorage.getItem('favStorage'));
+        if (localStorageFav == undefined || localStorageFav == null || localStorageFav == ""){
+            localStorageFav = [];
+            noFav.style.display = 'inline';
+        } */
+        btnFav.addEventListener('click', () => {       
+                fetch(`https://api.giphy.com/v1/gifs?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&ids=${idsFav}`).then(response => response.json())
+                .then(json => {
+                let arrayMyFavGif = json.data;
+                console.log(arrayMyFavGif);
+                
+                //Pintar el corazón
+                imgFav.src = 'assets/icon-fav-active.svg';
+    
+                for( let i=0; i < arrayMyFavGif.length; i++) {
+                noFav.style.display = 'none';
+    
+                let myFavsrc = arrayMyFavGif[i].images.downsized.url;
+                console.log(myFavsrc);
+    
+                let myFavTitle = arrayMyFavGif[i].title;
+                console.log(myFavTitle);
+            
+                let myFavUser = arrayMyFavGif[i].username;
+                console.log(myFavUser);
+                ////////TAL VEZ USAR ID
+                let imgFavGif = document.createElement('img');
+                imgFavGif.alt = 'gif';    
+                imgFavGif.src = myFavsrc;
+    
+                let cardFGif = document.createElement('div');
+                cardFGif.className = 'cardSGif';
+                cardFGif.append(imgFavGif);
+                gridFav.className = 'gridFormat'; 
+                gridFav.appendChild(cardFGif);
+                //  Generación de vistas del hover con base en el tamaño de pantalla
+                if (window.matchMedia("(min-width: 1366px)").matches) {
+                    imgFavGif.style.height = "200px";
+                    imgFavGif.style.width = "260px";
+                    cardFGif.style.height = "200px";
+                    cardFGif.style.width = "260px";
+    
+                    cardFGif.appendChild(hoverFavoriteGifs(myFavsrc, myFavUser, myFavTitle));
+                    let Fcard = cardFGif.querySelector('.gifScard');
+                    Fcard.style.visibility = 'hidden';
+    
+                    cardFGif.addEventListener('mouseover', () => {
+                        Fcard.style.visibility = 'visible';
+                    })
+    
+                    cardFGif.addEventListener('mouseout', () => {
+                        //let Scard = cardSGif.querySelector('.gifScard');
+                        Fcard.style.visibility = 'hidden';
+                    });
+                } else if (window.matchMedia("(max-width: 800px)").matches) { /////////////////////////AÚN NO FUNCIONA
+                    cardFGif.addEventListener('click', () => {
+                    gifMax.src = imgFavGif.src;
+                    userMax.innerHTML = myFavUser;
+                    overlay.style.visibility = 'visible';
+                    titleMax.innerHTML = myFavTitle;
+                    //Funcionalidad botón descarga en Modal
+                    btnDownloadMax.addEventListener('click', (e)=> {
+                        e.stopImmediatePropagation();
+                        downloadGif(trackSlider, imgGif);
+                    })
+                    btnCloseMax.addEventListener('click', () => {
+                        overlay.style.visibility = 'hidden';
+                    })
+    
+                    imgFavGif.style.height = "120px";
+                    imgFavGif.style.width = "156px";
+                    }) 
+                }
+            }
+            })
+        })
+    }
 
         //addGifFav();
 
@@ -886,6 +1033,7 @@ async function trendingByApiKey(){
                     downloadLink.href = urlremote;
                     downloadLink.download = "myGif.gif";
                     trackSlider.appendChild(downloadLink);
+                    //downloadLink.onclick = "event.stopPropagation()";
                     downloadLink.click();
                     downloadLink.remove();
             }).catch(console.error);
@@ -908,4 +1056,41 @@ async function trendingByApiKey(){
             trackSlider.style.transform = `translateX(-${index*trendingSlider}px)`;
             trackSlider.style.transition = '1s ease';
         })
+
+        /*let counto = 0;                               /////////////INTENTO 291010
+        btnRightMax.addEventListener('click', () => {
+            console.log('derecha');
+            counto++;
+            trackSlider.style.transform = `translateX(-${index*trendingSlider}px)`;
+            trackSlider.style.transition = '1s ease';
+        })
+        btnLeftMax.addEventListener('click', () => {
+            console.log('izquierda');
+            counto--;
+            trackSlider.style.transform = `translateX(-${index*trendingSlider}px)`;
+            trackSlider.style.transition = '1s ease';
+        })*/
     
+    //Funcionalidad carrusel OVERLAY
+    /*let overlaycounter = 0
+    contenedor.addEventListener('click', function (event) {
+        let tgt = event.target
+
+        if(tgt == btnLeftMax) {
+            if (overlaycounter > 0) {
+                img.src = array[ overlaycounter - 1]
+                overlaycounter--;
+            } else {
+                img.src = array[ array.length - 1]
+                overlaycounter = array.length - 1;
+            } else if (tgt == btnRightMax) {
+                if (overlaycounter < array.length - 1) {
+                    img.src = array[ overlaycounter + 1]
+                    contador++;
+                } else {
+                    img.src = array[0]
+                    overlaycounter = 0;
+                }
+            }
+        }
+    })*/

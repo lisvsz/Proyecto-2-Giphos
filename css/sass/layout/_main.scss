@@ -25,7 +25,14 @@ main{
                 }
                 #iconsearch2dark{
                 display: block;
-                fill-opacity: 100%;  /// NO FUNCIONA
+                }
+            }
+            #btnClose{
+                #btn-close{
+                    display: none;
+                }
+                #btn-close-dark{
+                    display: block;
                 }
             }
             .src{
@@ -265,9 +272,10 @@ main{
         }
         .boxsearch{
             #btnSearch{
-                fill-opacity: 100%; /////no funciona
+                background-color: transparent;
             }
             #btnClose{
+                background-color: transparent;
                 display: none;
             }
         }
@@ -303,18 +311,6 @@ main{
         #activeSearch{
             display: none;
         }
-        /*.gridFormat{ /////////7VER SI FUNCIONA EN GRID.SCSS
-            column-gap: 21px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-            margin: 46px 21px 78px 21px;
-            row-gap: 25px;
-            /*.img{
-                height:120px;
-                width: 156px;
-            }*/
-        //}
         #noResults{
             #lineNoResults{
                 border: 1px solid $color-quaternary;
@@ -532,10 +528,6 @@ main{
                 #btnSearch{
                     left: 245px;
                 }
-                #btn-close{
-                    display: none;
-                    left: 241px;
-                }
             }
             #searchTitle{
                 font-size: 35px;
@@ -549,18 +541,6 @@ main{
                 font-size: 16px;
                 width: 402px;
             }
-            /*.gridFormat{ //////////VER SI FUNCIONA EN GRID
-                column-gap: 29px;
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr;
-                grid-template-rows: 1fr 1fr 1fr;
-                margin: 46px 100px 78px 98px;
-                row-gap: 28px;
-                /*.img{
-                    height: 500px;
-                    width: 600px;
-                }*/
-            //}
         }
         #create{
             max-height: 572px;
