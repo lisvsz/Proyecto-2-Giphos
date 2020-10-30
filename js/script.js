@@ -34,13 +34,15 @@ let btnFavMaxImg = document.getElementById('btnFavMaxImg');
 let apiKey = 'PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT';
 
 //Mis favoritos (GIFS)
-    
+    let favArray = [];
+    localStorage.setItem("MyFavorites", JSON.stringify(favArray))
 //Local storage 'Mis Gifos'
     let idsFav = localStorage.getItem("MyFavorites");
+    //idsFav.JSON.parse(idsFav);                                     ///////////////////////MARCA ERROR EN PARSE
 
     if(localStorage.getItem("MyFavorites") == undefined ) {
         localStorage.setItem("MyFavorites", idsFav); ////////No funciona
-        idsFav.push("MyFavorites"); //////////////////////////////////////////////////////////////Intentar agregar al array
+        //idsFav.push("MyFavorites"); //////////////////////////////////////////////////////////////Intentar agregar al array
     }
     let noFav = document.getElementById('noFav');
     let gridFav = document.getElementById('grid-fav');
@@ -440,7 +442,7 @@ async function trendingByApiKey(){
             imgFav.style.margin = 'auto';
             btnFav.appendChild(imgFav);
             //Funcionalidad del botón favoritos  //////////////////////// PARA ENVIAR A FAVORITOS
-            btnFav.addEventListener('click', () => {       
+            /*btnFav.addEventListener('click', () => {       
                 //addGifFav();  https://media.giphy.com/media/a7H3KazB5KinC/source.gif
                 fetch(`https://api.giphy.com/v1/gifs?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&ids=${idsFav}`).then(response => response.json())
                 .then(json => {
@@ -514,9 +516,58 @@ async function trendingByApiKey(){
                     cardFGif.style.width = "156px";
                     }) 
                 }
+            }*/
+            //})
+        //})
+            btnFav.addEventListener('click', () => {
+                //Pintar el corazón
+                imgFav.src = 'assets/icon-fav-active.svg';
+                noFav.style.display = 'none';
+                //Agregar al arreglo
+                favArray.push (idsFav); /// No funciona
+                //Crear tarjeta e insertarla en sección Mis favoritos
+                let imgFavGif = document.createElement('img');
+                imgFavGif.alt = 'gif';    
+                imgFavGif.src = trendingGif;
+                //userTGif, titleTGif, idsFav
+
+                let cardFGif = document.createElement('div');
+                cardFGif.className = 'cardSGif';
+                cardFGif.append(imgFavGif);
+                gridFav.className = 'gridFormat'; 
+                gridFav.appendChild(cardFGif);
+                if (window.matchMedia("(min-width: 1366px)").matches) {
+                    imgFavGif.style.height = "200px";
+                    imgFavGif.style.width = "260px";
+                    cardFGif.style.height = "200px";
+                    cardFGif.style.width = "260px";
+    
+                    cardFGif.appendChild(hoverFavoriteGifs(trendingGif, userTGif, titleTGif, idsFav));
+                    let Fcard = cardFGif.querySelector('.gifScard');
+                    Fcard.style.visibility = 'hidden';
+    
+                    cardFGif.addEventListener('mouseover', () => {
+                        Fcard.style.visibility = 'visible';
+                    })
+    
+                    cardFGif.addEventListener('mouseout', () => {
+                        //let Scard = cardSGif.querySelector('.gifScard');
+                        Fcard.style.visibility = 'hidden';
+                    });
+                } else if (window.matchMedia("(max-width: 800px)").matches) { /////////////////////////AÚN NO FUNCIONA
+                    cardFGif.addEventListener('click', () => {
+                    gifMax.src = imgFavGif.src;
+                    userMax.innerHTML = myFavUser;
+                    overlay.style.visibility = 'visible';
+                    titleMax.innerHTML = myFavTitle;
+                    //Funcionalidad botón descarga en Modal    
+                    btnDownloadMax.addEventListener('click', (e)=> {
+                        e.stopImmediatePropagation();
+                        downloadGif(trackSlider, imgGif);
+                    })
+                })
             }
-        })
-        })
+            })
             
             //Diseño botón descargar
             let btnDownload = document.createElement('button');
