@@ -121,6 +121,11 @@ function hoverMyGifs (imgMyGif, myGifUser, myGifTitle){
     imgTrash.style.width = '16.7px';
     imgTrash.style.margin = 'auto';
     btnTrash.appendChild(imgTrash);
+    btnTrash.addEventListener('click', ()=> {
+        //storage.removeItem(imgMygif);
+        imgMyGif.remove();      ///////////////////// 011120 ELIMINA el primer gif
+        //delete imgMyGif;
+    })
 
     //Diseño botón descargar
     let btnDownload = document.createElement('button');

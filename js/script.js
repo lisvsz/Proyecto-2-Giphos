@@ -14,6 +14,8 @@ let btnMoreSearch = document.getElementById('btn-more-search');
 let trackSlider = document.getElementById('track'); // Carrusel Trending Gifs
 let count = 0; // Indice de los gifs ('ver más')
 //Variables favoritos
+let noFav = document.getElementById('noFav');
+let gridFav = document.getElementById('grid-fav');
 let btnMoreFav = document.getElementById('btn-more-fav');
 //Variables Modal
 let overlay = document.getElementById('overlay');
@@ -25,28 +27,28 @@ let btnLeftMax = document.getElementById('btnLeftMax');
 let btnRightMax = document.getElementById('btnRightMax');
 let userMax = document.getElementById('userMax');
 let titleMax = document.getElementById('titleMax');
-let btnDownloadMax = document.getElementById('btnDownloadMax');
+let iconsMax = document.getElementById('iconsMax');
+/*let btnDownloadMax = document.getElementById('btnDownloadMax');
 let btnFavMaxImg = document.getElementById('btnFavMaxImg');
     btnFavMax.style.cursor = 'pointer';
-    btnDownloadMax.style.cursor = 'pointer';
+    btnDownloadMax.style.cursor = 'pointer';*/
 
 //Variables API
 let apiKey = 'PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT';
 
-//Mis favoritos (GIFS)
+//Sección Mis favoritos
     let favArray = [];
     localStorage.setItem("MyFavorites", JSON.stringify(favArray))
-//Local storage 'Mis Gifos'
-    let idsFav = localStorage.getItem("MyFavorites");
-    //idsFav.JSON.parse(idsFav);                                     ///////////////////////MARCA ERROR EN PARSE
+    //Local storage 'Mis Gifos'
+    let idsFav = localStorage.getItem("MyFavorites");                                  
+    /*idsFav = JSON.parse(idsFav);
+    favArray.push(idsFav);*/
 
     if(localStorage.getItem("MyFavorites") == undefined ) {
-        localStorage.setItem("MyFavorites", idsFav); ////////No funciona
-        //idsFav.push("MyFavorites"); //////////////////////////////////////////////////////////////Intentar agregar al array
+        localStorage.setItem("MyFavorites", JSON.stringify(idsFav)); 
+        favArray.push(idsFav); 
     }
-    let noFav = document.getElementById('noFav');
-    let gridFav = document.getElementById('grid-fav');
-    
+
 // Botones búsqueda
 function lookingForInput(btnSearch, searchInput) {
     btnSearch.addEventListener('click', () => {
@@ -199,6 +201,15 @@ async function searchByApiKey(searchInput, offset){
 
 function showGifs(gifsArray){ 
     for (let i=0; i < gifsArray.length; i++ ) {
+         //////Eliminar resultados de búsquedas        //////intento 011120 FUNCIONA PERO SOLO MUESTRA UN ELEMENTO
+        while (searchResults.firstChild) {
+        searchResults.removeChild(searchResults.firstChild);
+        }
+        //////////////////////// 2° intento
+        /*if(searchResults != "") {
+        searchResults.remove();
+        }*/
+
         let imgGif = gifsArray[i].images.downsized.url;
         console.log(imgGif);
         //Título del Gif
@@ -220,11 +231,16 @@ function showGifs(gifsArray){
         //Agregar formato grid a los gifs
         searchResults.className = 'gridFormat';
         searchResults.appendChild(cardSGif);
+        // Eliminar gifs
         //Si está vacio, mostrar pantalla de no hay resultados          /////////////NO FUNCIONA
         /*if (gifsArray == '' || gifsArray == null) {
             noResults.style.display = 'inline';
         } else {
             noResults.style.display = 'none';
+        }*/
+        ////INTENTO 301020
+        /*for(let imgGif of cardSGif){
+            searchResults.removeChild(imgGif);
         }*/
 
         //Modificar tamaño gif
@@ -255,7 +271,7 @@ function showGifs(gifsArray){
                 userMax.innerHTML = searchGifUser;
                 overlay.style.visibility = 'visible';
                 titleMax.innerHTML = searchGifTitle;
-                //Funcionalidad botón descarga en Modal      ///////////// AL ACTIVARLO, VA AUMENTANDO +1 LA VENTANA PARA DESCARGAR EL GIF
+                //Funcionalidad botón descarga en Modal      
                 btnDownloadMax.addEventListener('click', (e)=> {
                     e.stopImmediatePropagation();
                     downloadGif(trackSlider, imgGif);
@@ -275,13 +291,14 @@ function showGifs(gifsArray){
         autocompleteByApiKey(searchInput.value);
 
         //Eliminar resultados de búsquedas ////// NO FUNCIONA
-        /*if (gridResults.firstChild !== ''){
-            gridResults.removeChild(gridResults.lastChild);
+        /*for (cardSGif of searchResults){
+            searchResults.removeChild(cardSGif);
         }*/
         //Eliminar resultados de búsquedas ////// VERIFICAR DONDE COLOCARLO
-        /*if (searchResults.firstChild !== ''){
+        /*if (searchResults.firstChild != ''){
             searchResults.removeChild(searchResults.lastChild);
         }*/
+        
 };
 
     //Botón 'Ver más' /////// Nota: reiniciar en función buscador el contador
@@ -524,7 +541,8 @@ async function trendingByApiKey(){
                 imgFav.src = 'assets/icon-fav-active.svg';
                 noFav.style.display = 'none';
                 //Agregar al arreglo
-                favArray.push (idsFav); /// No funciona
+                favArray.push(idsFav); /// No funciona
+                localStorage.setItem("MyFavorites", JSON.stringify(favArray));
                 //Crear tarjeta e insertarla en sección Mis favoritos
                 let imgFavGif = document.createElement('img');
                 imgFavGif.alt = 'gif';    
@@ -600,20 +618,39 @@ async function trendingByApiKey(){
             imgMax.style.width = '18px';
             imgMax.style.margin = 'auto';
             btnMax.appendChild(imgMax);
+
+            //Botón DownloadMax
+            let btnDownloadMax = document.createElement('button');
+            btnDownloadMax.classList.add('btnDownloadMax');
+            btnDownloadMax.style.left = '105px';
+            btnDownloadMax.style.top = '10px';
+            let imgDownMax = document.createElement('img');
+            imgDownMax.alt = 'icon-download';
+            imgDownMax.src = 'assets/icon-download.svg';
+            imgDownMax.style.height = '21.1px';
+            imgDownMax.style.width = '19.2px';
+            //imgDown.style.margin = 'auto';
+            btnDownloadMax.appendChild(imgDownMax);
+            iconsMax.appendChild(btnDownloadMax);
+            //btnDownloadMax.remove();
+
             //Funcionalidad botón Maximizar GIF
-            btnMax.addEventListener ('click', () => {
+            btnMax.addEventListener ('click', (e) => {
+                e.stopImmediatePropagation();9
                 gifMax.src = trendingGif;
                 userMax.innerHTML = userTGif;
                 titleMax.innerHTML = titleTGif;
                 overlay.style.visibility = 'visible';
+                //iconsMax.appendChild.remove(btnDownloadMax);
                 // Funcionalidad botones de Descarga en Modal en Treding Gif
-                
-                btnDownloadMax.addEventListener('click', (e) => {
+                btnDownload.addEventListener('click', (e) => {
                     e.stopImmediatePropagation();
                     downloadGif(trackSlider, trendingGif);
+                    btnDownloadMax.remove();
                 })
+                btnDownloadMax.remove();
                 ///////////Aquí debe estar la funcionalidad del botón de corazón para AGREGAR A FAVORITOS EN OVERLAY mobile y escritorio??
-                btnFavMax.addEventListener('click', (e) => {
+                /*btnFavMax.addEventListener('click', (e) => {
                     e.stopImmediatePropagation();
                     btnFavMaxImg.src = 'assets/icon-fav-active.svg'
                     fetch(`https://api.giphy.com/v1/gifs?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&ids=${idsFav}`).then(response => response.json())
@@ -681,7 +718,7 @@ async function trendingByApiKey(){
                         }
                         }
                     });
-                })
+                })*/
                 
                 /// FUNCIONALIDAD DE FLECHAS GALERIA TRENDING GIF                   //////////////intento 291020
                 /*trendingSlider.addEventListener('click', function (event) {
@@ -906,13 +943,17 @@ async function trendingByApiKey(){
         btnFavF.style.top = '10px';
         let imgFavF = document.createElement('img');
         imgFavF.alt = 'icon-fav';
-        imgFavF.src = 'assets/icon-fav-hover.svg';
+        imgFavF.src = 'assets/icon-fav-active.svg';
         imgFavF.style.height = '15.9px';
         imgFavF.style.width = '18px';
         imgFavF.style.margin = 'auto';
         btnFavF.appendChild(imgFavF);
-        //////////////// ¿QUÉ FUNCIONALIDAD CUANDO EL GIF ESTÁ EN FAVORITOS ¿QUITARLO? Y EN LA OTRA DEBE PODER PONER Y QUITAR?
-        
+        //Funcionalidad quitar de favoritos
+        btnFavF.addEventListener('click', () => {
+            //gridFav.appendChild.remove()
+            gridFav.removeChild(gridFav.firstChild); /////////////DEBO REMOVER EL HIJO ADECUADO
+        })
+
         //Diseño botón descargar
         let btnDownloadF = document.createElement('button');
         btnDownloadF.classList.add('btnHover');

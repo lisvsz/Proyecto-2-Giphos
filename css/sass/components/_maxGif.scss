@@ -189,18 +189,20 @@ body{
             }
         }
         .iconsMax{
-            #btnFavMax{
+            .btnFavMax{
                 background-color: transparent;
                 border: none;
+                cursor: pointer;
                 height: 18px;
                 position: absolute;
                 right: 10%;
                 top: 105%;
                 width: 20px;
             }
-            #btnDownloadMax{
+            .btnDownloadMax{
                 border: solid 1px $color-quaternary;
                 border-radius: 6px;
+                cursor: pointer;
                 height: 36px;
                 opacity: 0.5;
                 position: absolute;
@@ -334,8 +336,10 @@ body{
                     top: 500px;
                 }
             }
-            .iconsMax{
-                #btnFavMax{
+            #iconsMax{
+                position: relative;
+                top: 480px;
+                /*.btnFavMax{
                     border: solid 1px #CED7E1;
                     border-radius: 6px;
                     height: 36px;
@@ -343,13 +347,38 @@ body{
                     right: 15%;
                     top: 130%;
                     width: 36px;
-                }
-                #btnDownloadMax{
-                    right: 9%;
-                    top: 130%;
+                }*/
+                .btnDownloadMax{
+                border: solid 1px $color-quaternary;
+                border-radius: 6px;
+                cursor: pointer;
+                height: 36px;
+                opacity: 0.5;
+                //position: relative;
+                //right: 9%;
+                width: 36px;
+                //top: 130%;
                 }
             }
         }
     }
+    
+    }
 }
+
+/*.btnFavMax{
+    border: solid 1px #CED7E1;
+    border-radius: 6px;
+    height: 36px;
+    opacity: 0.5;
+    position: relative;
+    //right: 15%;
+    //top: 130%;
+    width: 36px;
 }
+.btnDownloadMax{
+    background-color: crimson;
+    position: relative;
+    right: 9%;
+    //top: 130%;
+}*/

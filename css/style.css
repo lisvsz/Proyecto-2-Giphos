@@ -335,9 +335,10 @@ body.dark #overlay .slideshow .captions .infoMax #titleMax {
   top: 300px;
 }
 
-#overlay .slideshow .captions .iconsMax #btnFavMax {
+#overlay .slideshow .captions .iconsMax .btnFavMax {
   background-color: transparent;
   border: none;
+  cursor: pointer;
   height: 18px;
   position: absolute;
   right: 10%;
@@ -345,9 +346,10 @@ body.dark #overlay .slideshow .captions .infoMax #titleMax {
   width: 20px;
 }
 
-#overlay .slideshow .captions .iconsMax #btnDownloadMax {
+#overlay .slideshow .captions .iconsMax .btnDownloadMax {
   border: solid 1px #9CAFC3;
   border-radius: 6px;
+  cursor: pointer;
   height: 36px;
   opacity: 0.5;
   position: absolute;
@@ -483,21 +485,45 @@ body.dark #overlay .slideshow .captions .infoMax #titleMax {
     right: 515px;
     top: 500px;
   }
-  #overlay .slideshow .captions .iconsMax #btnFavMax {
+  #overlay .slideshow .captions #iconsMax {
+    position: relative;
+    top: 480px;
+    /*.btnFavMax{
+                    border: solid 1px #CED7E1;
+                    border-radius: 6px;
+                    height: 36px;
+                    opacity: 0.5;
+                    right: 15%;
+                    top: 130%;
+                    width: 36px;
+                }*/
+  }
+  #overlay .slideshow .captions #iconsMax .btnDownloadMax {
+    border: solid 1px #9CAFC3;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 36px;
+    opacity: 0.5;
+    width: 36px;
+  }
+}
+
+/*.btnFavMax{
     border: solid 1px #CED7E1;
     border-radius: 6px;
     height: 36px;
     opacity: 0.5;
-    right: 15%;
-    top: 130%;
+    position: relative;
+    //right: 15%;
+    //top: 130%;
     width: 36px;
-  }
-  #overlay .slideshow .captions .iconsMax #btnDownloadMax {
-    right: 9%;
-    top: 130%;
-  }
 }
-
+.btnDownloadMax{
+    background-color: crimson;
+    position: relative;
+    right: 9%;
+    //top: 130%;
+}*/
 body.dark main #container-search .inputOpen {
   border: 1px solid white;
 }
