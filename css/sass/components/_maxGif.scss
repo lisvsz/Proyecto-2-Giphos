@@ -337,17 +337,22 @@ body{
                 }
             }
             #iconsMax{
-                position: relative;
+                display: flex;
+                height: 36px;
+                justify-content: space-between;
+                position: absolute;
                 top: 480px;
-                /*.btnFavMax{
+                width: 93px;
+                .btnFavMax{
                     border: solid 1px #CED7E1;
                     border-radius: 6px;
+                    cursor: pointer;
                     height: 36px;
                     opacity: 0.5;
                     right: 15%;
                     top: 130%;
                     width: 36px;
-                }*/
+                }
                 .btnDownloadMax{
                 border: solid 1px $color-quaternary;
                 border-radius: 6px;

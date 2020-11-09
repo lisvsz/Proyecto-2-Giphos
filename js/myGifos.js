@@ -1,32 +1,44 @@
-//////////
-
 //Variables 'Mis Gifos'
 
-let misGifos; //DEFINIDA ABAJO
-//let gifos12 = [];
+/*let misGifos; //DEFINIDA ABAJO
+let gifos12 = [];
 let clickCon = 0;
 let clickG; //Gif fav 12
-
-let con = 0;
+let con = 0;*/
 
 let noMine = document.getElementById('noMine');
 let gridMyGif = document.getElementById('grid-mine');
-
+let ids = localStorage.getItem("NewGifs");
 //Local storage 'Mis Gifos'
-if(localStorage.getItem("NewGifs") == undefined ) {
-    localStorage.setItem("NewGifs", "ys0TZuRXUbbDD7tZzM, KgOBWvi4oSC7heYKn0");
+function arrayMyGifos (id) {
+    let ids = localStorage.getItem("NewGifs");
+    let myGifosArray = [];
+
+    if ( ids == undefined || ids == null){
+        myGifosArray.push(id);
+    } else{
+        myGifosArray = JSON.parse(ids);
+        console.log(myGifosArray);
+        let sameId = myGifosArray.find( fav => fav == id );
+        if (sameId == undefined || sameId == null){
+            myGifosArray.push(id);
+        }
+    }
+    localStorage.setItem("NewGifs", JSON.stringify(myGifosArray)); 
 }
 
-function showMyGifos(array) {
+/*if(localStorage.getItem("NewGifs") == undefined ) {
+    localStorage.setItem("NewGifs", "ys0TZuRXUbbDD7tZzM, KgOBWvi4oSC7heYKn0");
+}*/
+
+/*function showMyGifos(array) {
 if(array == null || array.length == 0 || array == undefined) {
     noMine.style.display = 'inline'; //noMine(); función resultNoGIFOS
     } else if (array.length > 0) {
         resultGifos(array); //funcion resultGIFOS(array)
     }
-}
+}*/
 
-
-let ids = localStorage.getItem("NewGifs");
 
 /*async function getMyGif (ids){
     //Parámetros para el request
@@ -54,6 +66,9 @@ fetch(`https://api.giphy.com/v1/gifs?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&id
         
         let myGifUser = arrayMyG[i].username;
         console.log(myGifUser);
+
+        //Guardar en local storage
+        arrayMyGifos(arrayMyG[i].id)
 
         let myGifImg = document.createElement('img');
         myGifImg.alt = 'gif';    

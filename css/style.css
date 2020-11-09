@@ -486,17 +486,26 @@ body.dark #overlay .slideshow .captions .infoMax #titleMax {
     top: 500px;
   }
   #overlay .slideshow .captions #iconsMax {
-    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 36px;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    position: absolute;
     top: 480px;
-    /*.btnFavMax{
-                    border: solid 1px #CED7E1;
-                    border-radius: 6px;
-                    height: 36px;
-                    opacity: 0.5;
-                    right: 15%;
-                    top: 130%;
-                    width: 36px;
-                }*/
+    width: 93px;
+  }
+  #overlay .slideshow .captions #iconsMax .btnFavMax {
+    border: solid 1px #CED7E1;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 36px;
+    opacity: 0.5;
+    right: 15%;
+    top: 130%;
+    width: 36px;
   }
   #overlay .slideshow .captions #iconsMax .btnDownloadMax {
     border: solid 1px #9CAFC3;

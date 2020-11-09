@@ -28,26 +28,26 @@ let btnRightMax = document.getElementById('btnRightMax');
 let userMax = document.getElementById('userMax');
 let titleMax = document.getElementById('titleMax');
 let iconsMax = document.getElementById('iconsMax');
-/*let btnDownloadMax = document.getElementById('btnDownloadMax');
-let btnFavMaxImg = document.getElementById('btnFavMaxImg');
-    btnFavMax.style.cursor = 'pointer';
-    btnDownloadMax.style.cursor = 'pointer';*/
-
 //Variables API
 let apiKey = 'PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT';
 
-//Sección Mis favoritos
+//Local Storage 'Mis favoritos'
+function arrayFav (id) {
+    let idsFav = localStorage.getItem("MyFavorites"); 
     let favArray = [];
-    localStorage.setItem("MyFavorites", JSON.stringify(favArray))
-    //Local storage 'Mis Gifos'
-    let idsFav = localStorage.getItem("MyFavorites");                                  
-    /*idsFav = JSON.parse(idsFav);
-    favArray.push(idsFav);*/
 
-    if(localStorage.getItem("MyFavorites") == undefined ) {
-        localStorage.setItem("MyFavorites", JSON.stringify(idsFav)); 
-        favArray.push(idsFav); 
+    if ( idsFav == undefined || idsFav == null){
+        favArray.push(id);
+    } else{
+        favArray = JSON.parse(idsFav);
+        console.log(favArray);
+        let sameId = favArray.find( fav => fav == id );
+        if (sameId == undefined || sameId == null){
+            favArray.push(id);
+        }
     }
+    localStorage.setItem("MyFavorites", JSON.stringify(favArray)); 
+}
 
 // Botones búsqueda
 function lookingForInput(btnSearch, searchInput) {
@@ -104,9 +104,6 @@ function lookingForInput(btnSearch, searchInput) {
 lookingForInput(btnSearch, searchInput);
 
 // Barra de búsqueda - Autocompletar
-    //`https://api.giphy.com/v1/trending/searches?api_key=${apiKey}`;
-    //https://api.giphy.com/v1/gifs/search/tags?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&q=korea :)
-    //api.giphy.com/v1/gifs/search/tags
     async function autocompleteByApiKey(searchInput){
         let url = `https://api.giphy.com/v1/gifs/search/tags?api_key=${apiKey}&q=${searchInput}&limit=4&rating=g&lang=es`;
         let respA = await fetch(url);
@@ -143,8 +140,6 @@ lookingForInput(btnSearch, searchInput);
             //Reemplazar texto mostrado
             option.style.cursor = 'pointer';
             searchTitle.innerHTML = item.name;
-            ////////////////////////////////////////Cómo pintar el input cuando doy click al trending topic
-            //searchInput.value = item.name;
             searchInput.innerHTML = item.name;
 
             //Cerrar lista
@@ -174,7 +169,6 @@ lookingForInput(btnSearch, searchInput);
             btnSearch.style.left = '294px';
             btnSearch.style.top = '-35px';
         }
-
         //Borrar contenido y cerrar lista
         searchInput.value = '';
         huge_list.style.display = 'none';
@@ -202,9 +196,9 @@ async function searchByApiKey(searchInput, offset){
 function showGifs(gifsArray){ 
     for (let i=0; i < gifsArray.length; i++ ) {
          //////Eliminar resultados de búsquedas        //////intento 011120 FUNCIONA PERO SOLO MUESTRA UN ELEMENTO
-        while (searchResults.firstChild) {
+        /*while (searchResults.firstChild) {
         searchResults.removeChild(searchResults.firstChild);
-        }
+        }*/
         //////////////////////// 2° intento
         /*if(searchResults != "") {
         searchResults.remove();
@@ -366,7 +360,6 @@ async function trendingByApiKey(){
     trendingGifByApiKey().then(infoTGif =>{
         for(let i= 0; i<20; i++){ 
             var trendingGif = infoTGif.data[i].images.downsized.url;
-            //console.log(trendingGif);
             //Nombre del usuario del Gif
             let userTGif = infoTGif.data[i].username;
             //Nombre del título del Gif
@@ -407,7 +400,7 @@ async function trendingByApiKey(){
                 userMax.innerHTML = userTGif;
                 overlay.style.visibility = 'visible';
                 titleMax.innerHTML = titleTGif;
-                btnDownloadMax.addEventListener('click', (e)=> {  ///////////// AL ACTIVARLO, VA AUMENTANDO +1 LA VENTANA PARA DESCARGAR EL GIF
+                btnDownloadMax.addEventListener('click', (e)=> { 
                     e.stopImmediatePropagation();
                     downloadGif(trackSlider, trendingGif);
                 })
@@ -451,6 +444,7 @@ async function trendingByApiKey(){
             btnFav.style.cursor = 'pointer';
             btnFav.style.left = '95px';
             btnFav.style.top = '10px';
+            btnFav.id = idsFav;
             let imgFav = document.createElement('img');
             imgFav.alt = 'icon-fav';
             imgFav.src = 'assets/icon-fav-hover.svg';
@@ -458,91 +452,13 @@ async function trendingByApiKey(){
             imgFav.style.width = '18px';
             imgFav.style.margin = 'auto';
             btnFav.appendChild(imgFav);
-            //Funcionalidad del botón favoritos  //////////////////////// PARA ENVIAR A FAVORITOS
-            /*btnFav.addEventListener('click', () => {       
-                //addGifFav();  https://media.giphy.com/media/a7H3KazB5KinC/source.gif
-                fetch(`https://api.giphy.com/v1/gifs?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&ids=${idsFav}`).then(response => response.json())
-                .then(json => {
-                let arrayMyFavGif = json.data;
-                console.log(arrayMyFavGif);
-                
-                //Pintar el corazón
-                imgFav.src = 'assets/icon-fav-active.svg';
-    
-                for( let i=0; i < arrayMyFavGif.length; i++) {
-                noFav.style.display = 'none';
-    
-                let myFavsrc = arrayMyFavGif[i].images.downsized.url;
-                console.log(myFavsrc);
-    
-                let myFavTitle = arrayMyFavGif[i].title;
-                console.log(myFavTitle);
-            
-                let myFavUser = arrayMyFavGif[i].username;
-                console.log(myFavUser);
-                ////////TAL VEZ USAR ID /////////////no funciona
-                let myFavId = arrayMyFavGif[i].id;
-                console.log(myFavId);
-
-                let imgFavGif = document.createElement('img');
-                imgFavGif.alt = 'gif';    
-                imgFavGif.src = myFavsrc;
-    
-                let cardFGif = document.createElement('div');
-                cardFGif.className = 'cardSGif';
-                cardFGif.append(imgFavGif);
-                gridFav.className = 'gridFormat'; 
-                gridFav.appendChild(cardFGif);
-                //  Generación de vistas del hover con base en el tamaño de pantalla
-                if (window.matchMedia("(min-width: 1366px)").matches) {
-                    imgFavGif.style.height = "200px";
-                    imgFavGif.style.width = "260px";
-                    cardFGif.style.height = "200px";
-                    cardFGif.style.width = "260px";
-    
-                    cardFGif.appendChild(hoverFavoriteGifs(myFavsrc, myFavUser, myFavTitle));
-                    let Fcard = cardFGif.querySelector('.gifScard');
-                    Fcard.style.visibility = 'hidden';
-    
-                    cardFGif.addEventListener('mouseover', () => {
-                        Fcard.style.visibility = 'visible';
-                    })
-    
-                    cardFGif.addEventListener('mouseout', () => {
-                        //let Scard = cardSGif.querySelector('.gifScard');
-                        Fcard.style.visibility = 'hidden';
-                    });
-                } else if (window.matchMedia("(max-width: 800px)").matches) { /////////////////////////AÚN NO FUNCIONA
-                    cardFGif.addEventListener('click', () => {
-                    gifMax.src = imgFavGif.src;
-                    userMax.innerHTML = myFavUser;
-                    overlay.style.visibility = 'visible';
-                    titleMax.innerHTML = myFavTitle;
-                    //Funcionalidad botón descarga en Modal    
-                    btnDownloadMax.addEventListener('click', (e)=> {
-                        e.stopImmediatePropagation();
-                        downloadGif(trackSlider, imgGif);
-                    })
-                    btnCloseMax.addEventListener('click', () => {
-                        overlay.style.visibility = 'hidden';
-                    })
-    
-                    imgFavGif.style.height = "120px";
-                    imgFavGif.style.width = "156px";
-                    cardFGif.style.height = "120px";
-                    cardFGif.style.width = "156px";
-                    }) 
-                }
-            }*/
-            //})
-        //})
-            btnFav.addEventListener('click', () => {
+            btnFav.addEventListener('click', function () {
+                console.log(this);
                 //Pintar el corazón
                 imgFav.src = 'assets/icon-fav-active.svg';
                 noFav.style.display = 'none';
                 //Agregar al arreglo
-                favArray.push(idsFav); /// No funciona
-                localStorage.setItem("MyFavorites", JSON.stringify(favArray));
+                arrayFav (this.id);
                 //Crear tarjeta e insertarla en sección Mis favoritos
                 let imgFavGif = document.createElement('img');
                 imgFavGif.alt = 'gif';    
@@ -560,7 +476,7 @@ async function trendingByApiKey(){
                     cardFGif.style.height = "200px";
                     cardFGif.style.width = "260px";
     
-                    cardFGif.appendChild(hoverFavoriteGifs(trendingGif, userTGif, titleTGif, idsFav));
+                    cardFGif.appendChild(hoverFavoriteGifs(trendingGif, userTGif, titleTGif));
                     let Fcard = cardFGif.querySelector('.gifScard');
                     Fcard.style.visibility = 'hidden';
     
@@ -619,36 +535,26 @@ async function trendingByApiKey(){
             imgMax.style.margin = 'auto';
             btnMax.appendChild(imgMax);
 
-            //Botón DownloadMax
-            let btnDownloadMax = document.createElement('button');
-            btnDownloadMax.classList.add('btnDownloadMax');
-            btnDownloadMax.style.left = '105px';
-            btnDownloadMax.style.top = '10px';
-            let imgDownMax = document.createElement('img');
-            imgDownMax.alt = 'icon-download';
-            imgDownMax.src = 'assets/icon-download.svg';
-            imgDownMax.style.height = '21.1px';
-            imgDownMax.style.width = '19.2px';
-            //imgDown.style.margin = 'auto';
-            btnDownloadMax.appendChild(imgDownMax);
-            iconsMax.appendChild(btnDownloadMax);
-            //btnDownloadMax.remove();
-
             //Funcionalidad botón Maximizar GIF
             btnMax.addEventListener ('click', (e) => {
-                e.stopImmediatePropagation();9
+                e.stopImmediatePropagation();
                 gifMax.src = trendingGif;
                 userMax.innerHTML = userTGif;
                 titleMax.innerHTML = titleTGif;
                 overlay.style.visibility = 'visible';
-                //iconsMax.appendChild.remove(btnDownloadMax);
-                // Funcionalidad botones de Descarga en Modal en Treding Gif
-                btnDownload.addEventListener('click', (e) => {
-                    e.stopImmediatePropagation();
-                    downloadGif(trackSlider, trendingGif);
-                    btnDownloadMax.remove();
+                // Funcionalidad botón favorito en Modal en Treding Gif
+                let btnFavMx = createBtnFavModal();      
+                iconsMax.appendChild(btnFavMx);
+                btnFavMx.addEventListener('click', ()=> {
+                    alert(':D');
                 })
-                btnDownloadMax.remove();
+                // Funcionalidad botón de descarga en Modal en Treding Gif
+                let btnDownloadMax = createBtnDownloadModal();
+                iconsMax.appendChild(btnDownloadMax);
+                btnDownloadMax.addEventListener('click', ()=> {
+                    downloadGif(trackSlider, trendingGif);
+                })
+
                 ///////////Aquí debe estar la funcionalidad del botón de corazón para AGREGAR A FAVORITOS EN OVERLAY mobile y escritorio??
                 /*btnFavMax.addEventListener('click', (e) => {
                     e.stopImmediatePropagation();
@@ -743,11 +649,15 @@ async function trendingByApiKey(){
                             }
                         }
                 })*/
+                btnCloseMax.addEventListener('click', (e) => {
+                    e.stopImmediatePropagation();
+                    overlay.style.visibility = 'hidden';
+                    let btnFavMax = document.getElementsByClassName('btnFavMax');
+                    btnFavMax[0].remove();
+                    let btnDownloadMax = document.getElementsByClassName('btnDownloadMax');
+                    btnDownloadMax[0].remove();
+                })
             });
-
-            btnCloseMax.addEventListener('click', () => {
-                overlay.style.visibility = 'hidden';
-            })
 
             //Diseño Usuario
             let userTitle = document.createElement('p');
@@ -808,7 +718,10 @@ async function trendingByApiKey(){
         
             let myFavUser = arrayMyFavGif[i].username;
             console.log(myFavUser);
-            //////////tal vez usar ID
+            
+            //Guardar en local storage
+            arrayFav(arrayMyFavGif[i].id)
+
             let imgFavGif = document.createElement('img');
             imgFavGif.alt = 'gif';    
             imgFavGif.src = myFavsrc;
@@ -896,17 +809,32 @@ async function trendingByApiKey(){
             userMax.innerHTML = searchGU;
             titleMax.innerHTML = searchGT;
             overlay.style.visibility = 'visible';
-            // Funcionalidad botones de Descarga en Modal en Searched Gif
-            btnDownloadMax.style.cursor = 'pointer';
-            btnDownloadMax.addEventListener('click', (e) => {
-                e.stopImmediatePropagation();
+            // Funcionalidad botón favorito en Modal en Searched Gif
+            let btnFavMx = createBtnFavModal();      
+            iconsMax.appendChild(btnFavMx);
+            btnFavMx.addEventListener('click', ()=> {
+                //Visualización
+                noFav.style.display = 'none';
+                //Agregar al arreglo
+                arrayFav (idsFav);
+                addfavsection (imgGif, searchGU, searchGT)
+            })
+            // Funcionalidad botón de descarga en Modal en Searched Gif
+            let btnDownloadMax = createBtnDownloadModal();
+            iconsMax.appendChild(btnDownloadMax);
+            btnDownloadMax.addEventListener('click', () => {
                 downloadGif(trackSlider, imgGif);
             })
+            // Funcionalidad
+            btnCloseMax.addEventListener('click', () => {
+                overlay.style.visibility = 'hidden';
+                let btnFavMax = document.getElementsByClassName('btnFavMax');
+                    btnFavMax[0].remove();
+                    let btnDownloadMax = document.getElementsByClassName('btnDownloadMax');
+                    btnDownloadMax[0].remove();
+            })
+    
         });
-
-        btnCloseMax.addEventListener('click', () => {
-            overlay.style.visibility = 'hidden';
-        })
 
         //Diseño Usuario
         //let userTitle = infoTGif.data[i].user.username;
@@ -1022,11 +950,6 @@ async function trendingByApiKey(){
     }
 
     function addGifFav(btnFav) {
-        /*let localStorageFav = JSON.parse(localStorage.getItem('favStorage'));
-        if (localStorageFav == undefined || localStorageFav == null || localStorageFav == ""){
-            localStorageFav = [];
-            noFav.style.display = 'inline';
-        } */
         btnFav.addEventListener('click', () => {       
                 fetch(`https://api.giphy.com/v1/gifs?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&ids=${idsFav}`).then(response => response.json())
                 .then(json => {
@@ -1099,19 +1022,6 @@ async function trendingByApiKey(){
             })
         })
     }
-
-        //addGifFav();
-
-        /// 2° Intento
-        
-        //Leemos los favoritos del local storage
-        /*function addGifFav ()
-        let favStorage = localStorage.getItem("favGifs")
-        favStorage = JSON.parse(favStorage);
-        console.log(favStorage);*/
-
-        //Guardamos la lista de favoritos
-        //localStorage.setItem("favoritos", JSON.stringify(favStorage));
 
     //Función para descargar Gif
         function downloadGif(trackSlider, urlremote) {
@@ -1186,3 +1096,78 @@ async function trendingByApiKey(){
             }
         }
     })*/
+
+
+    //Botón DownloadMax OVERLAY
+    function createBtnDownloadModal() {
+    let btnDownloadMax = document.createElement('button');
+    btnDownloadMax.classList.add('btnDownloadMax');
+    btnDownloadMax.style.left = '105px';
+    btnDownloadMax.style.top = '40px';
+    let imgDownMax = document.createElement('img');
+    imgDownMax.alt = 'icon-download';
+    imgDownMax.src = 'assets/icon-download.svg';
+    imgDownMax.style.height = '21.1px';
+    imgDownMax.style.width = '19.2px';
+    //imgDown.style.margin = 'auto';
+    btnDownloadMax.appendChild(imgDownMax);
+    return btnDownloadMax;      
+    }
+
+    //Botón FavMax OVERLAY
+    function createBtnFavModal(){
+    let btnFavMx = document.createElement('button');
+    btnFavMx.classList.add('btnFavMax');
+    let imgFav = document.createElement('img');
+    imgFav.alt = 'icon-fav';
+    imgFav.src = 'assets/icon-fav-hover.svg';
+    imgFav.style.height = '15.9px';
+    imgFav.style.width = '18px';
+
+    btnFavMx.appendChild(imgFav);
+    return btnFavMx;
+    }
+
+    //Funcionalidad botón Favoritos OVERLAY
+    function addfavsection (gifSource, userSource, titleSource) {
+        let imgFavGif = document.createElement('img');
+        imgFavGif.alt = 'gif';    
+        imgFavGif.src = gifSource //trendingGif;
+
+        let cardFGif = document.createElement('div');
+        cardFGif.className = 'cardSGif';
+        cardFGif.append(imgFavGif);
+        gridFav.className = 'gridFormat'; 
+        gridFav.appendChild(cardFGif);
+            if (window.matchMedia("(min-width: 1366px)").matches) {
+                imgFavGif.style.height = "200px";
+                imgFavGif.style.width = "260px";
+                cardFGif.style.height = "200px";
+                cardFGif.style.width = "260px";
+    
+                cardFGif.appendChild(hoverFavoriteGifs(gifSource, userSource, titleSource));  //trendingGif, userTGif, titleTGif));
+                let Fcard = cardFGif.querySelector('.gifScard');
+                Fcard.style.visibility = 'hidden';
+    
+                cardFGif.addEventListener('mouseover', () => {
+                Fcard.style.visibility = 'visible';
+                })
+    
+                cardFGif.addEventListener('mouseout', () => {
+                //let Scard = cardSGif.querySelector('.gifScard');
+                Fcard.style.visibility = 'hidden';
+                });
+                } else if (window.matchMedia("(max-width: 800px)").matches) { /////////////////////////AÚN NO FUNCIONA
+                    cardFGif.addEventListener('click', () => {
+                    gifMax.src = gifSource  //imgFavGif.src;
+                    userMax.innerHTML = userSource //myFavUser;
+                    overlay.style.visibility = 'visible';
+                    titleMax.innerHTML = titleSource //myFavTitle;
+                    //Funcionalidad botón descarga en Modal    
+                    btnDownloadMax.addEventListener('click', (e)=> {
+                        e.stopImmediatePropagation();
+                        downloadGif(trackSlider, imgGif);
+                    })
+                })
+            }
+    }
