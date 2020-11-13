@@ -16,7 +16,7 @@ const gallerysection = document.getElementById("gallery");
 const logomain = document.getElementById("principal");
 
 //Mostrar sección 'Favoritos'
-navfav.addEventListener('click', () => {
+navfav.addEventListener('click', () => { // voy al local storage, me traigo lo de favoritos y veo la tarjeta
     if(favsection.style.display === "none"){
         favsection.style.display = "block";
         minesection.style.display = "none";

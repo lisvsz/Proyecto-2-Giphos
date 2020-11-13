@@ -194,7 +194,7 @@ function uploadGif(gif) {
         res.json().then(res => { 
             let oldIDS = localStorage.getItem("NewGifs");
             oldIDS = oldIDS + "," + res.data.id;
-            
+
             /////////////////////
             /*if(!oldIDS){
                 oldIDS = [];

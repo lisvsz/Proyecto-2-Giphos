@@ -11,13 +11,14 @@ let gridMyGif = document.getElementById('grid-mine');
 let ids = localStorage.getItem("NewGifs");
 //Local storage 'Mis Gifos'
 function arrayMyGifos (id) {
-    let ids = localStorage.getItem("NewGifs");
+    //let ids = localStorage.getItem("NewGifs");
     let myGifosArray = [];
 
     if ( ids == undefined || ids == null){
         myGifosArray.push(id);
     } else{
-        myGifosArray = JSON.parse(ids);
+        //myGifosArray = JSON.parse(ids);
+        console.log(ids);
         console.log(myGifosArray);
         let sameId = myGifosArray.find( fav => fav == id );
         if (sameId == undefined || sameId == null){
@@ -49,8 +50,8 @@ if(array == null || array.length == 0 || array == undefined) {
     return gif;
 }*/
 
-
-fetch(`https://api.giphy.com/v1/gifs?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&ids=${ids}`).then(response => response.json())
+function addGifMine(ids) {
+    fetch(`https://api.giphy.com/v1/gifs?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&ids=${ids}`).then(response => response.json())
     .then(json => {
         let arrayMyG = json.data;
         console.log(arrayMyG);
@@ -67,6 +68,8 @@ fetch(`https://api.giphy.com/v1/gifs?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&id
         let myGifUser = arrayMyG[i].username;
         console.log(myGifUser);
 
+        let myGifIndex = arrayMyG[i];
+
         //Guardar en local storage
         arrayMyGifos(arrayMyG[i].id)
 
@@ -82,7 +85,7 @@ fetch(`https://api.giphy.com/v1/gifs?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&id
         if (window.matchMedia("(min-width: 1366px)").matches) {
             cardMGif.style.height = '200px';
             cardMGif.style.width = '260px';
-            cardMGif.appendChild(hoverMyGifs (imgMyGif, myGifUser, myGifTitle));
+            cardMGif.appendChild(hoverMyGifs (imgMyGif, myGifUser, myGifTitle,myGifIndex));
             
             let mGHoverCard = cardMGif.querySelector('.gifScard');
             mGHoverCard.style.visibility = 'hidden';
@@ -95,30 +98,16 @@ fetch(`https://api.giphy.com/v1/gifs?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&id
                 mGHoverCard.style.visibility = 'hidden';
             })
         }
-        
-        
-        }
-        //arrayMyG.foreach(())
-
-        /*arrayMyG.forEach((value,index, array) => {            
-            mygifos_localStorage(value.username, value.title, value.images.fixed_height.url, value.slug);
-        });
-
-        let misGifos = JSON.parse(window.localStorage.getItem("mygifos"));
-
-        if (misGifos == null || misGifos == undefined || misGifos.length == 0) {
-            clickG = 0;
-        } else {
-            clickG = Math.round(misGifos.length / 12);
-        }
-        showMyGifos(misGifos)*/
+    }
     });
+}
 
+addGifMine(ids);
 //Función para mostrar los resultados (grid, mouse enter, mouse out, botón dinámico)
 
 //Función de hover morado con iconos
 
-function hoverMyGifs (imgMyGif, myGifUser, myGifTitle){
+function hoverMyGifs (imgMyGif, myGifUser, myGifTitle, myGifIndex){
     //Diseño de tarjeta morada
     let purpleCardM = document.createElement('div');
     purpleCardM.classList.add('gifScard');
@@ -139,6 +128,7 @@ function hoverMyGifs (imgMyGif, myGifUser, myGifTitle){
     btnTrash.addEventListener('click', ()=> {
         //storage.removeItem(imgMygif);
         imgMyGif.remove();      ///////////////////// 011120 ELIMINA el primer gif
+        myGifIndex.remove();
         //delete imgMyGif;
     })
 
@@ -175,15 +165,13 @@ function hoverMyGifs (imgMyGif, myGifUser, myGifTitle){
     btnMax.appendChild(imgMax);
     //Funcionalidad botón expandir MY GIFO
     btnMax.addEventListener ('click', () => {
+        overlay.style.visibility = 'visible';
         gifMax.src = imgMyGif;
-        //gifMax.style.left = '4%';
         userMax.innerHTML = myGifUser;
         userMax.style.right = '635px';
         titleMax.innerHTML = myGifTitle;
         titleMax.style.right = '635px';
-        overlay.style.visibility = 'visible';
     });
-
 
     //Diseño Usuario
     let myGUser = document.createElement('p');
@@ -222,6 +210,7 @@ function downloadMyGif(gridMyGif, urlmg) {
             downloadLink.remove();
     }).catch(console.error);
 }
+
 //Función para borrar gif
 
 //Función carrusel gif expandido
@@ -260,10 +249,3 @@ function downloadMyGif(gridMyGif, urlmg) {
 }
 */
 
-//////////////
-//Botón para mostrar la sección de mis gifos
-
-/*export function myGifos () {
-    alert(':D');
-    let mineG = JSON.parse(localStorage.getItem("myGifs"));
-}*/

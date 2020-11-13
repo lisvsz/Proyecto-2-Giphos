@@ -33,13 +33,13 @@ let apiKey = 'PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT';
 
 //Local Storage 'Mis favoritos'
 function arrayFav (id) {
-    let idsFav = localStorage.getItem("MyFavorites"); 
-    let favArray = [];
+    let idsFav = localStorage.getItem("MyFavorites"); //
+    let favArray = []; //
 
     if ( idsFav == undefined || idsFav == null){
         favArray.push(id);
     } else{
-        favArray = JSON.parse(idsFav);
+        favArray = JSON.parse(idsFav); //
         console.log(favArray);
         let sameId = favArray.find( fav => fav == id );
         if (sameId == undefined || sameId == null){
@@ -441,7 +441,7 @@ async function trendingByApiKey(){
             //Diseño botón favorito
             let btnFav  = document.createElement('button');
             btnFav.classList.add('btnHover');
-            btnFav.style.cursor = 'pointer';
+            //btnFav.style.cursor = 'pointer';
             btnFav.style.left = '95px';
             btnFav.style.top = '10px';
             btnFav.id = idsFav;
@@ -452,19 +452,19 @@ async function trendingByApiKey(){
             imgFav.style.width = '18px';
             imgFav.style.margin = 'auto';
             btnFav.appendChild(imgFav);
-            btnFav.addEventListener('click', function () {
+            btnFav.addEventListener('click', function () { // sólo guardar en local storage
                 console.log(this);
                 //Pintar el corazón
                 imgFav.src = 'assets/icon-fav-active.svg';
                 noFav.style.display = 'none';
                 //Agregar al arreglo
                 arrayFav (this.id);
+                
                 //Crear tarjeta e insertarla en sección Mis favoritos
                 let imgFavGif = document.createElement('img');
                 imgFavGif.alt = 'gif';    
-                imgFavGif.src = trendingGif;
+                imgFavGif.src = trendingGif;      ///// url+id, no es necesaria una petición
                 //userTGif, titleTGif, idsFav
-
                 let cardFGif = document.createElement('div');
                 cardFGif.className = 'cardSGif';
                 cardFGif.append(imgFavGif);
@@ -506,7 +506,7 @@ async function trendingByApiKey(){
             //Diseño botón descargar
             let btnDownload = document.createElement('button');
             btnDownload.classList.add('btnHover');
-            btnDownload.style.cursor = 'pointer';
+            //btnDownload.style.cursor = 'pointer';
             btnDownload.style.left = '105px';
             btnDownload.style.top = '10px';
             let imgDown = document.createElement('img');
@@ -524,7 +524,7 @@ async function trendingByApiKey(){
             //Diseño botón expandir
             let btnMax = document.createElement('button');
             btnMax.classList.add('btnHover');
-            btnMax.style.cursor = 'pointer';
+            //btnMax.style.cursor = 'pointer';
             btnMax.style.left = '115px';
             btnMax.style.top = '10px';
             let imgMax = document.createElement('img');
@@ -687,7 +687,7 @@ async function trendingByApiKey(){
         //Diseño botón favorito
         let btnFavS  = document.createElement('button');
         btnFavS.classList.add('btnHover');
-        btnFavS.style.cursor = 'pointer';
+        //btnFavS.style.cursor = 'pointer';
         btnFavS.style.left = '50px';
         btnFavS.style.top = '10px';
         let imgFavS = document.createElement('img');
@@ -774,7 +774,7 @@ async function trendingByApiKey(){
         //Diseño botón descargar
         let btnDownloadS = document.createElement('button');
         btnDownloadS.classList.add('btnHover');
-        btnDownloadS.style.cursor = 'pointer';
+        //btnDownloadS.style.cursor = 'pointer';
         btnDownloadS.style.left = '61px';
         btnDownloadS.style.top = '10px';
         let imgDownS = document.createElement('img');
@@ -793,7 +793,7 @@ async function trendingByApiKey(){
         //Diseño botón expandir
         let btnMaxS = document.createElement('button');
         btnMaxS.classList.add('btnHover');
-        btnMaxS.style.cursor = 'pointer';
+        //btnMaxS.style.cursor = 'pointer';
         btnMaxS.style.left = '72px';
         btnMaxS.style.top = '10px';
         let imgMaxS = document.createElement('img');
@@ -866,7 +866,7 @@ async function trendingByApiKey(){
         //Diseño botón favorito
         let btnFavF  = document.createElement('button');
         btnFavF.classList.add('btnHover');
-        btnFavF.style.cursor = 'pointer';
+        //btnFavF.style.cursor = 'pointer';
         btnFavF.style.left = '50px';
         btnFavF.style.top = '10px';
         let imgFavF = document.createElement('img');
@@ -903,7 +903,7 @@ async function trendingByApiKey(){
         //Diseño botón expandir
         let btnMaxF = document.createElement('button');
         btnMaxF.classList.add('btnHover');
-        btnMaxF.style.cursor = 'pointer';
+        //btnMaxF.style.cursor = 'pointer';
         btnMaxF.style.left = '72px';
         btnMaxF.style.top = '10px';
         let imgMaxF = document.createElement('img');
@@ -914,20 +914,32 @@ async function trendingByApiKey(){
         imgMaxF.style.margin = 'auto';
         btnMaxF.appendChild(imgMaxF);
         //Funcionalidad botón expandir SEARCHED GIF
-        btnMaxF.addEventListener ('click', () => {
+        btnMaxF.addEventListener ('click', (e) => {
+            e.stopImmediatePropagation();
             gifMax.src = imgGif;
             userMax.innerHTML = favGU;
             titleMax.innerHTML = favGT;
             overlay.style.visibility = 'visible';
-            // Funcionalidad botones de Descarga en Modal en Searched Gif
-            btnDownloadMax.style.cursor = 'pointer';
-            btnDownloadMax.addEventListener('click', (e) => {
-                e.stopImmediatePropagation();
+            // Funcionalidad botón favorito en Modal en Favoritos
+            let btnFavMx = createBtnFavModal();      
+            iconsMax.appendChild(btnFavMx);
+            btnFavMx.addEventListener('click', ()=> {
+                alert(':D');
+            })
+            // Funcionalidad botón de descarga en Modal en Treding Gif
+            let btnDownloadMax = createBtnDownloadModal();
+            iconsMax.appendChild(btnDownloadMax);
+            btnDownloadMax.addEventListener('click', ()=> {
                 downloadGif(trackSlider, imgGif);
             })
         });
-        btnCloseMax.addEventListener('click', () => {
+        btnCloseMax.addEventListener('click', (e) => {
+            e.stopImmediatePropagation();
             overlay.style.visibility = 'hidden';
+            let btnFavMax = document.getElementsByClassName('btnFavMax');
+            btnFavMax[0].remove();
+            let btnDownloadMax = document.getElementsByClassName('btnDownloadMax');
+            btnDownloadMax[0].remove();
         })
 
         //Diseño Usuario
@@ -1171,3 +1183,71 @@ async function trendingByApiKey(){
                 })
             }
     }
+
+//FUNCION AGREGAR A FAVORITOS
+
+/*function addFavBtn(){
+
+btnFav.addEventListener('click', function () { // sólo guardar en local storage
+    console.log(this);
+    //Eliminar botón y sustituirlo
+    btnFav.remove();
+    let btnFavRemove = document.createElement('button');
+    btnFavRemove.classList.add('btnHover');
+    btnFavF.style.left = '50px';
+    btnFavF.style.top = '10px';
+    let imgFavF = document.createElement('img');
+    imgFavF.alt = 'icon-fav';
+    imgFavF.src = 'assets/icon-fav-active.svg';
+    imgFavF.style.height = '15.9px';
+    imgFavF.style.width = '18px';
+    imgFavF.style.margin = 'auto';
+    imgFav.src = 'assets/icon-fav-active.svg';
+    noFav.style.display = 'none';
+    
+    //Agregar al arreglo
+    arrayFav (this.id);
+    
+    //Crear tarjeta e insertarla en sección Mis favoritos
+    let imgFavGif = document.createElement('img');
+    imgFavGif.alt = 'gif';    
+    imgFavGif.src = trendingGif;      ///// url+id, no es necesaria una petición
+    //userTGif, titleTGif, idsFav
+    let cardFGif = document.createElement('div');
+    cardFGif.className = 'cardSGif';
+    cardFGif.append(imgFavGif);
+    gridFav.className = 'gridFormat'; 
+    gridFav.appendChild(cardFGif);
+    if (window.matchMedia("(min-width: 1366px)").matches) {
+        imgFavGif.style.height = "200px";
+        imgFavGif.style.width = "260px";
+        cardFGif.style.height = "200px";
+        cardFGif.style.width = "260px";
+
+        cardFGif.appendChild(hoverFavoriteGifs(trendingGif, userTGif, titleTGif));
+        let Fcard = cardFGif.querySelector('.gifScard');
+        Fcard.style.visibility = 'hidden';
+
+        cardFGif.addEventListener('mouseover', () => {
+            Fcard.style.visibility = 'visible';
+        })
+
+        cardFGif.addEventListener('mouseout', () => {
+            //let Scard = cardSGif.querySelector('.gifScard');
+            Fcard.style.visibility = 'hidden';
+        });
+    } else if (window.matchMedia("(max-width: 800px)").matches) { /////////////////////////AÚN NO FUNCIONA
+        cardFGif.addEventListener('click', () => {
+        gifMax.src = imgFavGif.src;
+        userMax.innerHTML = myFavUser;
+        overlay.style.visibility = 'visible';
+        titleMax.innerHTML = myFavTitle;
+        //Funcionalidad botón descarga en Modal    
+        btnDownloadMax.addEventListener('click', (e)=> {
+            e.stopImmediatePropagation();
+            downloadGif(trackSlider, imgGif);
+        })
+    })
+}
+})
+}*/
