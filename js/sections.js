@@ -1,8 +1,4 @@
 // Visualización de las diferentes secciones
-
-//Exportar variables
-//import {myG} from './myGifos';
-
 //Variables secciones
 
 const navfav = document.getElementById("favorites");
@@ -15,46 +11,35 @@ const searchsection = document.getElementById("container-search");
 const gallerysection = document.getElementById("gallery");
 const logomain = document.getElementById("principal");
 
+import {readFavs} from './script.js';
+import {readMyGifos} from './myGifos.js';
 //Mostrar sección 'Favoritos'
-navfav.addEventListener('click', () => { // voy al local storage, me traigo lo de favoritos y veo la tarjeta
+navfav.addEventListener('click', () => {
     if(favsection.style.display === "none"){
         favsection.style.display = "block";
         minesection.style.display = "none";
         searchsection.style.display = "none";
         createsection.style.display = "none";
+        readFavs();
     }
     else{
         favsection.style.display = "block";
         gallerysection.style.display = "block";
     }
 })
-//Mostrar sección 'Mis Gifos'  ////////DEBO LLAMAR A LA FUNCIÓN QUE TRAE LOS GIFS
+//Mostrar sección 'Mis Gifos'
 navmine.addEventListener('click', () => {
     if(minesection.style.display === "none"){
         favsection.style.display = "none";
         minesection.style.display = "block";
         searchsection.style.display = "none";
         createsection.style.display = "none";
+        readMyGifos();
     }
     else{
         minesection.style.display = "block";
         gallerysection.style.display = "block";
     }
-    ////// MIS GIFOS
-    /*let ids = localStorage.getItem("NuevosGifos");
-    fetch(`https://api.giphy.com/v1/gifs?PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&ids=${ids}`).then(response => response.json())
-    .then(json => {
-
-        let arrayMyG = json.data;
-
-        arrayMyG.forEach(value) => {
-
-        }
-
-    let myGifs = JSON.parse(window.localStorage.getItem("myGifs"));
-    console.log(myGifs);*/
-
-
 })
 //Mostrar sección 'Crear mi Gifo'
 navcreate.addEventListener('click', () => {
@@ -85,12 +70,10 @@ logomain.addEventListener('click', () => {
 })
 
 // Dark mode
-
 function darkMode() {
     const btnSwitch = document.getElementById("switch");
     btnSwitch.addEventListener("click", function dark() {
         document.body.classList.toggle("dark");
     });
 }
-
 darkMode();

@@ -1,23 +1,29 @@
 //Variables 'Mis Gifos'
 
-/*let misGifos; //DEFINIDA ABAJO
-let gifos12 = [];
-let clickCon = 0;
-let clickG; //Gif fav 12
-let con = 0;*/
-
 let noMine = document.getElementById('noMine');
 let gridMyGif = document.getElementById('grid-mine');
 let ids = localStorage.getItem("NewGifs");
+
+import {createBtnDownloadModal} from './script.js';
 //Local storage 'Mis Gifos'
-function arrayMyGifos (id) {
-    //let ids = localStorage.getItem("NewGifs");
+export function readMyGifos() {
+    let ids = localStorage.getItem("NewGifs");
+    let myGifosArray = JSON.parse(ids);
+    gridMyGif.innerHTML = " ";
+    myGifosArray.forEach(element => {
+        console.log('Getting mine', element);
+        addGifMine(element);
+    });
+}
+
+export function arrayMyGifos (id) {
+    let ids = localStorage.getItem("NewGifs");
     let myGifosArray = [];
 
     if ( ids == undefined || ids == null){
         myGifosArray.push(id);
     } else{
-        //myGifosArray = JSON.parse(ids);
+        myGifosArray = JSON.parse(ids);
         console.log(ids);
         console.log(myGifosArray);
         let sameId = myGifosArray.find( fav => fav == id );
@@ -28,29 +34,16 @@ function arrayMyGifos (id) {
     localStorage.setItem("NewGifs", JSON.stringify(myGifosArray)); 
 }
 
-/*if(localStorage.getItem("NewGifs") == undefined ) {
-    localStorage.setItem("NewGifs", "ys0TZuRXUbbDD7tZzM, KgOBWvi4oSC7heYKn0");
-}*/
+function removeMyGifos (id) {
+    let myGifosArray = [];
+    let gif = myGifosArray.indexOf(id);
+    myGifosArray.splice(gif, 1);
+    localStorage.setItem("NewGifs", JSON.stringify(myGifosArray));
 
-/*function showMyGifos(array) {
-if(array == null || array.length == 0 || array == undefined) {
-    noMine.style.display = 'inline'; //noMine(); función resultNoGIFOS
-    } else if (array.length > 0) {
-        resultGifos(array); //funcion resultGIFOS(array)
-    }
-}*/
-
-
-/*async function getMyGif (ids){
-    //Parámetros para el request
-    let url = `https://api.giphy.com/v1/gifs?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&ids=${ids}`;
-    let resp = await fetch(url);
-    let gif = await resp.json();
-    console.log(gif);
     return gif;
-}*/
+}
 
-function addGifMine(ids) {
+export function addGifMine(ids) {
     fetch(`https://api.giphy.com/v1/gifs?api_key=PlzoJMPs7k0ixQrxRj53HDBKPN2s0zqT&ids=${ids}`).then(response => response.json())
     .then(json => {
         let arrayMyG = json.data;
@@ -68,10 +61,11 @@ function addGifMine(ids) {
         let myGifUser = arrayMyG[i].username;
         console.log(myGifUser);
 
-        let myGifIndex = arrayMyG[i];
+        let myGifId = arrayMyG[i].id;
+        console.log(myGifId);
 
         //Guardar en local storage
-        arrayMyGifos(arrayMyG[i].id)
+        arrayMyGifos(myGifId);
 
         let myGifImg = document.createElement('img');
         myGifImg.alt = 'gif';    
@@ -85,7 +79,7 @@ function addGifMine(ids) {
         if (window.matchMedia("(min-width: 1366px)").matches) {
             cardMGif.style.height = '200px';
             cardMGif.style.width = '260px';
-            cardMGif.appendChild(hoverMyGifs (imgMyGif, myGifUser, myGifTitle,myGifIndex));
+            cardMGif.appendChild(hoverMyGifs (imgMyGif, myGifUser, myGifTitle, myGifId));
             
             let mGHoverCard = cardMGif.querySelector('.gifScard');
             mGHoverCard.style.visibility = 'hidden';
@@ -97,17 +91,42 @@ function addGifMine(ids) {
             cardMGif.addEventListener('mouseout', () => {
                 mGHoverCard.style.visibility = 'hidden';
             })
-        }
+        } else if (window.matchMedia("(max-width: 800px)").matches) {
+            cardMGif.addEventListener('click', () => {
+            gifMax.src = imgMyGif;
+            userMax.innerHTML = myGifUser;
+            overlay.style.visibility = 'visible';
+            titleMax.innerHTML = myGifTitle;
+            // Funcionalidad botón de descarga en Modal en Treding Gif
+            let btnTrashMax = createBtnTrash();
+            iconsMax.appendChild(btnTrashMax);
+            btnTrashMax.addEventListener('click', (e)=> {
+                e.stopImmediatePropagation();
+                removeMyGifos (id);
+            })
+            // Funcionalidad botón de descarga en Modal en Treding Gif
+            let btnDownloadMax = createBtnDownloadModal();
+            iconsMax.appendChild(btnDownloadMax);
+            btnDownloadMax.addEventListener('click', (e)=> {
+                e.stopImmediatePropagation();
+                downloadMyGif(gridMyGif, gifMax.src);
+            });
+            btnCloseMax.addEventListener('click', () => {
+                overlay.style.visibility = 'hidden';
+                let btnTrashMax = document.getElementsByClassName('btnTrashMax');
+                btnTrashMax[0].remove();
+                let btnDownloadMax = document.getElementsByClassName('btnDownloadMax');
+                btnDownloadMax[0].remove();
+            })
+        })
+    }
     }
     });
 }
-
 addGifMine(ids);
-//Función para mostrar los resultados (grid, mouse enter, mouse out, botón dinámico)
 
 //Función de hover morado con iconos
-
-function hoverMyGifs (imgMyGif, myGifUser, myGifTitle, myGifIndex){
+function hoverMyGifs (imgMyGif, myGifUser, myGifTitle, id){
     //Diseño de tarjeta morada
     let purpleCardM = document.createElement('div');
     purpleCardM.classList.add('gifScard');
@@ -125,11 +144,8 @@ function hoverMyGifs (imgMyGif, myGifUser, myGifTitle, myGifIndex){
     imgTrash.style.width = '16.7px';
     imgTrash.style.margin = 'auto';
     btnTrash.appendChild(imgTrash);
-    btnTrash.addEventListener('click', ()=> {
-        //storage.removeItem(imgMygif);
-        imgMyGif.remove();      ///////////////////// 011120 ELIMINA el primer gif
-        myGifIndex.remove();
-        //delete imgMyGif;
+    btnTrash.addEventListener('click', () => {
+        removeMyGifos(id);
     })
 
     //Diseño botón descargar
@@ -147,7 +163,7 @@ function hoverMyGifs (imgMyGif, myGifUser, myGifTitle, myGifIndex){
     btnDownload.appendChild(imgDown);
     //Funcionalidad del botón descargar
     btnDownload.addEventListener('click', () => {
-        downloadGif(gridMyGif, imgMyGif);
+        downloadMyGif(gridMyGif, imgMyGif)
     })
     
     //Diseño botón expandir
@@ -171,6 +187,30 @@ function hoverMyGifs (imgMyGif, myGifUser, myGifTitle, myGifIndex){
         userMax.style.right = '635px';
         titleMax.innerHTML = myGifTitle;
         titleMax.style.right = '635px';
+
+        // Funcionalidad botón de descarga en Modal en Treding Gif
+        let btnTrashMax = createBtnTrash();
+        iconsMax.appendChild(btnTrashMax);
+        btnTrashMax.addEventListener('click', (e)=> {
+            e.stopImmediatePropagation();
+            removeMyGifos (id);
+        })
+        // Funcionalidad botón de descarga en Modal en Treding Gif
+        let btnDownloadMax = createBtnDownloadModal();
+        iconsMax.appendChild(btnDownloadMax);
+        btnDownloadMax.addEventListener('click', (e)=> {
+            e.stopImmediatePropagation();
+            downloadMyGif(gridMyGif, gifMax.src);
+        })
+
+        let btnCloseMax = document.getElementById('btnCloseMax');
+        btnCloseMax.addEventListener('click', () => {
+            overlay.style.visibility = 'hidden';
+            let btnTrashMax = document.getElementsByClassName('btnTrashMax');
+            btnTrashMax[0].remove();
+            let btnDownloadMax = document.getElementsByClassName('btnDownloadMax');
+            btnDownloadMax[0].remove();
+        })
     });
 
     //Diseño Usuario
@@ -190,11 +230,9 @@ function hoverMyGifs (imgMyGif, myGifUser, myGifTitle, myGifIndex){
     purpleCardM.appendChild(myGUser);
     purpleCardM.appendChild(myGTitle);
     return purpleCardM;
-
 }
 
 //Función descargar Mi Gif
-
 function downloadMyGif(gridMyGif, urlmg) {
     //Se genera anchor 
     let downloadLink = document.createElement("a");
@@ -211,41 +249,16 @@ function downloadMyGif(gridMyGif, urlmg) {
     }).catch(console.error);
 }
 
-//Función para borrar gif
-
-//Función carrusel gif expandido
-
-
-//LOCALSTORAGE DE MYGIFOS
-/*function mygifos_localStorage(user, titleGifo, url, slug) {
-
-    let gif = {
-        usergif: user,
-        urlgif: url,
-        titlegif: titleGifo,
-        slug: slug
-    };
-
-    let localStorage_mygifos = JSON.parse(localStorage.getItem("mygifos"));
-
-    if (localStorage_mygifos == undefined || localStorage_mygifos == null || localStorage_mygifos == "") {
-        localStorage_mygifos = [];
-    }
-
-    let repetidoMyG = false;
-    localStorage_mygifos.forEach(value => {
-
-        //Si son iguales nos regresa un 0
-        if (value.slug.localeCompare(gif.slug) == 0) {
-            repetidoMyG = true;
-        }
-    });
-
-    if (!repetidoMyG) {
-        localStorage_mygifos.push(gif);
-    }   
-
-    localStorage.setItem("mygifos", JSON.stringify(localStorage_mygifos));
+//Botón Trash OVERLAY
+function createBtnTrash() {
+    let btnTrashMax = document.createElement('button');
+    btnTrashMax.classList.add('btnTrashMax');
+    let imgTrash = document.createElement('img');
+    imgTrash.alt = 'icon-fav';
+    imgTrash.src = 'assets/icon_trash.svg';
+    imgTrash.style.height = '15.9px';
+    imgTrash.style.width = '18px';
+    
+    btnTrashMax.appendChild(imgTrash);
+    return btnTrashMax;
 }
-*/
-

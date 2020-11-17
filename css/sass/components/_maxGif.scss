@@ -15,80 +15,6 @@ body{
                         display: block;
                     }
                 }
-                .btnLeftMax{
-                    background-color: $color-grey;
-                    border: 1px solid $color-primary;
-                    &:hover{
-                        background-color: $color-primary;
-                        #imgLeftMax{
-                            display: none;
-                        }
-                        #imgLeftDarkMax{
-                            display: inline-block;
-                        }
-                        #imgLeftHoverMax{
-                            display: none;
-                        }
-                    }
-                    &:active{
-                        background-color: $color-quaternary;
-                        #imgLeftMax{
-                            display: none;
-                        }
-                        #imgLeftDarkMax{
-                            display: none;
-                        }
-                        #imgLeftHoverMax{
-                            display: inline-block;
-                        }
-                    }
-                    #imgLeftMax{
-                        display: none;
-                    }
-                    #imgLeftDarkMax{
-                        display: none;
-                    }
-                    #imgLeftHoverMax{
-                        display: inline-block;
-                    }
-                }
-                .btnRightMax{
-                    background-color: $color-grey;
-                    border: 1px solid $color-primary;
-                    &:hover{
-                        background-color: $color-primary;
-                        #imgRightMax{
-                            display: none;
-                        }
-                        #imgRightDarkMax{
-                            display: inline-block;
-                        }
-                        #imgRightHoverMax{
-                            display: none;
-                        }
-                    }
-                    &:active{
-                        background-color: $color-quaternary;
-                        #imgRightMax{
-                            display: none;
-                        }
-                        #imgRightDarkMax{
-                            display: none;
-                        }
-                        #imgRightHoverMax{
-                            display: inline-block;
-                        }
-                    }
-                    #imgRightMax{
-                        display: none;
-                    }
-                    #imgRightDarkMax{
-                        display: none;
-                    }
-                    #imgRightHoverMax{
-                        display: inline-block;
-                    }
-                }
                 .captions{
                     .infoMax{
                         #userMax{
@@ -161,15 +87,9 @@ body{
             display: none;
         }
     }
-    .btnLeftMax{
-        display: none;
-    }
-    .btnRightMax{
-        display: none;
-    }
     .captions{
-        margin-left: 20px;
         .infoMax{
+            margin-left: 20px;
             #userMax{
                 color: $color-tertiary;
                 font-family: $font-secondary;
@@ -188,15 +108,20 @@ body{
                 top: 300px;
             }
         }
-        .iconsMax{
+        #iconsMax{
+            align-items: center;
+            display: flex;
+            height: 36px;
+            justify-content: space-between;
+            right: -20px;
+            position: absolute;
+            top: 300px;
+            width: 85px;
             .btnFavMax{
                 background-color: transparent;
                 border: none;
                 cursor: pointer;
                 height: 18px;
-                position: absolute;
-                right: 10%;
-                top: 105%;
                 width: 20px;
             }
             .btnDownloadMax{
@@ -205,16 +130,12 @@ body{
                 cursor: pointer;
                 height: 36px;
                 opacity: 0.5;
-                position: absolute;
-                right: -10%;
-                top: 102%;
                 width: 36px;
                 }
             }
         }
     }
 }
-
 
 /* Desktop 1366px*/
 @media (min-width: 1366px){ 
@@ -241,90 +162,6 @@ body{
                 display: none;
             }
         }
-        .btnLeftMax{
-            background-color: $color-primary;
-            border: 1px solid $color-secondary;
-            display: flex;
-            height: 40px;
-            justify-content: center;
-            left: 8%;
-            position: absolute;
-            top: 70%;
-            width: 40px;
-            z-index: 5;
-            &:hover{
-                background-color: $color-secondary;
-                #imgLeftMax{
-                    display: none;
-                }
-                #imgLeftHoverMax{
-                    display: inline-block;
-                }
-            }
-            &:active{
-                background-color: $color-quaternary;
-                #imgLeftMax{
-                    display: none;
-                }
-                #imgLeftDarkMax{ 
-                    display: none;
-                }
-                #imgLeftHoverMax{
-                    display: inline;
-                }
-            }
-            #imgLeftMax{
-                display: inline-block;
-            }
-            #imgLeftDarkMax{
-                display: none;
-            }
-            #imgLeftHoverMax{
-                display: none;
-            }
-        }
-        .btnRightMax{
-            background-color: $color-primary;
-            border: 1px solid $color-secondary;
-            display: flex;
-            height: 40px;
-            justify-content: center;
-            left: 94%;
-            position: absolute;
-            top: 70%;
-            width: 40px;
-            z-index: 5;
-            &:hover{
-                background-color: $color-secondary;
-                #imgRightMax{
-                    display: none;
-                }
-                #imgRightHoverMax{
-                    display: inline-block;
-                }
-            }
-            &:active{
-                background-color: $color-quaternary;
-                #imgLeftMax{
-                    display: none;
-                }
-                #imgLeftDarkMax{ 
-                    display: none;
-                }
-                #imgLeftHoverMax{
-                    display: inline;
-                }
-            }
-            #imgRightMax{
-                display: inline-block;
-            }
-            #imgRightDarkMax{
-                display: none;
-            }
-            #imgRightHoverMax{
-                display: none;
-            }
-        }
         .captions{
             .infoMax{
                 #userMax{
@@ -343,7 +180,7 @@ body{
                 position: absolute;
                 top: 480px;
                 width: 93px;
-                .btnFavMax{
+                .btnFavMax, .btnTrashMax{
                     border: solid 1px #CED7E1;
                     border-radius: 6px;
                     cursor: pointer;
@@ -359,31 +196,10 @@ body{
                 cursor: pointer;
                 height: 36px;
                 opacity: 0.5;
-                //position: relative;
-                //right: 9%;
                 width: 36px;
-                //top: 130%;
                 }
             }
         }
     }
-    
     }
 }
-
-/*.btnFavMax{
-    border: solid 1px #CED7E1;
-    border-radius: 6px;
-    height: 36px;
-    opacity: 0.5;
-    position: relative;
-    //right: 15%;
-    //top: 130%;
-    width: 36px;
-}
-.btnDownloadMax{
-    background-color: crimson;
-    position: relative;
-    right: 9%;
-    //top: 130%;
-}*/

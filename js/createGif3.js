@@ -1,5 +1,5 @@
 // Funcionalidad de la sección 'Crear tu Gif'
-
+import {arrayMyGifos} from './myGifos.js';
     //Variables botones
     let btnStart = document.getElementById('btn-start');
     let btnRecord = document.getElementById('btn-record'); ////= capturar = record
@@ -78,9 +78,6 @@
         btn3.style.backgroundColor = '#572EE5';
         btn3.style.color = '#ffffff';
         //Crear div morado para sobreponer a video
-        //let divPurpleScreen = document.createElement('div');
-        //divPurpleScreen.classList.add('videoPurpleScreen');
-        //divPurpleScreen.appendChild(video);
         video.classList.add('videoPurpleScreen');
         //Borrar contenido de pantalla de video y ajustar video
         videoCover.style.display = 'none';
@@ -88,11 +85,7 @@
         videoStepUpload.style.display = 'inline';
         document.getElementById('frame3').style.top = '-172px';
         document.getElementById('frame4').style.top = '-214px';
-        //document.getElementById('loader').style.transform="rotate(180deg)"
         video.style.bottom = '134px';
-        //Agregar Texto
-
-        //cardUPGif(); FORMATO PANTALLA MORADA
         uploadGif(form);
     });
     
@@ -110,8 +103,6 @@
         
         console.log(form.get("file"));
     };
-
-/////////
 
 function cameraS() {
     navigator.mediaDevices.getUserMedia(constraints)
@@ -149,10 +140,6 @@ function createDownloadL(tagIcon, urlD, container) {
         linkdown.download = 'myGifo.gif';
         linkdown.appendChild(tagIcon);
         container.appendChild(linkdown);
-        /*videoSuccessUpload.appendChild(linkdown);
-        linkdown.click();
-        linkdown.remove();*/
-        //contenedor.appendChild(linkdown);
     }).catch(console.error);
 }
 
@@ -167,21 +154,12 @@ function successUpload (id) {
     let btnDownloadC = document.getElementById('btnDownloadC');
     videoSuccessUpload.appendChild(btnDownloadC);
     getUrlById(id).then(urlD => createDownloadL(btnDownloadC, urlD, videoSuccessUpload));
-    /*btnDownloadC.addEventListener('click', () => {
-        getUrlById(id).then(urlD => createDownloadL(videoSuccessUpload, urlD))
-        urlD.click();
-        urlD.remove();*/
-    //createDownloadL(btnDownloadC, urlD));
 
     //Botón link 'Mi Gifo'
     let btnLinkC = document.getElementById('btnLinkC');    
     btnLinkC.addEventListener('click', () => { 
         alert("Comparte tu gif: " + "https://giphy.com/gifs/" + id)}
     )
-
-    //successScreen.appendChild(btnDownloadC);
-    //successScreen.appendChild(btnLinkC);
-    //return successScreen;
 }
 
 //Función para subir gif
@@ -192,17 +170,8 @@ function uploadGif(gif) {
     }).then(res => {
         if(res.ok) {
         res.json().then(res => { 
-            let oldIDS = localStorage.getItem("NewGifs");
-            oldIDS = oldIDS + "," + res.data.id;
-
-            /////////////////////
-            /*if(!oldIDS){
-                oldIDS = [];
-            }
-            oldIDS.push(res.data.id);*/
-
-            localStorage.setItem("NewGifs", oldIDS);
-            successUpload(res.data.id); //////CAMBIAR
+            successUpload(res.data.id);
+            arrayMyGifos(res.data.id);
         });
         } else {
         console.log("Hubo un problema al subir tu GIF. Vuelve a intentarlo más tarde.");
@@ -210,8 +179,6 @@ function uploadGif(gif) {
     });
 }
 
-//Función 'detener'
-    
     //Función 'timer'
     function getDuration() {
         let seconds = 0;
@@ -234,17 +201,3 @@ function uploadGif(gif) {
             }
         }, 1000);
     }
-
-//////////Mis GIFOS /////// Verificar si es necesario
-
-//Local storage 'Mis Gifos'
-if(localStorage.getItem("NewGifs") == undefined ) {
-    localStorage.setItem("NewGifs", "ys0TZuRXUbbDD7tZzM");
-}
-/*    if(localStorage.getItem("myGifs") == undefined ) {
-        localStorage.setItem("myGifs", "ys0TZuRXUbbDD7tZzM");
-        }*/
-
-
-
-

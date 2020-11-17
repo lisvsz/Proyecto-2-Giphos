@@ -10,9 +10,6 @@ header{
     border-top: 5px solid $color-secondary;
     height: 100px;
     transition: 0.7s ease all;
-    //position: fixed;
-    //width: 100%;
-    //z-index: 2;
     body.dark & {
         background-color: $color-grey;
         border-top: 5px solid $color-tertiary;
