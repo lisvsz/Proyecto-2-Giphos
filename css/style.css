@@ -4,7 +4,7 @@
 /* Colores */
 /* Dark mode */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;700&display=swap");
-@media (min-width: 1366px) {
+@media (min-width: 1000px) {
   .gifTcard {
     background-color: #572EE5;
     border: 2px solid purple;
@@ -263,8 +263,8 @@ body.dark #overlay .slideshow .captions .infoMax #titleMax {
   width: 36px;
 }
 
-/* Desktop 1366px*/
-@media (min-width: 1366px) {
+/* Desktop 1000px*/
+@media (min-width: 1000px) {
   #overlay {
     background-color: white;
   }
@@ -677,8 +677,8 @@ header .btn-mygifos {
   display: none;
 }
 
-/* Desktop 1366px*/
-@media (min-width: 1366px) {
+/* Desktop 1000px*/
+@media (min-width: 1000px) {
   header {
     background-color: white;
     height: 90px;
@@ -781,7 +781,7 @@ header .btn-mygifos {
   width: 156px;
 }
 
-@media (min-width: 1366px) {
+@media (min-width: 1000px) {
   .gridFormat {
     -webkit-column-gap: 29px;
             column-gap: 29px;
@@ -1758,8 +1758,8 @@ footer .r14px {
   text-align: center;
 }
 
-/* Desktop 1366px*/
-@media (min-width: 1366px) {
+/* Desktop 1000px*/
+@media (min-width: 1000px) {
   footer {
     height: 116px;
     display: -webkit-box;

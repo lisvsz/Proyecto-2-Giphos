@@ -76,7 +76,7 @@ export function addGifMine(ids) {
         gridMyGif.className = 'gridFormat'; 
         gridMyGif.appendChild(cardMGif);
         
-        if (window.matchMedia("(min-width: 1366px)").matches) {
+        if (window.matchMedia("(min-width: 1000px)").matches) {
             cardMGif.style.height = '200px';
             cardMGif.style.width = '260px';
             cardMGif.appendChild(hoverMyGifs (imgMyGif, myGifUser, myGifTitle, myGifId));

@@ -74,7 +74,7 @@ function lookingForInput(btnSearch, searchInput) {
             huge_list.style.display = 'none';
             hugeListLine.style.display = 'none';
             btnSearch.style.display = 'block';
-            if (window.matchMedia("(min-width: 1366px)").matches) {
+            if (window.matchMedia("(min-width: 1000px)").matches) {
                 btnSearch.style.left = '510px';
                 btnSearch.style.top = '-33px';
             } else if(window.matchMedia("(max-width: 800px)").matches) {
@@ -162,7 +162,7 @@ lookingForInput(btnSearch, searchInput);
         //Cambiar botones 
         btnClose.style.display = 'none';
         btnSearch.style.display = 'block';
-        if (window.matchMedia("(min-width: 1366px)").matches) {
+        if (window.matchMedia("(min-width: 1000px)").matches) {
             btnSearch.style.left = '510px';
             btnSearch.style.top = '-33px';
         } else if(window.matchMedia("(max-width: 800px)").matches) {
@@ -214,7 +214,7 @@ function showGifs(gifsArray){
         searchResults.className = 'gridFormat';
         searchResults.appendChild(cardSGif);
         //Modificar tamaño gif
-            if (window.matchMedia("(min-width: 1366px)").matches) {
+            if (window.matchMedia("(min-width: 1000px)").matches) {
                 searchGif.style.height = "200px";
                 searchGif.style.width = "260px";
                 cardSGif.style.height = "200px";
@@ -349,7 +349,7 @@ async function trendingByApiKey(){
             cardTGif.appendChild(imgGif);
 
             //Agregar diseño mouse over & mouseout
-            if (window.matchMedia("(min-width: 1366px)").matches) {
+            if (window.matchMedia("(min-width: 1000px)").matches) {
             cardTGif.appendChild(hoverTrendingGifs(trendingGif, userTGif, titleTGif, idTGif));
 
             let Tcard = cardTGif.querySelector('.gifTcard');
@@ -771,7 +771,7 @@ async function trendingByApiKey(){
             gridFav.className = 'gridFormat'; 
             gridFav.appendChild(cardFGif);
             //  Generación de vistas del hover con base en el tamaño de pantalla
-            if (window.matchMedia("(min-width: 1366px)").matches) {
+            if (window.matchMedia("(min-width: 1000px)").matches) {
                 imgFavGif.style.height = "200px";
                 imgFavGif.style.width = "260px";
                 cardFGif.style.height = "200px";
@@ -892,7 +892,7 @@ async function trendingByApiKey(){
         cardFGif.append(imgFavGif);
         gridFav.className = 'gridFormat'; 
         gridFav.appendChild(cardFGif);
-            if (window.matchMedia("(min-width: 1366px)").matches) {
+            if (window.matchMedia("(min-width: 1000px)").matches) {
                 imgFavGif.style.height = "200px";
                 imgFavGif.style.width = "260px";
                 cardFGif.style.height = "200px";
