@@ -76,9 +76,11 @@ export function addGifMine(ids) {
         gridMyGif.className = 'gridFormat'; 
         gridMyGif.appendChild(cardMGif);
         
-        if (window.matchMedia("(min-width: 1000px)").matches) {
-            cardMGif.style.height = '200px';
-            cardMGif.style.width = '260px';
+        if (window.matchMedia("(min-width: 1080px)").matches) {
+            cardMGif.style.height = '180px';
+            cardMGif.style.width = '240px';
+            myGifImg.style.height = '180px';
+            myGifImg.style.width = '240px';
             cardMGif.appendChild(hoverMyGifs (imgMyGif, myGifUser, myGifTitle, myGifId));
             
             let mGHoverCard = cardMGif.querySelector('.gifScard');
@@ -135,8 +137,8 @@ function hoverMyGifs (imgMyGif, myGifUser, myGifTitle, id){
     let btnTrash = document.createElement('button');
     btnTrash.classList.add('btnHover');
     btnTrash.style.cursor = 'pointer';
-    btnTrash.style.left = '50px';
-    btnTrash.style.top = '10px';
+    btnTrash.style.left = '40px';
+    btnTrash.style.top = '5px';
     let imgTrash = document.createElement('img');
     imgTrash.alt = 'icon-trash';
     imgTrash.src = 'assets/icon_trash.svg';
@@ -152,8 +154,8 @@ function hoverMyGifs (imgMyGif, myGifUser, myGifTitle, id){
     let btnDownload = document.createElement('button');
     btnDownload.classList.add('btnHover');
     btnDownload.style.cursor = 'pointer';
-    btnDownload.style.left = '61px';
-    btnDownload.style.top = '10px';
+    btnDownload.style.left = '51px';
+    btnDownload.style.top = '5px';
     let imgDown = document.createElement('img');
     imgDown.alt = 'icon-download';
     imgDown.src = 'assets/icon-download.svg';
@@ -170,8 +172,8 @@ function hoverMyGifs (imgMyGif, myGifUser, myGifTitle, id){
     let btnMax = document.createElement('button');
     btnMax.classList.add('btnHover');
     btnMax.style.cursor = 'pointer';
-    btnMax.style.left = '72px';
-    btnMax.style.top = '10px';
+    btnMax.style.left = '62px';
+    btnMax.style.top = '5px';
     let imgMax = document.createElement('img');
     imgMax.alt = 'icon-max';
     imgMax.src = 'assets/icon-max.svg';

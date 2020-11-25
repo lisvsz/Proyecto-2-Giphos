@@ -168,8 +168,8 @@ header{
         display: none;
     }
 }
-/* Desktop 1000px*/
-@media (min-width: 1000px){ 
+/* Desktop 1080px*/
+@media (min-width: 1080px){ 
     header{
     background-color: $color-primary;
     height: 90px;
@@ -218,7 +218,7 @@ header{
             border-radius: 100%;
             display: block;
             height: 54px;
-            margin: 23px 156px 18px 53px;
+            margin: 23px 90px 18px 60px;
             padding: 19px;
             width: 54px;
             #pluswhite{

@@ -4,7 +4,7 @@
 /* Colores */
 /* Dark mode */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;700&display=swap");
-@media (min-width: 1000px) {
+@media (min-width: 1080px) {
   .gifTcard {
     background-color: #572EE5;
     border: 2px solid purple;
@@ -46,12 +46,12 @@
   .gifScard {
     background-color: #572EE5;
     border: 2px solid purple;
-    bottom: 205px;
-    height: 200px;
+    bottom: 185px;
+    height: 180px;
     opacity: 0.6;
     padding-top: 10px;
     position: relative;
-    width: 260px;
+    width: 240px;
     z-index: 3;
   }
   .userSName {
@@ -62,7 +62,7 @@
     padding-left: 8%;
     position: relative;
     right: 60px;
-    top: 85px;
+    top: 67px;
   }
   .gifSTitle {
     color: white;
@@ -72,7 +72,7 @@
     padding-left: 8%;
     position: relative;
     right: 22px;
-    top: 90px;
+    top: 72px;
   }
   .videoPurpleScreen {
     background-color: #572EE5;
@@ -263,8 +263,8 @@ body.dark #overlay .slideshow .captions .infoMax #titleMax {
   width: 36px;
 }
 
-/* Desktop 1000px*/
-@media (min-width: 1000px) {
+/* Desktop 1080px*/
+@media (min-width: 1080px) {
   #overlay {
     background-color: white;
   }
@@ -677,8 +677,8 @@ header .btn-mygifos {
   display: none;
 }
 
-/* Desktop 1000px*/
-@media (min-width: 1000px) {
+/* Desktop 1080px*/
+@media (min-width: 1080px) {
   header {
     background-color: white;
     height: 90px;
@@ -739,7 +739,7 @@ header .btn-mygifos {
     border-radius: 100%;
     display: block;
     height: 54px;
-    margin: 23px 156px 18px 53px;
+    margin: 23px 90px 18px 60px;
     padding: 19px;
     width: 54px;
   }
@@ -781,22 +781,18 @@ header .btn-mygifos {
   width: 156px;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1080px) {
   .gridFormat {
-    -webkit-column-gap: 29px;
-            column-gap: 29px;
+    -webkit-column-gap: 25px;
+            column-gap: 25px;
     display: -ms-grid;
     display: grid;
     -ms-grid-columns: 1fr 1fr 1fr 1fr;
         grid-template-columns: 1fr 1fr 1fr 1fr;
     -ms-grid-rows: 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
-    margin: 46px 100px 78px 98px;
+    margin: 46px 20px 78px 20px;
     row-gap: 28px;
-  }
-  .gridFormat img {
-    height: 200px;
-    width: 260px;
   }
 }
 
@@ -943,7 +939,7 @@ body.dark main #create #cameraimg {
 
 body.dark main #create #cameraimgdark {
   display: inline;
-  left: -452px;
+  left: -414px;
   position: relative;
   top: 140px;
 }
@@ -1366,8 +1362,8 @@ main #gallery #trending-slider #track img {
   z-index: 3;
 }
 
-/* Desktop 1366px*/
-@media (min-width: 1366px) {
+/* Desktop 1080px*/
+@media (min-width: 1080px) {
   main #container-search {
     min-height: 665px;
   }
@@ -1410,7 +1406,7 @@ main #gallery #trending-slider #track img {
     max-height: 572px;
   }
   main #create #cameraimg {
-    left: -452px;
+    left: -414px;
     position: relative;
     top: 140px;
   }
@@ -1418,7 +1414,7 @@ main #gallery #trending-slider #track img {
     display: none;
   }
   main #create #luzimg {
-    left: -455px;
+    left: -419px;
     position: relative;
     top: 137px;
     height: 151px;
@@ -1567,8 +1563,8 @@ main #gallery #trending-slider #track img {
   }
   main #create #tapeimg {
     position: relative;
-    left: 480px;
-    bottom: 255px;
+    left: 445px;
+    bottom: 268px;
   }
   main #create #tapeimgdark {
     display: none;
@@ -1680,7 +1676,7 @@ main #gallery #trending-slider #track img {
   }
   main #gallery #trending-slider {
     margin-right: 100px;
-    padding: 53px 100px 0 65px;
+    padding: 53px 100px 0 15px;
     width: 1250px;
   }
   main #gallery #trending-slider #track {
@@ -1759,7 +1755,7 @@ footer .r14px {
 }
 
 /* Desktop 1000px*/
-@media (min-width: 1000px) {
+@media (min-width: 1080px) {
   footer {
     height: 116px;
     display: -webkit-box;
@@ -1775,7 +1771,7 @@ footer .r14px {
   }
   footer .r15px {
     font-size: 13px;
-    margin: 49.5px 17px 48.3px 150px;
+    margin: 49.5px 30px 48.3px 150px;
     padding: 0;
   }
   footer #socialmedia {

@@ -51,7 +51,7 @@ footer{
 }
 
 /* Desktop 1000px*/
-@media (min-width: 1000px){ 
+@media (min-width: 1080px){ 
     footer{
         height: 116px;
         display: flex;
@@ -59,7 +59,7 @@ footer{
         align-items: center;
         .r15px{
             font-size: 13px;
-            margin: 49.5px 17px 48.3px 150px;
+            margin: 49.5px 30px 48.3px 150px;
             padding: 0;
         }
         #socialmedia{

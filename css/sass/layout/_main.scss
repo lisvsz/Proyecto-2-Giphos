@@ -113,7 +113,7 @@ main{
             }
             #cameraimgdark{
                 display: inline;
-                left: -452px;
+                left: -414px;
                 position: relative;
                 top: 140px;
             }
@@ -473,8 +473,8 @@ main{
     }
 }
 
-/* Desktop 1366px*/
-@media (min-width: 1366px){ 
+/* Desktop 1080px*/
+@media (min-width: 1080px){ 
     main{
         #container-search{
             min-height: 665px;
@@ -517,7 +517,7 @@ main{
         #create{
             max-height: 572px;
             #cameraimg{
-                left: -452px;
+                left: -414px;
                 position: relative;
                 top: 140px;
             }
@@ -525,7 +525,7 @@ main{
                 display: none;
             }
             #luzimg{
-                left: -455px;
+                left: -419px;
                 position: relative;
                 top: 137px;
                 height: 151px;
@@ -678,8 +678,8 @@ main{
             }
             #tapeimg{
                 position: relative;
-                left: 480px;
-                bottom: 255px;
+                left: 445px;
+                bottom: 268px;
             }
             #tapeimgdark{
                 display: none;
@@ -791,7 +791,7 @@ main{
             }
             #trending-slider{
                 margin-right: 100px;
-                padding: 53px 100px 0 65px;
+                padding: 53px 100px 0 15px;
                 width: 1250px;
                 #track{
                     overflow: hidden;

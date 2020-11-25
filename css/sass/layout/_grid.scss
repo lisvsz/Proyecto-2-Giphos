@@ -13,17 +13,13 @@
 }
 
 
-@media (min-width: 1000px){ 
+@media (min-width: 1080px){ 
     .gridFormat{ 
-        column-gap: 29px;
+        column-gap: 25px;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
-        margin: 46px 100px 78px 98px;
+        margin: 46px 20px 78px 20px;
         row-gap: 28px;
-            img{
-                height: 200px;
-                width: 260px;
-            }
-        }
+    }
 }
