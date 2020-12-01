@@ -24,6 +24,7 @@ import {arrayMyGifos} from './myGifos.js';
     //Objeto recorder
     let recorder;
     let form;
+    let media_stream;
     
     //Funcionalidad del botón 'Comenzar'
     btnStart.addEventListener('click', () => { 
@@ -32,6 +33,7 @@ import {arrayMyGifos} from './myGifos.js';
         btn1.style.backgroundColor = '#572EE5';
         btn1.style.color = '#FFFFFF';
         videoStep1.style.display = 'block';
+        alert('Da click en el número 2 para continuar');
     });
     
     //Funcionalidad del botón 2
@@ -62,11 +64,29 @@ import {arrayMyGifos} from './myGifos.js';
         btnUpload.style.left = '54px';
         timeStamp.style.display = 'none';
         stopRecord(recorder);
+        //vidOff();
     });
     
     //Funcionalidad del botón 'repetir captura'
     btnRepeat.addEventListener('click', () => {
         location.reload();
+        /*recorder = new RecordRTCPromisesHandler(media_stream, {
+            type: 'gif',
+            frameRate: 60,
+            quality: 200,
+            width: 360
+        });
+        btn2.style.backgroundColor = '#572EE5';
+        btn2.style.color = '#FFFFFF';
+        btn3.style.backgroundColor = '#FFFFFF';
+        btn3.style.color = '#572EE5';
+        btnRepeat.style.display = 'none';
+        btnFinish.style.display = 'none';
+        btnUpload.style.display = 'inline';
+        timeStamp.style.display = 'inline';
+        recorder.startRecording();
+        getDuration();*/
+        //iluminar el 2 y apagar el 3, reiniciar el timer, cambiar a botón finalizar
     })
 
     //Funcionalidad de botón 'Subir'
@@ -87,6 +107,7 @@ import {arrayMyGifos} from './myGifos.js';
         document.getElementById('frame4').style.top = '-214px';
         video.style.bottom = '134px';
         uploadGif(form);
+        video.srcObject.stop();
     });
     
     //Función de la grabación
@@ -97,10 +118,9 @@ import {arrayMyGifos} from './myGifos.js';
     async function stopRecord(recorder) {
         await recorder.stopRecording();
         let blob = await recorder.getBlob();
-        //invokeSaveAsDialog(blob);
         form = new FormData();
         form.append("file", blob, "myGif.gif");
-        
+        //video.pause();
         console.log(form.get("file"));
     };
 
@@ -108,9 +128,11 @@ function cameraS() {
     navigator.mediaDevices.getUserMedia(constraints)
     .then(function (mediaStream) {
         video.srcObject = mediaStream;
-        video.onloadedmetadata = function (e) {
+        media_stream = mediaStream;
         video.play();
-        };
+        /*video.onloadedmetadata = function (e) {
+        video.play();
+        };*/
         recorder = new RecordRTCPromisesHandler(mediaStream, {
         type: 'gif',
         frameRate: 60,
@@ -201,3 +223,4 @@ function uploadGif(gif) {
             }
         }, 1000);
     }
+

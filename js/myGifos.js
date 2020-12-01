@@ -148,6 +148,7 @@ function hoverMyGifs (imgMyGif, myGifUser, myGifTitle, id){
     btnTrash.appendChild(imgTrash);
     btnTrash.addEventListener('click', () => {
         removeMyGifos(id);
+        alert('Se ha eliminado el Gif, actualiza la página para ver los cambios')
     })
 
     //Diseño botón descargar
